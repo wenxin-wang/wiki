@@ -1,0 +1,24 @@
+#+TITLE: MineCraft
+#+WIKI: server gaming
+
+* Cuberite
+
+It's written in C++. Hope it's compatible.
+
+#+BEGIN_SRC bash
+yaourt -S cuberite
+#+END_SRC
+
+Edit PKGBUILD and install
+#+BEGIN_EXAMPLE
+server_root=/mnt/extra/cuberite
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+sudo vi /etc/conf.d/cuberite
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+SERVER_ROOT="/mnt/extra/cuberite"
+BACKUP_DEST="/mnt/extra/cuberite/backup"
+#+END_EXAMPLE

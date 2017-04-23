@@ -1,0 +1,9 @@
+#+TITLE: IPv6
+#+WIKI: networking
+
+* Disable ipv6
+
+#+BEGIN_SRC bash
+echo "net.ipv6.conf.all.disable_ipv6 = 1" | sudo tee /etc/sysctl.d/99-no-ipv6.conf
+sudo sysctl -p /etc/sysctl.d/99-no-ipv6.conf
+#+END_SRC

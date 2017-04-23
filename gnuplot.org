@@ -1,0 +1,4 @@
+#+TITLE: gnuplot
+#+WIKI: plotting
+
+[[http://www.gnuplot.info/documentation.html][官方文档页]] [[https://www.ibm.com/developerworks/aix/library/au-gnuplot/][IBM介绍]]

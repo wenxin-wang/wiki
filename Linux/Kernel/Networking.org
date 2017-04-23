@@ -1,0 +1,32 @@
+#+TITLE: Networking
+#+WIKI: kernel developing networking
+#+STARTUP: inlineimages
+
+* sk_buff
+
+** Fields
+
+[[http://vger.kernel.org/~davem/skb_data.html][A good introduction]], I borrow some of the figures here.
+
+[[./skb_layout.png]]
+
+** Operations
+
+[[http://vger.kernel.org/~davem/skb_data.html][A good introduction]]
+
+up = dec, down = inc
+
+|             | head | end | data | tail | len | return    |
+| alloc_skb   |    0 | e   | 0    | 0    | 0   | skb       |
+| skb_reserve |      |     | down | down | 0   |           |
+| skb_put     |      |     |      | down | +   | orig tail |
+| skb_trim    |      |     |      |      | set |           |
+| skb_push    |      |     | up   |      | +   | new data  |
+| skb_pull    |      |     | down |      | -   | new data  |
+
+** Alignment of IP Packets
+
+There's [[https://lwn.net/Articles/89597/][an article]] on LWN.net that discuss the impact of unaligned memory access
+on CPU and DMA. If we align IP packets, then DMA access is unaligned; if not,
+then CPU access is unaligned. The cost of the two kinds of penalties varies
+between architecture, and thus different choices are made.

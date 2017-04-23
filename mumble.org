@@ -1,0 +1,15 @@
+#+TITLE: Mumble
+#+WIKI: server gaming
+
+* Server
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed murmur
+#+END_SRC
+
+
+* Client
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed mumble
+#+END_SRC

@@ -1,0 +1,29 @@
+#+TITLE: Archlinux
+#+WIKI: linuxDistribution admin
+
+* Multilib
+
+See [[https://wiki.archlinux.org/index.php/multilib][Arch Wiki]]
+
+* AUR
+
+#+BEGIN_SRC bash
+sudo vi /etc/pacman.conf
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+[archlinuxfr]
+Server = http://repo.archlinux.fr/$arch
+SigLevel = Never
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+sudo pacman -Syu
+sudo pacman -S --needed yaourt fakeroot
+sudo vi /etc/makepkg.conf
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+MAKEFLAGS="-j4"
+BUILDDIR=/tmp/makepkg
+#+END_EXAMPLE

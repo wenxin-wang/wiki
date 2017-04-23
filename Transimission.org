@@ -1,0 +1,47 @@
+#+TITLE: Transmission
+#+WIKI: server media
+
+* Server
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed transmission-cli
+#+END_SRC
+
+开一次，生成配置文件
+
+#+BEGIN_SRC bash
+sudo systemctl start transmission
+sudo systemctl stop transmission
+sudo vi /var/lib/transmission/.config/transmission-daemon/settings.json
+#+END_SRC
+
+#+BEGIN_SRC json
+{
+    "bind-address-ipv4": "127.0.0.1",
+    "bind-address-ipv6": "::1",
+    "cache-size-mb": 128,
+    "rpc-bind-address": "127.0.0.1",
+}
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo systemctl enable transmission
+sudo systemctl start transmission
+sudo systemctl status transmission
+#+END_SRC
+
+#+BEGIN_SRC bash
+d=/var/lib/transmission/.ssh
+sudo -u transmission mkdir -p $d
+sudo -u transmission touch $d/authorized_keys
+sudo chmod -R go-rwx $d
+sudo vi $d/authorized_keys
+#+END_SRC
+
+* Client
+
+[[http://axilleas.me/en/blog/2013/connect-to-transmission-through-an-ssh-encrypted-session/][Transmission Remote GUI + SSH教程]]
+
+#+BEGIN_SRC bash
+yaourt -S --needed transmission-remote-gui-bin
+#+END_SRC

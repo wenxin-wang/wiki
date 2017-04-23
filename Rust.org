@@ -1,0 +1,30 @@
+#+TITLE: Rust
+#+WIKI: proglang
+
+* Introduction
+
+Rust seems to be a good system language: not too abstract, but with enough
+sugar; no runtime gc; plus its memory management using ownership (and lifetimes)
+is fun.
+
+Rust has an [[https://medium.com/@bugaevc/understanding-rust-ownership-borrowing-lifetimes-ff9ee9f79a9c][official online book]], which oftentimes is very helpful. But I don't
+know if it's me not being a careful reader, but sometimes the book seems a
+little bit verbose, yet confusing. For example, I think a table comparing the
+different types of references would serve well as an intro or a summary to the
+ownership chapters.
+
+* Ownership
+
+There's a [[https://medium.com/@bugaevc/understanding-rust-ownership-borrowing-lifetimes-ff9ee9f79a9c][good article on Medium]] that clarify things a bit after reading the
+Rust book.
+
+** Reference
+
+|                | Reference    | Mutable Reference |
+| syntax         | src_rust{&x} | src_rust{&mut x}  |
+| move semantics | copy         | move              |
+
+References don't have to be explicitly dereferenced; there are
+[[http://stackoverflow.com/questions/28519997/what-are-rusts-exact-auto-dereferencing-rules][auto-dereferencing rules]]. (some say [[http://stackoverflow.com/questions/29216530/does-rust-automatically-dereference-primitive-type-references][impl for both types and reference types]]?)
+
+[[wiki:sdfsd][asdf]]

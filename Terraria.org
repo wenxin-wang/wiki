@@ -1,0 +1,86 @@
+#+TITLE: Terraria
+#+WIKI: gaming
+
+* AUR
+
+#+BEGIN_SRC bash
+yaourt -S terraria-server
+#+END_SRC
+
+Edit PKGBUILD, install, and below, replace /opt with /mnt/extra
+#+BEGIN_SRC bash
+sudo sed -i 's@/opt@/mnt/extra@g' /usr/lib/systemd/system/terraria-server@.service /usr/bin/terraria-server
+cat <<EOF | sudo -u terraria tee /mnt/extra/terraria-server/Re.conf
+maxplayers=8
+world=/mnt/extra/terraria-server/Worlds/Re.wld
+port=7777
+password=a
+worldpath=/mnt/extra/terraria-server/Worlds
+difficulty=0
+secure=1
+EOF
+#+END_SRC
+
+* Basic Terraria Server
+
+好像下面的调用有错误，用AUR吧
+#+BEGIN_SRC bash
+sudo pacman -S --needed wget p7zip tmux
+mkdir -p Terraria
+cd Terraria
+# Amazon S3
+wget http://terraria.org/server/terraria-server-1353.zip
+7z x terraria-server-1353.zip
+chmod +x ./1353/Linux/TerrariaServer.bin.x86_64
+TERM=linux tmux new-session -s Terraria
+#mkdir -p Worlds
+cat >config.ini <<EOF
+maxplayers=8
+world=re
+port=7777
+password=a
+motd=Hey
+worldpath=/home/wenxin/Terraria/Worlds
+autocreate=2
+difficulty=0
+worldname=Re
+secure=1
+EOF
+#./1353/Linux/TerrariaServer.bin.x86_64 -config /home/wenxin/Terraria/Worlds
+# 但是它并不理会你的配置文件，还是要再配一遍，开心吗
+./1353/Linux/TerrariaServer.bin.x86_64
+# 不如干脆不配了……这怎么回事
+#+END_SRC
+
+* Tshock
+** Installation
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed wget p7zip tmux mono
+mkdir -p tshock
+cd tshock
+# Amazon S3
+wget https://github.com/NyxStudios/TShock/releases/download/v4.3.23/tshock_4.3.23.zip
+7z x tshock_4.3.23.zip
+tmux new-session -s tshock
+mono TerrariaServer.exe
+#+END_SRC
+
+** Become admin
+
+In game:
+
+#+BEGIN_EXAMPLE
+/auth [authcode]
+/user add [username] [password] superadmin
+/login [username] [password]
+/auth
+#+END_EXAMPLE
+
+** Proper permissions
+
+In game or at console
+
+#+BEGIN_EXAMPLE
+/group addperm * tshock.warp tshock.whisper tshock.npc.spawnboss tshock.npc.summonboss tshock.world.movenpc
+#+END_EXAMPLE

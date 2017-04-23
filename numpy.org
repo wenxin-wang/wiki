@@ -1,0 +1,8 @@
+#+TITLE: numpy
+#+WIKI: data_science numeric
+
+* Installation
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed python-numpy python-matplotlib python-scikit-learn
+#+END_SRC

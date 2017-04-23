@@ -1,0 +1,30 @@
+#+TITLE: General Unix Admin
+#+WIKI: admin
+
+* Sudoers
+
+#+BEGIN_SRC bash
+groupadd -r sudoers
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+%sudoers ALL=(ALL) ALL
+%wheel ALL=(ALL) NOPASSWD: ALL
+#+END_EXAMPLE
+
+* Add user
+
+#+BEGIN_SRC bash
+u=a
+g=b,c
+sudo useradd -mG $g $u
+sudo usermod -aG $u $u
+#+END_SRC
+
+* Listening Ports
+
+[[http://www.binarytides.com/linux-ss-command/][ss examples]]
+
+#+BEGIN_SRC bash
+sudo ss -ltn
+#+END_SRC
