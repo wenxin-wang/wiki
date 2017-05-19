@@ -21,6 +21,12 @@ secure=1
 EOF
 #+END_SRC
 
+#+BEGIN_SRC bash
+sudo systemctl start terraria-server@Re
+sudo systemctl enable terraria-server@Re
+sudo -u terraria screen -r
+#+END_SRC
+
 * Basic Terraria Server
 
 好像下面的调用有错误，用AUR吧

@@ -1,0 +1,20 @@
+#+TITLE: OpenVPN
+#+WIKI: server
+
+* Installation
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed openvpn
+sudo groupadd -r nogroup
+sudo cp a.conf /etc/openvpn/server/
+sudo systemctl start openvpn-server@a
+sudo systemctl enable openvpn-server@a
+#+END_SRC
+
+* Trouble shooting
+
+Need reboot since last kernel upgrade:
+
+#+BEGIN_EXAMPLE
+Cannot open TUN/TAP dev /dev/net/tun
+#+END_EXAMPLE

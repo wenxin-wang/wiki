@@ -22,3 +22,9 @@ sudo vi /etc/conf.d/cuberite
 SERVER_ROOT="/mnt/extra/cuberite"
 BACKUP_DEST="/mnt/extra/cuberite/backup"
 #+END_EXAMPLE
+
+#+BEGIN_SRC bash
+sudo systemctl start cuberite
+sudo systemctl enable cuberite
+sudo -u cuberite cuberite console
+#+END_SRC
