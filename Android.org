@@ -1,0 +1,20 @@
+#+TITLE: Android
+#+WIKI: phone
+
+* Oneplus
+
+** Recovery
+
+[[https://twrp.me/devices/oneplusone.html][TWRP]] can use adb in recovery
+
+** LineageOs
+
+Here's the [[https://wiki.lineageos.org/devices/bacon/install][official guide]].
+
+If failed with "can't install over newer build", unzip the rom and edit META-INF/com/google/android/updater-script
+
+** Gapps
+
+http://opengapps.org/
+
+Before rebooting into LineageOs, flash opengapps (arm 7.1)
