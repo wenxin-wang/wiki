@@ -25,6 +25,12 @@ BACKUP_DEST="/mnt/extra/cuberite/backup"
 
 #+BEGIN_SRC bash
 sudo systemctl start cuberite
+sudo systemctl stop cuberite
+sudo -u cuberite -i
+vi settings.ini
+vi webadmin.ini
+exit
+sudo systemctl start cuberite
 sudo systemctl enable cuberite
 sudo -u cuberite cuberite console
 #+END_SRC

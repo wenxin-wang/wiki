@@ -1,0 +1,10 @@
+#+TITLE: Nvidia
+#+WIKI: driver gpu
+
+* Propriety Driver
+
+** Headless
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed nvidia-settings
+#+END_SRC

@@ -18,3 +18,9 @@ Need reboot since last kernel upgrade:
 #+BEGIN_EXAMPLE
 Cannot open TUN/TAP dev /dev/net/tun
 #+END_EXAMPLE
+
+* Windows auto start service
+
+Copy the config ("*.ovpn") to "C:\Program Files\OpenVPN\config", not the users
+config folder. Use regedit and see "HKEY_LOCAL_MACHINE\SOFTWARE\OpenVPN". Read
+the [[https://support.balabit.com/index.php?/Knowledgebase/Article/View/54/0/how-to-use-openvpn-as-service-on-windows][friendly doc]] here.
