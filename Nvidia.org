@@ -8,3 +8,15 @@
 #+BEGIN_SRC bash
 sudo pacman -S --needed nvidia-settings
 #+END_SRC
+
+* Windows Remote Gameplay
+
+First install Nvidia Geforce Experience on the game PC, turn on Nvidia Shield,
+then install Moonlight on the clients.
+
+Setup [[wiki:OpenVPN][OpenVPN]] if not in a local network. Add mstsc to Nvidia Shield if remote
+desktop control is needed. Do not use Windows' rdp, as it will logout current
+user and Nvidia Shield would stop working.
+
+Setup a gaming user if wanted. It could be the default user that can login
+without password.
