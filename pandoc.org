@@ -1,0 +1,62 @@
+#+TITLE: Pandoc
+#+WIKI: haskell
+
+[[http://pandoc.org/][Pandoc]] 是一个支持多种格式的通用文档转换器——先把输入格式转换为Pandoc的通用中间格式（可能有损失），然后再转换为目标格式。
+
+个人感觉是目前对Org-mode支持最好的解析器。
+
+* AST
+
+Pandoc的AST示例如下
+#+BEGIN_SRC org
+#+TITLE: t
+* h
+p 1
+#+END_SRC
+
+使用native格式查看包含元数据的语法树：src_bash{pandoc -s -t native test.org}
+
+#+BEGIN_EXAMPLE
+Pandoc (Meta {unMeta = fromList [("title",MetaInlines [Str "t"])]})
+[Header 1 ("h",[],[]) [Str "h"]
+,Para [Str "p",Space,Str "1"]]
+#+END_EXAMPLE
+
+使用json格式查看包含元数据的语法树：src_bash{pandoc -s -t json test.org | python -m json.tool}
+
+#+BEGIN_SRC json
+{
+    "blocks": [
+        {
+            "t": "Header",
+            "c": [1, ["h", [], []], [{"t": "Str", "c": "h"}]]
+        },
+        {
+            "t": "Para",
+            "c": [{"t": "Str", "c": "p"}, {"t": "Space"}, {"t": "Str", "c": "1"}]
+        }
+    ],
+    "pandoc-api-version": [1, 17, 0, 5],
+    "meta": {
+        "title": {"t": "MetaInlines", "c": [{"t": "Str", "c": "t"}]}
+    }
+}
+#+END_SRC
+
+* 中文换行
+
+Markdown或者Org-mode格式的文档使用双换行符换行，把单独一个换行符当作词间隔处理。
+对中文等不使用空格分词的语言，这带来了一些麻烦：
+
+- 首先换行的中文之间一般不希望有空格
+- 有的时候又希望确实有空格，比如我可以在行末或者段首插一个空格（目前pandoc一定会
+  吞这种连续空格）
+- 如果中英文混杂又不清楚到底要不要在之间加空格
+
+对于Markdown而言，可以使用Pandoc的east\_asian\_line\_breaks插件（src_bash{pandoc -f
+markdown+east\_asian\_line\_breaks}）。不过这个是嵌在 [[https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Readers/Markdown.hs#L377][Markdown解析器]] 里的，虽然其它
+格式也可以打开这个选项，但是没用。
+
+虽然提了一个 [[https://github.com/jgm/pandoc/issues/3703][issue]] ，不过是否会被理睬尚未可知，我的Haskell水平又约等于0。看了一下
+[[https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Pretty.hs#L514][代码]] ，感觉是又爬了一遍语法树，把两个相邻的东亚字符之间的单独换行删了。于是有 [[https://gist.github.com/wenxin-wang/daa084356d0f96cf3fb4d38266e6f9a0][这
+段python代码]] 凑合一下。
