@@ -1,5 +1,5 @@
 #+TITLE: numpy
-#+WIKI: data_science numeric
+#+WIKI: programming data_science numeric
 
 * Installation
 

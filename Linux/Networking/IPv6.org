@@ -1,5 +1,5 @@
 #+TITLE: IPv6
-#+WIKI: networking
+#+WIKI: linux networking
 
 * Disable ipv6
 

@@ -1,5 +1,5 @@
 #+TITLE: Networking
-#+WIKI: kernel developing networking
+#+WIKI: linux kernel developing networking
 #+STARTUP: inlineimages
 
 * sk_buff

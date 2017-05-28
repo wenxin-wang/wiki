@@ -1,5 +1,5 @@
 #+TITLE: General Unix Admin
-#+WIKI: admin
+#+WIKI: linux admin
 
 * Sudoers
 

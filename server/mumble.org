@@ -5,6 +5,7 @@
 
 #+BEGIN_SRC bash
 sudo pacman -S --needed murmur
+sudo murmurd -ini /etc/murmur.ini -supw <your-password>
 #+END_SRC
 
 
