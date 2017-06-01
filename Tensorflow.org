@@ -1,0 +1,20 @@
+#+TITLE: Tensorflow
+#+WIKI: machine_learning
+
+* Installation
+
+#+BEGIN_SRC bash
+# Cuda version
+sudo pacman -S --needed python-tensorflow-cuda tensorflow-cuda
+# CPU version
+sudo pacman -S --needed python-tensorflow tensorflow
+#+END_SRC
+
+Verify Installation
+
+#+BEGIN_SRC python
+import tensorflow as tf
+hello = tf.constant('Hello, TensorFlow!')
+sess = tf.Session()
+print(sess.run(hello))
+#+END_SRC
