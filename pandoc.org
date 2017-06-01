@@ -14,7 +14,8 @@ Pandoc的AST示例如下
 p 1
 #+END_SRC
 
-使用native格式查看包含元数据的语法树：src_bash{pandoc -s -t native test.org}
+使用native格式查看包含元数据的语法树：
+src_bash{pandoc -s -t native test.org}
 
 #+BEGIN_EXAMPLE
 Pandoc (Meta {unMeta = fromList [("title",MetaInlines [Str "t"])]})
@@ -22,7 +23,8 @@ Pandoc (Meta {unMeta = fromList [("title",MetaInlines [Str "t"])]})
 ,Para [Str "p",Space,Str "1"]]
 #+END_EXAMPLE
 
-使用json格式查看包含元数据的语法树：src_bash{pandoc -s -t json test.org | python -m json.tool}
+使用json格式查看包含元数据的语法树：
+src_bash{pandoc -s -t json test.org | python -m json.tool}
 
 #+BEGIN_SRC json
 {
@@ -53,10 +55,10 @@ Markdown或者Org-mode格式的文档使用双换行符换行，把单独一个�
   吞这种连续空格）
 - 如果中英文混杂又不清楚到底要不要在之间加空格
 
-对于Markdown而言，可以使用Pandoc的east\_asian\_line\_breaks插件（src_bash{pandoc -f
-markdown+east\_asian\_line\_breaks}）。不过这个是嵌在 [[https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Readers/Markdown.hs#L377][Markdown解析器]] 里的，虽然其它
-格式也可以打开这个选项，但是没用。
+对于Markdown而言，可以使用Pandoc的east\_asian\_line\_breaks插件（
+src_bash{pandoc -f markdown+east\_asian\_line\_breaks}）。
+不过这个是嵌在 [[https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Readers/Markdown.hs#L377][Markdown解析器]] 里的，虽然其它格式也可以打开这个选项，但是没用。
 
-虽然提了一个 [[https://github.com/jgm/pandoc/issues/3703][issue]] ，不过是否会被理睬尚未可知，我的Haskell水平又约等于0。看了一下
-[[https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Pretty.hs#L514][代码]] ，感觉是又爬了一遍语法树，把两个相邻的东亚字符之间的单独换行删了。于是有 [[https://gist.github.com/wenxin-wang/daa084356d0f96cf3fb4d38266e6f9a0][这
-段python代码]] 凑合一下。
+提了一个 [[https://github.com/jgm/pandoc/issues/3703][issue]] ，不过是否会被理睬尚未可知，我的Haskell水平又约等于0。看了一下
+[[https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Pretty.hs#L514][代码]] ，感觉是又爬了一遍语法树，把两个相邻的东亚字符之间的单独换行删了。于是有
+[[https://gist.github.com/wenxin-wang/daa084356d0f96cf3fb4d38266e6f9a0][这段python代码]] 凑合一下。
