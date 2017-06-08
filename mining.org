@@ -1,0 +1,58 @@
+#+TITLE: mining
+#+WIKI:
+
+* CPU
+
+** xmr-stak-cpu
+
+*** Install
+#+BEGIN_SRC bash
+sudo apt-get install libssl-dev cmake build-essential
+sudo apt-get install -t unstable g++-5
+git clone https://github.com/fireice-uk/xmr-stak-cpu.git
+cd xmr-stak-cpu
+# There's donation!
+# Edit CMakeList.txt add -std=c++11 to CMAKE_CXX_FLAGS
+CC=gcc-5 CXX=g++-5 cmake . -DMICROHTTPD_REQUIRED=OFF
+#+END_SRC
+
+*** Config
+
+#+BEGIN_SRC bash
+sudo vi /etc/security/limits.conf
+logout
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+wenxin           soft    memlock         262144
+wenxin           hard    memlock         262144
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+sudo vi /etc/sysctl.d/99-large-page.conf
+sudo sysctl --system
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+vm.nr_hugepages = 128
+#+END_EXAMPLE
+
+Run bin first for recommendation, then tune.
+
+#+BEGIN_SRC bash
+cd ~/xmr-stak-cpu/bin
+./xmr-stak-cpu
+vi config.txt
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+"nicehash_nonce" : true,
+"pool_address" : "cryptonight.hk.nicehash.com:3355",
+"wallet_address" : "149QWefQoWKR1zJXLCNRWooXFTG3XV3VSa.other",
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+tmux new-s -s miner
+cd ~/xmr-stak-cpu/bin
+./xmr-stak-cpu
+#+END_SRC

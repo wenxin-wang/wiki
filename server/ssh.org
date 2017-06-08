@@ -1,0 +1,17 @@
+#+TITLE: ssh
+#+WIKI: server
+
+* X11
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed xorg-xauth xorg-xhost
+sudo vi /etc/ssh/sshd_config
+sudo systemctl restart sshd
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+AllowTcpForwarding yes
+X11UseLocalhost no
+X11DisplayOffset 10
+X11Forwarding yes
+#+END_EXAMPLE
