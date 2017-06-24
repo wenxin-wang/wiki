@@ -27,4 +27,5 @@ sudo usermod -aG $u $u
 
 #+BEGIN_SRC bash
 sudo ss -ltn
+sudo ss -lun
 #+END_SRC

@@ -7,20 +7,23 @@
 
 *** Install
 #+BEGIN_SRC bash
-sudo apt-get install libssl-dev cmake build-essential
-sudo apt-get install -t unstable g++-5
+sudo apt-get install -y libssl-dev cmake build-essential git tmux
+# sudo apt-get install -t unstable g++-5
 git clone https://github.com/fireice-uk/xmr-stak-cpu.git
 cd xmr-stak-cpu
 # There's donation!
 # Edit CMakeList.txt add -std=c++11 to CMAKE_CXX_FLAGS
-CC=gcc-5 CXX=g++-5 cmake . -DMICROHTTPD_REQUIRED=OFF
+cmake . -DMICROHTTPD_REQUIRED=OFF
+# CC=gcc-5 CXX=g++-5 cmake . -DMICROHTTPD_REQUIRED=OFF
+# CC=gcc CXX=g++ cmake3 . -DMICROHTTPD_REQUIRED=OFF
+# CC=/root/gcc5/bin/gcc CXX=/root/gcc5/bin/g++ cmake3 . -DMICROHTTPD_REQUIRED=OFF
+make -j3 install
 #+END_SRC
 
 *** Config
 
 #+BEGIN_SRC bash
 sudo vi /etc/security/limits.conf
-logout
 #+END_SRC
 
 #+BEGIN_EXAMPLE
@@ -30,7 +33,6 @@ wenxin           hard    memlock         262144
 
 #+BEGIN_SRC bash
 sudo vi /etc/sysctl.d/99-large-page.conf
-sudo sysctl --system
 #+END_SRC
 
 #+BEGIN_EXAMPLE
@@ -40,6 +42,9 @@ vm.nr_hugepages = 128
 Run bin first for recommendation, then tune.
 
 #+BEGIN_SRC bash
+sudo sysctl --system
+ulimit -l
+logout
 cd ~/xmr-stak-cpu/bin
 ./xmr-stak-cpu
 vi config.txt
@@ -48,11 +53,36 @@ vi config.txt
 #+BEGIN_EXAMPLE
 "nicehash_nonce" : true,
 "pool_address" : "cryptonight.hk.nicehash.com:3355",
-"wallet_address" : "149QWefQoWKR1zJXLCNRWooXFTG3XV3VSa.other",
+"wallet_address" : "1FumXYi11HRTNAWMhZPrVHUea1eZbyjC3r.flow0",
 #+END_EXAMPLE
 
 #+BEGIN_SRC bash
 tmux new-s -s miner
 cd ~/xmr-stak-cpu/bin
 ./xmr-stak-cpu
+#+END_SRC
+
+* Nvidia
+
+[[https://github.com/wenxin-wang/nicesquash][A miner scheduler and watcher]], work in progress
+
+** CCminer
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed base-devel pkg-config
+yaourt --noconfirm -S ccminer-git
+#+END_SRC
+
+** Ethminer
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed base-devel pkg-config
+yaourt --noconfirm -S ethereum-genoil-git
+#+END_SRC
+
+** Nicehash Equihash Miner
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed base-devel pkg-config
+yaourt --noconfirm -S nheqminer-cuda-git
 #+END_SRC

@@ -27,3 +27,7 @@ sudo vi /etc/makepkg.conf
 MAKEFLAGS="-j4"
 BUILDDIR=/tmp/makepkg
 #+END_EXAMPLE
+
+*DO REMEMBER* that when a build fails, yaourt *WON'T* remove the original failed
+ compiling directory, and will use it for later builds. Remember to remove it
+ when this behaviour is causing trouble, especially when cmake is involved.
