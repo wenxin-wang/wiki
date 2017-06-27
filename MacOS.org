@@ -1,0 +1,21 @@
+#+TITLE: MacOS
+#+WIKI: mac
+
+* Synergy
+
+得到了他人借予的Mac OS，但是人太贱不会用。发现这个开源神器，目前看来不需要付费。
+
+但是它官网藏得太深了，根本没有给开源版的二进制链接（实际是有的，brew cask用的就是这个）。
+
+良心公司，我记得你了。
+
+On your Arch Linux:
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed synergy
+#+END_SRC
+
+On your Mac OS, first install [[wiki:brew][brew]]
+#+BEGIN_SRC bash
+brew cask install synergy
+#+END_SRC
