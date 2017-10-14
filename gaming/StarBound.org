@@ -1,0 +1,46 @@
+#+TITLE: StarBound
+#+WIKI: gaming
+
+* Server Installation
+
+[[https://starbounder.org/Guide:LinuxServerSetup][Reference]]
+
+#+BEGIN_SRC bash
+yaourt -S lib32-gcc-libs screen git
+cd ~
+mkdir steamcmd
+cd steamcm
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+tar -zxvf steamcmd_linux.tar.gz
+./steamcmd.sh
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+login <username>
+force_install_dir /home/<username>/StarBound
+app_update 211820
+quit
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+cat >~/update_starbound_server.sh <<EOF
+#!/bin/bash
+./steamcmd.sh +login <username> +force_install_dir /home/<username>/StarBound +app_update 211820 validate +quit
+EOF
+chmod 700 ~/update_starbound_server.sh
+#+END_SRC
+
+#+BEGIN_SRC bash
+# Generate a world and its config
+cd ~/StarBound/linux
+screen
+./starbound_server
+#+END_SRC
+
+
+#+BEGIN_SRC bash
+# Install mods
+cd ~/StarBound/mods
+git clone https://github.com/sayterdarkwynd/FrackinUniverse.git
+git co 5.4.862
+#+END_SRC
