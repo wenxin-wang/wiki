@@ -1,6 +1,12 @@
 #+TITLE: General Unix Admin
 #+WIKI: linux admin
 
+* PrivateTmp
+
+Fuck the PrivateTmp! Find the private tmps in /var/tmp/. Took me an hour to find out why php cannot see tmp.
+
+I should've try if php could see /tmp, or other files much earlier.
+
 * Sudoers
 
 #+BEGIN_SRC bash
