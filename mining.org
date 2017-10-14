@@ -32,12 +32,8 @@ wenxin           hard    memlock         262144
 #+END_EXAMPLE
 
 #+BEGIN_SRC bash
-sudo vi /etc/sysctl.d/99-large-page.conf
+echo "vm.nr_hugepages = 128" | sudo tee /etc/sysctl.d/99-large-page.conf
 #+END_SRC
-
-#+BEGIN_EXAMPLE
-vm.nr_hugepages = 128
-#+END_EXAMPLE
 
 Run bin first for recommendation, then tune.
 
