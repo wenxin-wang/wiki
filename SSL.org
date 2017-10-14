@@ -1,0 +1,6 @@
+#+TITLE: SSL
+#+WIKI:
+
+#+BEGIN_SRC bash
+echo | openssl s_client -connect ldap.lab.ivi2.org:443
+#+END_SRC
