@@ -1,0 +1,85 @@
+#+TITLE: KVM
+#+WIKI: virtualization
+
+* Install
+
+** Host
+
+#+BEGIN_SRC bash
+sudo pacman -S virt-viewer virt-manager virt-install qemu
+#+END_SRC
+
+* Windows Hyper-V Enlightenments
+
+** Host
+
+#+BEGIN_SRC bash
+sudo virt-xml $VMNAME --edit --features hyperv_relaxed=on,hyperv_vapic=on,hyperv_spinlocks=on,hyperv_spinlocks_retries=8191
+sudo virt-xml $VMNAME --edit --clock hypervclock_present=yes  
+#+END_SRC
+
+* Clock
+
+** Host (Virsh)
+
+似乎过不了xml检查，但是好像也没事
+
+* Block
+
+** Host (Virt Manager)
+
+- PCI Bus 选 Virtio SCSI
+- Block Device 选 Virtio
+
+** Guest
+
+安装 viostor 和 vioscsi
+
+* 内存
+
+** Guest
+
+安装 Balloon
+
+* 显示、拖拽、剪贴板：Spice
+
+** Host (Virt Manager)
+
+- Enable Spice Channel and Spice server
+- Graphics: use QXL
+- Enable resize on Virt Manager
+
+* 让 Windows 虚拟机认可 Linux 宿主机的键位
+
+** Guest
+
+- 在Windows内装上 keytweak
+- 把里面键位调得和外面一样
+- 我不知道为什么这件事要做两次，大概VM拿到的按键信息是 原始键位 和 Host键位 的混合
+
+* 声音
+
+** Host (Virt Manager)
+
+[[https://wiki.archlinux.org/index.php/Libvirt#PulseAudio][Arch 教程]]
+
+然后我选ich6（和电脑上比较像）
+
+* Windows Guest 共享文件：samba
+
+在Linux上搭samba太麻烦了，windows自带，只在内网开启。这样虽然Windows无法访问Linux文件，但是Linux可以。
+其实有spice的拖拽，这个方向是不需要samba的……
+
+** Windows Guest
+
+** Host
+
+*** Gnome系
+
+#+BEGIN_SRC bash
+sudo pacman -S gvfs-smb
+#+END_SRC
+
+**** Nautilus
+
+ctrl + l 然后输入 smb://$ip

@@ -1,0 +1,14 @@
+#+TITLE: IPtables
+#+WIKI: linux networking
+
+* REDIRECT
+
+摘自 man iptables-extensions
+
+#+BEGIN_QUOTE
+It  redirects  the  packet  to the machine itself by changing the destination IP to the primary address of the incoming interface
+#+END_QUOTE
+
+*The primary address of the incoming interface*!! 不是 127.0.0.1 ！
+
+同一个坑踩两次是要哪样！每次3小时！

@@ -1,0 +1,30 @@
+#+TITLE: vagrant
+#+WIKI: virt
+
+* Installation
+
+** Debian
+
+#+BEGIN_SRC bash
+cd /tmp
+wget https://releases.hashicorp.com/vagrant/2.0.0/vagrant_2.0.0_x86_64.deb
+sudo dpkg -i vagrant_2.0.0_x86_64.deb
+#+END_SRC
+
+* Libvirt
+
+#+BEGIN_SRC bash
+vagrant plugin install vagrant-libvirt
+#+END_SRC
+
+** Debian
+
+#+BEGIN_SRC bash
+sudo apt-get install libvirt-dev
+#+END_SRC
+
+** Fix for Arch Linux
+
+https://gist.github.com/j883376/d90933620c7ed14daa4e0963e005377f
+
+Make sure ~/.gemrc doesn't force install to user home local!!!!!

@@ -1,0 +1,12 @@
+#+TITLE: libvirt
+#+WIKI: virtualization
+
+* Network
+
+The default network requires
+
+#+BEGIN_SRC bash
+sudo pacman -S --needed ebtables dnsmasq
+#+END_SRC
+
+* Pulse

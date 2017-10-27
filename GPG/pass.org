@@ -1,0 +1,10 @@
+#+TITLE: pass
+#+WIKI: gpg
+
+* Force Encrypt with multiple keys
+
+SHOUT OUT LOUD!!!!!
+
+#+BEGIN_SRC bash
+pass init 'key!' 'key!'
+#+END_SRC

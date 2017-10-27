@@ -1,0 +1,10 @@
+#+TITLE: GPU Pass-Through
+#+WIKI: virtualization
+
+* 启用IOMMU
+
+[[https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF][Arch Wiki]]
+
+#+BEGIN_EXAMPLE
+iommu_intel=on
+#+END_EXAMPLE

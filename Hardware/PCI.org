@@ -1,0 +1,10 @@
+#+TITLE: PCI
+#+WIKI: hardware
+
+* Find ETH by PCI
+
+#+BEGIN_SRC bash
+sudo lshw -c network -businfo
+#+END_SRC
+
+其实Virt Manager会显示PCI设备名的
