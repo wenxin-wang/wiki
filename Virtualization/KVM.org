@@ -9,6 +9,11 @@
 sudo pacman -S virt-viewer virt-manager virt-install qemu
 #+END_SRC
 
+*** Centos 7
+#+BEGIN_SRC 
+yum install qemu-kvm qemu-img libvirt libvirt-python libvirt-client virt-install 
+#+END_SRC
+
 * Windows Hyper-V Enlightenments
 
 ** Host
