@@ -7,13 +7,13 @@
 
 *** Install
 #+BEGIN_SRC bash
-sudo apt-get install -y libssl-dev cmake build-essential git tmux
+sudo apt-get install -y libssl-dev cmake build-essential git tmux hwloc libhwloc-dev
 # sudo apt-get install -t unstable g++-5
 git clone https://github.com/fireice-uk/xmr-stak-cpu.git
 cd xmr-stak-cpu
 # There's donation!
 # Edit CMakeList.txt add -std=c++11 to CMAKE_CXX_FLAGS
-cmake . -DMICROHTTPD_REQUIRED=OFF
+cmake . -DMICROHTTPD_ENABLE=OFF
 # CC=gcc-5 CXX=g++-5 cmake . -DMICROHTTPD_REQUIRED=OFF
 # CC=gcc CXX=g++ cmake3 . -DMICROHTTPD_REQUIRED=OFF
 # CC=/root/gcc5/bin/gcc CXX=/root/gcc5/bin/g++ cmake3 . -DMICROHTTPD_REQUIRED=OFF
@@ -27,8 +27,8 @@ sudo vi /etc/security/limits.conf
 #+END_SRC
 
 #+BEGIN_EXAMPLE
-wenxin           soft    memlock         262144
-wenxin           hard    memlock         262144
+$USER           soft    memlock         262144
+$USER           hard    memlock         262144
 #+END_EXAMPLE
 
 #+BEGIN_SRC bash
@@ -41,6 +41,7 @@ Run bin first for recommendation, then tune.
 sudo sysctl --system
 ulimit -l
 logout
+ulimit -l
 cd ~/xmr-stak-cpu/bin
 ./xmr-stak-cpu
 vi config.txt
