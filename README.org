@@ -2,7 +2,13 @@
 
 * Welcome
 
+#+BEGIN_LANG zh_CN
 欢迎。
+#+END_LANG
+
+#+BEGIN_LANG en_US
+Welcome!
+#+END_LANG
 
 * License
 
