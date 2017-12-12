@@ -61,7 +61,7 @@ cd ~/xmr-stak-cpu/bin
 
 * Nvidia
 
-[[https://github.com/wenxin-wang/nicesquash][A miner scheduler and watcher]], work in progress
+[[https://github.com/wenxin-wang/nicesquash][A miner scheduler and watcher]], +work in progress+ *EDIT 2017-12-12* rest in peace.
 
 ** CCminer
 
