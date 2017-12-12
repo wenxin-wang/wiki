@@ -1,5 +1,5 @@
 #+TITLE: Docker
-#+WIKI: virtualization/container/docker
+#+WIKI: virtualization/container
 
 * Installation
 :HEADLINE:

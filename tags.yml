@@ -14,8 +14,7 @@ network:
     i18n:
       zh_CN: 网络
 virtualization:
-  container:
-    docker: {}
+  container: {}
   _meta_:
     i18n:
       zh_CN: 虚拟化
