@@ -1,5 +1,5 @@
 #+TITLE: IPtables
-#+WIKI: linux networking
+#+WIKI: linux,network
 
 * REDIRECT
 

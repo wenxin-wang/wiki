@@ -1,5 +1,5 @@
 #+TITLE: debian
-#+WIKI: linux
+#+WIKI: linux/distro,linux/admin
 
 * Sources
 

@@ -1,5 +1,5 @@
 #+TITLE: Nvidia
-#+WIKI: driver gpu
+#+WIKI: hardware/gpu
 
 * Propriety Driver
 

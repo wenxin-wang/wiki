@@ -1,5 +1,5 @@
 #+TITLE: Transmission
-#+WIKI: server media
+#+WIKI: network/p2p
 
 * Server
 

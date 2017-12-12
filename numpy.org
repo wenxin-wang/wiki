@@ -1,5 +1,5 @@
 #+TITLE: numpy
-#+WIKI: programming data_science numeric
+#+WIKI: proglang/python,data science
 
 * Installation
 

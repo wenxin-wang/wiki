@@ -1,6 +1,5 @@
 #+TITLE: MacOS
-#+WIKI: mac
-
+#+WIKI: osuser
 * Synergy
 
 得到了他人借予的Mac OS，但是人太贱不会用。发现这个开源神器，目前看来不需要付费。

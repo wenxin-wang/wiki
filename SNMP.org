@@ -1,0 +1,44 @@
+#+TITLE: SNMP
+#+WIKI: monitoring/snmp
+
+* 安装
+
+** CentOS
+
+#+BEGIN_SRC bash
+sudo yum -y install net-snmp net-snmp-utils
+#+END_SRC
+
+* 配置
+
+** CentOS
+
+#+BEGIN_SRC bash
+mv /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.orig
+cat >/etc/snmp/snmpd.conf <<EOF
+rocommunity secret
+EOF
+
+service snmpd restart
+chkconfig snmpd on
+snmpwalk -v 2c -c secret 127.0.0.1 | less
+#+END_SRC
+
+* 例子
+
+** IPv6 + IP限制 + OID限制
+
+限制到IF-MIB，但是没法限到TABLE里的子项了
+
+#+BEGIN_EXAMPLE
+agentAddress udp:161,udp6:161
+rocommunity secret 127.0.0.1 .1.3.6.1.2.1.31.1.1
+rocommunity6 secret ::1 .1.3.6.1.2.1.31.1.1
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+snmpget -v 2c -c secret 127.0.0.1 IF-MIB::ifHCInOctets.2 
+snmpget -v 2c -c secret 127.0.0.1 .1.3.6.1.2.1.31.1.1.1.6.2
+snmpget -v 2c -c secret 127.0.0.1 IF-MIB::ifHCOutOctets.2 
+snmpget -v 2c -c secret 127.0.0.1 .1.3.6.1.2.1.31.1.1.1.10.2
+#+END_SRC

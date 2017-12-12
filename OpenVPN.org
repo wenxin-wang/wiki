@@ -1,5 +1,5 @@
 #+TITLE: OpenVPN
-#+WIKI: server
+#+WIKI: network
 
 * Installation
 

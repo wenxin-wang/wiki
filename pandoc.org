@@ -1,5 +1,5 @@
 #+TITLE: Pandoc
-#+WIKI: haskell
+#+WIKI: proglang/haskell
 
 [[http://pandoc.org/][Pandoc]] 是一个支持多种格式的通用文档转换器——先把输入格式转换为Pandoc的通用中间格式（可能有损失），然后再转换为目标格式。
 

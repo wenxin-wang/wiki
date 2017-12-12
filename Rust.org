@@ -1,5 +1,5 @@
 #+TITLE: Rust
-#+WIKI: programming proglang
+#+WIKI: proglang/rust
 
 * Introduction
 

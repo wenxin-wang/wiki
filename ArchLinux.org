@@ -1,5 +1,5 @@
 #+TITLE: Archlinux
-#+WIKI: linux linux_distribution admin
+#+WIKI: linux/distro,linux/admin
 
 * Multilib
 

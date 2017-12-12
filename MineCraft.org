@@ -1,5 +1,5 @@
 #+TITLE: MineCraft
-#+WIKI: server gaming
+#+WIKI: gaming
 
 * Cuberite
 

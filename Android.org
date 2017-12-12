@@ -1,5 +1,4 @@
 #+TITLE: Android
-#+WIKI: phone
 
 * Oneplus
 

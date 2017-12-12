@@ -1,5 +1,5 @@
 #+TITLE: brew
-#+WIKI: mac
+#+WIKI: osuser
 
 [[https://brew.sh/][Brew]] is a good thing under MacOS.
 

@@ -5,6 +5,8 @@
 
 [[https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF][Arch Wiki]]
 
+修改grub，添加内核启动参数
+
 #+BEGIN_EXAMPLE
 iommu_intel=on
 #+END_EXAMPLE

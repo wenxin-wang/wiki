@@ -1,0 +1,61 @@
+---
+proglang:
+  haskell: {}
+  rust: {}
+  python: {}
+  _meta_:
+    i18n:
+      zh_CN: 编程语言
+network:
+  p2p: {}
+  ipsec:
+    strongswan: {}
+  _meta_:
+    i18n:
+      zh_CN: 网络
+virtualization:
+  container:
+    docker: {}
+  _meta_:
+    i18n:
+      zh_CN: 虚拟化
+monitoring:
+  snmp: {}
+  _meta_:
+    i18n:
+      zh_CN: 监控
+hardware:
+  gpu: {}
+  _meta_:
+    i18n:
+      zh_CN: 硬件
+osuser:
+  _meta_:
+    i18n:
+      zh_CN: 操作系统使用
+linux:
+  admin:
+    _meta_:
+      i18n:
+        zh_CN: 管理
+  distro:
+    _meta_:
+      i18n:
+        zh_CN: 发行版
+  kernel:
+    _meta_:
+      i18n:
+        zh_CN: 内核
+security:
+  gpg: {}
+  _meta_:
+    i18n:
+      zh_CN: 安全
+gaming:
+  _meta_:
+    i18n:
+      zh_CN: 游戏
+service:
+  _meta_:
+    i18n:
+      zh_CN: 服务

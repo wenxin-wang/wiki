@@ -1,5 +1,5 @@
 #+TITLE: Terraria
-#+WIKI: gaming server
+#+WIKI: gaming
 
 * AUR
 

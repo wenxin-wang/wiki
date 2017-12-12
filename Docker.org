@@ -1,0 +1,24 @@
+#+TITLE: Docker
+#+TAGS: virtualization/container/docker
+
+* Installation
+:HEADLINE:
+en_US
+zh_CN: 安装
+:END:
+
+#+BEGIN_SRC bash
+sudo yum remove docker \
+                  docker-common \
+                  docker-selinux \
+                  docker-engine
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+#+END_SRC

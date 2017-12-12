@@ -1,5 +1,5 @@
 #+TITLE: Tensorflow
-#+WIKI: machine_learning
+#+WIKI: proglang/python,machine learning
 
 * Installation
 

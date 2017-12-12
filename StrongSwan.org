@@ -1,0 +1,14 @@
+#+TITLE: StrongSwan
+#+WIKI: network/ipsec/strongswan
+
+* Installation
+:HEADLINE:
+en_US
+zh_CN: 安装
+:END:
+
+
+#+BEGIN_SRC bash
+sudo yum install -y epel-release
+sudo yum install -y strongswan
+#+END_SRC

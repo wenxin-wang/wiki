@@ -1,5 +1,5 @@
 #+TITLE: ssh
-#+WIKI: server
+#+WIKI: network,service
 
 * X11
 

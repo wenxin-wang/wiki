@@ -1,5 +1,5 @@
-#+TITLE: General Unix Admin
-#+WIKI: linux admin
+#+TITLE: General Linux Admin
+#+WIKI: linux/admin
 
 * PrivateTmp
 

@@ -1,5 +1,5 @@
-#+TITLE: vagrant
-#+WIKI: virt
+#+TITLE: Vagrant
+#+WIKI: virtualization
 
 * Installation
 
