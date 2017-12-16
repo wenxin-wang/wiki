@@ -1,14 +1,178 @@
 #+TITLE: StrongSwan
 #+WIKI: network/ipsec/strongswan
 
-* Installation
+用作实验室内部环境的VPN。我很喜欢IKEv2的 Traffic Selector Narrowing，这样服务器
+和客户机可以分别制定策略，决定到底哪些流量通过IPSec传输。看看它能支持多少路由表吧。
+
+* 注意
+
+在CentOS 7中，原本的ipsec命令似乎改名为strongswan。
+
+* 安装
 :HEADLINE:
-en_US
-zh_CN: 安装
+zh_CN
+en_US: Installation
 :END:
 
+** CentOS 7
 
 #+BEGIN_SRC bash
 sudo yum install -y epel-release
 sudo yum install -y strongswan
 #+END_SRC
+
+** ArchLinux
+
+之所以在自己电脑上装，主要是为了管理PKI。
+
+#+BEGIN_SRC 
+sudo pacman -S strongswan
+#+END_SRC
+
+* PKI
+
+见一个非常简单的strongswan pki[[https://github.com/wenxin-wang/strongswan-simple-pki][脚本]]。
+
+* 配置
+
+strongswan真的是……选项超多。
+
+- 可以选传统ipsec.conf风格的配置，也可以选最新的stronswan.conf风格，这里选择后者
+- 可以选择IKEv1，或者v2，这里选择v2
+- 各种认证方式，这里选择和OpenVPN最类似的公钥体系
+- 还有很多看不懂的选项……
+
+** 关于路由的选择 
+
+traffic selector: 用于匹配包的 *目标* 地址。
+
+Initiator（客户端）和Responder（服务器端）各自可以有 local_ts/remote_ts （Traffic
+Selector，流选择），而IKEv2规定，最终的IPSec策略是在两者的ts之间取交集
+（narrowing），因此可以相对灵活地由客户或者服务器端 *配合决定* 哪些流量通过IPSec传输。
+
+
+** 关于IPv6的ND
+
+[[https://wiki.strongswan.org/projects/strongswan/wiki/IPv6NDP][官方文档]]说得挺清楚。就是万一ND等本地组播的地址也被Tunnel了，本地端口的 link
+local 协商会被影响，估计拿不到 fe80**的地址了。解决办法是在 ND 被影响的端加入一
+个本地的 connection，盖住 ND 使它不走IPSec
+
+#+BEGIN_SRC conf
+connections {
+  ...
+  ndp {
+    children {
+      ns {
+        local_ts = ::/0[ipv6-icmp/135]
+        remote_ts = ::/0[ipv6-icmp/135]
+        mode = pass
+        start_action = trap
+      }
+      na {
+        local_ts = ::/0[ipv6-icmp/136]
+        remote_ts = ::/0[ipv6-icmp/136]
+        mode = pass
+        start_action = trap
+      }
+    }
+  }
+}
+#+END_SRC
+
+** RoadWarrior（Host-To-Site）
+
+通过IPSec连接访问某些内网，客户访问其它站点不受影响：服务器端不做NAT。但是还是有可能要做端口转发。
+
+*** Responsder（服务器端）
+
+#+BEGIN_SRC conf
+connections {
+   roadwarriors {
+      version = 2
+      local_addrs = ip,ip6
+
+      pools = v4pool,v6pool
+      local {
+         auth = pubkey
+         certs = server-cert.pem
+         id = vm0.lab.ivi2.org
+      }
+      remote {
+         auth = pubkey
+         cacerts = ca-cert.pem
+     }
+      children {
+         net {
+            local_ts = 172.16.21.0/24
+         }
+      }
+   }
+}
+pools {
+   v4pool {
+      addrs = 172.16.254.0/24  
+   }
+   v6pool {
+      addrs = fddc:ffff::0/64
+   }
+}
+#+END_SRC
+
+*** Initiator（客户端）
+
+#+BEGIN_SRC conf
+connections {
+   lab {
+      version = 2
+      vips = 0.0.0.0, ::
+      remote_addrs = ip,ip6
+
+      local {
+         auth = pubkey
+         certs = user-cert.pem
+         id = user
+      }
+      remote {
+         auth = pubkey
+         cacerts = ca-cert.pem
+         id = vm0.lab.ivi2.org
+     }
+      children {
+         lab {
+            remote_ts = 0.0.0.0/0,::/0
+            start_action = trap
+         }
+      }
+   }
+}
+#+END_SRC
+
+* 启动
+
+** Responsder
+
+首先配置防火墙！
+
+#+BEGIN_SRC bash
+sudo firewall-cmd --zone=public --add-service="ipsec" --permanent
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+#+END_SRC
+
+注意在 children 配置里没有 start_action，默认为 none 。Responsder 是这样配的。
+
+#+BEGIN_SRC bash
+sudo systemctl start strongswan-swanctl
+sudo swanctl --load-all
+#+END_SRC
+
+** Initiator
+
+不同的 start_action 行为：
+- none: 只加载，等着用 swanctl -i -c children
+- trap: 有匹配 children 的流量出现时建立连接（准确说是协商 SA）
+- start: 立即建立连接
+
+* 调试
+
+[[https://wiki.strongswan.org/projects/strongswan/wiki/CorrectTrafficDump][抓包]]的方法需要 IPtables 配合。从另一个角度讲，也可以帮助 Debug IPtables 规则。

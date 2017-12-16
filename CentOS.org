@@ -1,0 +1,15 @@
+#+TITLE: CentOS
+#+WIKI: linux/distro,linux/admin
+
+* 自动更新
+
+#+BEGIN_SRC bash
+sudo yum -y install yum-cron
+sudo systemctl enable yum-cron
+#+END_SRC
+
+* Bash补全
+
+#+BEGIN_SRC bash
+sudo yum -y install bash-completion bash-completion-extras
+#+END_SRC
