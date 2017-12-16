@@ -1,0 +1,42 @@
+#+TITLE: Build From Source
+#+WIKI: linux/distro,linux/admin
+
+* 安装编译工具
+
+#+BEGIN_SRC bash
+sudo apt-get install build-essential fakeroot devscripts
+#+END_SRC
+
+* 添加代码源
+
+#+BEGIN_EXAMPLE
+deb-src ...
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+sudo apt-get update
+#+END_SRC
+
+* 下载源码包
+
+#+BEGIN_SRC bash
+apt-get source $pkgname
+sudo apt-get build-dep $pkgname
+cd $pkgname_ver_whatever
+#+END_SRC
+
+* 编译源码包
+
+#+BEGIN_SRC bash
+debuild -b -uc -us
+# 近似于不清除之前的 build
+# debuild -b -uc -us -nc
+#+END_SRC
+
+* 获取自己的 patch
+
+修改 *源码* 之后
+
+#+BEGIN_SRC bash
+dpkg-source --commit
+#+END_SRC

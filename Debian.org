@@ -4,3 +4,22 @@
 * Sources
 
 [[https://serverfault.com/questions/22414/how-can-i-run-debian-stable-but-install-some-packages-from-testing][Priorities]]
+
+* 锁定包
+
+#+BEGIN_SRC bash
+sudo apt-mark hold $pkgname
+#+END_SRC
+
+* 解锁包
+
+#+BEGIN_SRC bash
+sudo apt-mark unhold $pkgname
+#+END_SRC
+
+* Locale
+
+#+BEGIN_SRC bash
+sudo apt-get install locales
+sudo dpkg-reconfigure locales
+#+END_SRC

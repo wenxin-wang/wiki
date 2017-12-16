@@ -1,0 +1,58 @@
+diff -aur src2/strongswan-5.5.1/debian/libstrongswan.install src/strongswan-5.5.1/debian/libstrongswan.install
+--- src2/strongswan-5.5.1/debian/libstrongswan.install	2017-08-03 19:23:40.000000000 +0000
++++ src/strongswan-5.5.1/debian/libstrongswan.install	2017-12-16 16:32:33.465886506 +0000
+@@ -23,6 +23,11 @@
+ usr/lib/ipsec/plugins/libstrongswan-sshkey.so
+ usr/lib/ipsec/plugins/libstrongswan-x509.so
+ usr/lib/ipsec/plugins/libstrongswan-xcbc.so
++usr/lib/ipsec/libipsec.so
++usr/lib/ipsec/libipsec.so.0
++usr/lib/ipsec/libipsec.so.0.0.0
++usr/lib/ipsec/plugins/libstrongswan-kernel-libipsec.so
++
+ # config files
+ usr/share/strongswan/templates/config/plugins/aes.conf
+ usr/share/strongswan/templates/config/plugins/constraints.conf
+@@ -76,6 +81,8 @@
+ usr/share/strongswan/templates/config/strongswan.conf
+ usr/share/strongswan/templates/config/plugins/attr.conf
+ usr/share/strongswan/templates/config/plugins/resolve.conf
++usr/share/strongswan/templates/config/plugins/kernel-libipsec.conf
++etc/strongswan.d/charon/kernel-libipsec.conf
+ etc/strongswan.d/charon/attr.conf
+ etc/strongswan.d/charon/resolve.conf
+ etc/strongswan.conf
+diff -aur src2/strongswan-5.5.1/debian/rules src/strongswan-5.5.1/debian/rules
+--- src2/strongswan-5.5.1/debian/rules	2017-08-03 19:23:40.000000000 +0000
++++ src/strongswan-5.5.1/debian/rules	2017-12-16 16:13:44.957965540 +0000
+@@ -4,6 +4,7 @@
+ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+ 
+ CONFIGUREARGS := --libdir=/usr/lib --libexecdir=/usr/lib \
++		--enable-kernel-libipsec \
+ 		--enable-addrblock \
+ 		--enable-agent \
+ 		--enable-ccm \
+@@ -119,6 +120,12 @@
+ 	dh_install -p libstrongswan usr/lib/ipsec/plugins/libstrongswan-kernel-netlink.so
+ 	dh_install -p libstrongswan usr/share/strongswan/templates/config/plugins/kernel-netlink.conf
+ 	dh_install -p libstrongswan etc/strongswan.d/charon/kernel-netlink.conf
++	dh_install -p libstrongswan usr/lib/ipsec/libipsec.so
++	dh_install -p libstrongswan usr/lib/ipsec/libipsec.so.0
++	dh_install -p libstrongswan usr/lib/ipsec/libipsec.so.0.0.0
++	dh_install -p libstrongswan usr/lib/ipsec/plugins/libstrongswan-kernel-libipsec.so
++	dh_install -p libstrongswan usr/share/strongswan/templates/config/plugins/kernel-libipsec.conf
++	dh_install -p libstrongswan etc/strongswan.d/charon/kernel-libipsec.conf
+ 
+ 	dh_install -p libstrongswan-extra-plugins usr/lib/ipsec/plugins/libstrongswan-af-alg.so
+ 	dh_install -p libstrongswan-extra-plugins usr/share/strongswan/templates/config/plugins/af-alg.conf
+@@ -164,7 +171,8 @@
+ endif
+ 
+ 	# then install the rest, ignoring the above
+-	dh_install --fail-missing \
++	# dh_install --fail-missing \
++	dh_install \
+ 		-X\.la -X\.a \
+ 		-Xmedsrv -Xman3 \
+ 		-Xlibstrongswan-connmark.so -X connmark.conf \

@@ -1,0 +1,27 @@
+#+TITLE: StrongSwan On UserLand (TUN)
+#+WIKI: network/ipsec/strongswan
+
+OpenVZ等无法要求内核开启IPSec支持的环境下，需要用用户态的实现凑合。
+
+* Debian
+
+在 stretch 下[[wiki:Debian/Build From Source][编译]]且[[wiki:Debian/apt][锁定]]源码包。
+
+#+BEGIN_SRC bash
+mkdir src
+cd src
+apt-get source charon-systemd
+sudo apt-get build-dep charon-systemd
+patch -p1 -i ~/deb-libipsec.patch
+cd strongswan-5.5.1
+debuild -b -uc -us
+#+END_SRC
+
+#+BEGIN_SRC bash
+cd ..
+
+sudo dpkg -i ./libstrongswan_5.5.1-4+deb9u1_amd64.deb
+sudo apt-mark hold libstrongswan # 嘿嘿嘿
+
+sudo apt-get install strongswan-swanctl charon-systemd
+#+END_SRC
