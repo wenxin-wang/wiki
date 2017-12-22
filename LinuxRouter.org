@@ -20,3 +20,73 @@ net.ipv6.conf.all.forwarding=1
 EOF
 sudo sysctl -p /etc/sysctl.d/100-ipv6-all-forward.conf
 #+END_SRC
+
+* 获取APNIC路由表
+
+#+BEGIN_SRC bash
+curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' >/tmp/apnic.txt
+
+# 只获取路由表项
+awk -F\| '/CN\|ipv4/{ printf "%s/%d\n", $4, 32-log($5)/log(2) }' /tmp/apnic.txt >/tmp/apnic-entries.txt
+
+# 生成ipset
+awk -F\| "
+BEGIN{ print \"create apnic hash:net family inet hashsize 2048 maxelem 65536\" }
+/CN\|ipv4/{ printf \"add apnic %s/%d\n\", \$4, 32-log(\$5)/log(2) }" /tmp/apnic.txt >/tmp/apnic-ipset.txt
+#+END_SRC
+
+* 持久化路由策略
+
+- 首先添加路由表
+#+BEGIN_SRC bash
+sudo cp /etc/iproute2/{rt_tables,rt_tables.bak}
+sudo vi /etc/iproute2/rt_tables
+#+END_SRC
+- 然后添加路由规则使得表被使用
+- 然后往表里添加路由
+
+** CentOS 7
+
+https://unix.stackexchange.com/a/295646
+
+然而这个只支持 ifcfg-* 那种老格式的。如果想要支持 nm 管理的端口，请
+
+#+BEGIN_SRC bash
+#!/bin/sh
+
+if [ "$2" != "pre-up" -a "$2" != "down" ]; then
+    exit 0
+fi
+
+dir=$(dirname "$CONNECTION_FILENAME")
+if [ "$dir" != "/etc/NetworkManager/system-connections" ]; then
+    exit 0
+fi
+profile=$(basename "$CONNECTION_FILENAME")
+if [ -z "$profile" ]; then
+    exit 0
+fi
+
+dir=/etc/sysconfig/network-scripts
+if ! [ -f "$dir/rule-$profile" -o -f "$dir/rule6-$profile" ]; then
+    if ! [ -f "$dir/rule-$DEVICE_IP_IFACE" -o -f "$dir/rule6-$DEVICE_IP_IFACE" ]; then
+        exit 0
+    fi
+fi
+
+case "$2" in
+    pre-up)
+        /etc/sysconfig/network-scripts/ifup-routes "$DEVICE_IP_IFACE" "$profile"
+        ;;
+    down)
+        /etc/sysconfig/network-scripts/ifdown-routes "$DEVICE_IP_IFACE" "$profile"
+        ;;
+esac
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo chmod +x $dir/10-ifcfg-rh-nm-routes.sh
+for d in no-wait.d  pre-down.d  pre-up.d; do
+  sudo ln -sf $dir/10-ifcfg-rh-nm-routes.sh $dir/$d
+done
+#+END_SRC

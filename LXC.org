@@ -1,0 +1,9 @@
+#+TITLE: LXC
+#+WIKI: virtualization/container
+
+* 安装
+** CentOS 7
+#+BEGIN_SRC bash
+sudo yum -y install lxc lxc-templates libcap-devel libcgroup busybox wget bridge-utils
+sudo lxc-checkconfig
+#+END_SRC

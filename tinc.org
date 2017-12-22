@@ -1,0 +1,128 @@
+#+TITLE: tinc
+#+WIKI: network/tunnel
+
+* 安装
+
+讲真这三个发行版上的版本竟然相同，这样的软件不多见……还在开发吗。
+
+** Debian
+
+#+BEGIN_SRC bash
+sudo apt-get install -y tinc
+#+END_SRC
+
+** CentOS 7
+
+#+BEGIN_SRC bash
+sudo yum install -y tinc
+#+END_SRC
+
+** ArchLinux
+
+#+BEGIN_SRC bash
+sudo pacman -S tinc
+sudo mkdir -p /etc/tinc
+#+END_SRC
+
+* 配置一个网络
+
+首先配置防火墙！
+
+#+BEGIN_SRC bash
+sudo firewall-cmd --zone=public --add-service="tinc" --permanent
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+#+END_SRC
+
+它的名字叫net。
+
+#+BEGIN_SRC bash
+netname=net
+#+END_SRC
+
+** 交换模式
+
+路由我们自己来。如果愿意，可以关掉转发。
+
+#+BEGIN_SRC bash
+sudo mkdir -p /etc/tinc/$netname
+sudo touch /etc/tinc/$netname/{tinc.conf,tinc-up,tinc-down}
+sudo chmod +x /etc/tinc/$netname/tinc-*
+#+END_SRC
+
+*** 节点1
+
+/etc/tinc/$netname/tinc.conf
+
+#+BEGIN_SRC conf
+Name = node1
+Mode = switch
+#+END_SRC
+
+/etc/tinc/$netname/tinc-up
+
+#+BEGIN_SRC conf
+#!/bin/sh
+ip l set $INTERFACE up
+ip a add 172.16.254.1/24 dev $INTERFACE
+#+END_SRC
+
+/etc/tinc/$netname/tinc-down
+
+#+BEGIN_SRC conf
+#!/bin/sh
+# This file closes down the tap device.
+
+ip l set $INTERFACE down
+#+END_SRC
+
+*** 节点2
+
+/etc/tinc/$netname/tinc.conf
+
+#+BEGIN_SRC conf
+Name = node2
+Mode = switch
+ConnectTo = node1
+#+END_SRC
+
+/etc/tinc/$netname/tinc-up
+
+#+BEGIN_SRC conf
+#!/bin/sh
+ip l set $INTERFACE up
+ip a add 172.16.254.2/24 dev $INTERFACE
+#+END_SRC
+
+/etc/tinc/$netname/tinc-down
+
+#+BEGIN_SRC conf
+#!/bin/sh
+# This file closes down the tap device.
+
+ip l set $INTERFACE down
+#+END_SRC
+
+*** 生成密钥
+在各个节点上生成密钥对
+
+#+BEGIN_SRC bash
+sudo tincd -D -d4 -n $netname -K2048
+#+END_SRC
+
+执行完命令后，各台机器上的 /etc/tinc/$netname/hosts/$nodename 会被追加公钥
+
+*** 交换公钥
+
+#+BEGIN_SRC bash
+sudo mkdir -p /etc/tinc/$netname/hosts
+#+END_SRC
+
+将所有节点 /etc/tinc/$netname/hosts/$nodename 信息汇总发布到各个节点上。
+
+* 启动
+
+#+BEGIN_SRC bash
+sudo systemctl start tinc@net
+sudo systemctl enable tinc@net
+#+END_SRC

@@ -1,0 +1,26 @@
+#+TITLE: SELinux
+#+WIKI: security
+
+* 安装管理工具
+#+BEGIN_SRC bash
+sudo yum install -y policycoreutils-python setools-console setroubleshoot-server
+#+END_SRC
+
+
+* 查看
+** 文件
+#+BEGIN_SRC bash
+ls -Z
+#+END_SRC
+
+** 进程
+
+#+BEGIN_SRC bash
+sudo ps -eZ
+#+END_SRC
+
+** 用户
+
+#+BEGIN_SRC bash
+id -Z
+#+END_SRC

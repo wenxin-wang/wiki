@@ -1,0 +1,9 @@
+#+TITLE: GRUB
+#+WIKI:
+
+* 更新
+
+** CentOS 7
+#+BEGIN_SRC bash
+grub2-mkconfig -o "$(readlink /etc/grub2.cfg)"
+#+END_SRC

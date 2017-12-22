@@ -1,0 +1,10 @@
+#+TITLE: GRE (tunnel)
+#+WIKI: network
+
+* 防火墙配置
+
+#+BEGIN_SRC bash
+sudo firewall-cmd --zone=public --add-rich-rule='rule protocol value="47" accept' --permanent
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+#+END_SRC

@@ -1,0 +1,9 @@
+#+TITLE: Bash
+#+WIKI: proglang/bash
+
+* 坑们
+
+https://stackoverflow.com/questions/9393038/ssh-breaks-out-of-while-loop-in-bash
+
+* 关联数组
+https://www.artificialworlds.net/blog/2012/10/17/bash-associative-array-examples/

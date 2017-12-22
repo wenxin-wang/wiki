@@ -1,0 +1,8 @@
+#+TITLE: LVM
+#+WIKI: storage
+
+* 安装
+** CentOS 7
+#+BEGIN_SRC bash
+sudo yum -y install lvm2
+#+END_SRC

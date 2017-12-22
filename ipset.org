@@ -1,0 +1,8 @@
+#+TITLE: ipset
+#+WIKI: network
+
+* 加载ipset文件
+
+#+BEGIN_SRC bash
+/usr/bin/ipset -f /etc/ipset.conf restore
+#+END_SRC

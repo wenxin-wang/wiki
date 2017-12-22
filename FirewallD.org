@@ -1,0 +1,48 @@
+#+TITLE: FirewallD
+
+对IPtables的封装。虽然很烦但是似乎最终会整洁很多。
+
+[Digital Ocean上](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7)
+有不错的讲解。FirewallD不可怕的。
+
+*坑*：
+- 记得--permanent
+- 记得`sudo firewall-cmd --reload`
+- 如果上一条不行，`sudo systemctl restart firewalld`
+- 修改防火墙时小心！如果搞错了，你的ssh连接可能被断掉
+
+* 安装
+
+** Debian
+
+#+BEGIN_SRC bash
+sudo apt-get install -y firewalld && sudo systemctl enable firewalld
+#+END_SRC
+
+** CentOS 7
+默认已经装了
+
+#+BEGIN_SRC bash
+sudo yum install -y firewalld && sudo systemctl enable firewalld
+#+END_SRC
+
+* 非NAT的一般配置
+
+#+BEGIN_SRC bash
+INF=出口
+INF=macvlan-ext
+#+END_SRC
+
+正常上网，把网口加到`public` zone。一般来说，保留ssh访问。
+
+#+BEGIN_SRC bash
+sudo firewall-cmd --zone=public --add-service=ssh --permanent
+sudo firewall-cmd --zone=public --add-interface=$INF --permanent
+#sudo firewall-cmd --zone=public --add-port=5201/tcp --permanent
+
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+sudo iptables-save | less
+#+END_SRC
+
+如果是NAT配置见[这里](./NAT.md)。

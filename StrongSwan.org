@@ -35,6 +35,8 @@ sudo pacman -S strongswan
 
 * 配置
 
+名字里*不要*带点！（'.'）会和swanctl本身的配置解析冲突！
+
 strongswan真的是……选项超多。
 
 - 可以选传统ipsec.conf风格的配置，也可以选最新的stronswan.conf风格，这里选择后者
@@ -176,3 +178,47 @@ sudo swanctl --load-all
 * 调试
 
 [[https://wiki.strongswan.org/projects/strongswan/wiki/CorrectTrafficDump][抓包]]的方法需要 IPtables 配合。从另一个角度讲，也可以帮助 Debug IPtables 规则。
+
+* 校园网
+
+校园网用的公网IP所以看不出NAT。但是即便使用
+
+#+BEGIN_SRC conf
+connections.<conn>.encap = yes
+#+END_SRC
+
+也没用。忧郁。
+
+* SELinux
+
+默认的 SELinux profile 会导致 strongswan-swanctl 的 systemd service 中，swanctl 执行权限不够。
+
+#+BEGIN_SRC bash
+cat <<EOF >swanctl-local.te
+module swanctl-local 1.0;
+
+require {
+	type ipsec_conf_file_t;
+	type ipsec_mgmt_t;
+	class dir { open read search };
+}
+
+#============= ipsec_mgmt_t ==============
+
+allow ipsec_mgmt_t ipsec_conf_file_t:dir { open read search };
+EOF
+checkmodule -M -m -o swanctl-local.mod swanctl-local.te
+semodule_package -o swanctl-local.pp -m swanctl-local.mod
+semodule -i swanctl-local.pp
+#+END_SRC
+
+** 调试记录
+
+#+BEGIN_SRC bash
+# 重启
+
+sudo setenforce 0
+sudo systemctl restart strongswan-swanctl
+sudo ausearch  -m AVC | grep swan
+sudo grep ipsec_mgmt_t /var/log/audit/audit.log | sudo audit2allow -m swanctl-local > swanctl-local.te
+#+END_SRC

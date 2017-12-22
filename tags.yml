@@ -8,8 +8,10 @@ proglang:
       zh_CN: 编程语言
 network:
   p2p: {}
+  tunnel: {}
   ipsec:
     strongswan: {}
+  routing: {}
   _meta_:
     i18n:
       zh_CN: 网络
@@ -58,3 +60,7 @@ service:
   _meta_:
     i18n:
       zh_CN: 服务
+storage:
+  _meta_:
+    i18n:
+      zh_CN: 存储

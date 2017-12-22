@@ -1,0 +1,54 @@
+#+TITLE: nftables
+#+WIKI: network
+
+* 安装
+
+** CentOS 7
+
+#+BEGIN_SRC bash
+sudo yum install -y epel-release
+sudo yum install -y nftables
+#+END_SRC
+
+停用firewalld
+
+#+BEGIN_SRC bash
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
+#+END_SRC
+
+** Debian
+
+#+BEGIN_SRC bash
+sudo apt-get install -y nftables
+#+END_SRC
+
+* 概念
+
+- tables of chains
+- chains of rules
+
+还和iptables一样我不明白为什么要有table，感觉同一个table的chain之间没有啥关系。大概就是名字空间吧。
+
+* 使用
+
+** 查看
+#+BEGIN_SRC bash
+sudo nft list ruleset
+#+END_SRC
+** 加载
+如果经常用
+
+#+BEGIN_SRC bash
+sudo nft -f $file
+#+END_SRC
+
+一定记得在文件头加上
+#+BEGIN_EXAMPLE
+flush ruleset
+#+END_EXAMPLE
+
+或者先执行
+#+BEGIN_SRC bash
+sudo nft flush ruleset
+#+END_SRC

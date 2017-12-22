@@ -1,6 +1,18 @@
 #+TITLE: libvirt
 #+WIKI: virtualization
 
+* 安装
+
+** CentOS 7
+#+BEGIN_SRC bash
+sudo yum install -y qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install
+sudo usermod -aG libvirt,qemu,kvm $USER 
+#+END_SRC
+
+** 源
+
+| CentOS 6 i386 | [[https://mirrors.tuna.tsinghua.edu.cn/centos/6/os/i386]] |
+
 * Network
 
 The default network requires

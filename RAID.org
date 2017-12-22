@@ -1,0 +1,19 @@
+#+TITLE: 软件RAID
+#+WIKI: storage
+
+* 安装
+** Debian
+#+BEGIN_SRC bash
+sudo apt-get install -y mdadm
+#+END_SRC
+
+** CentOS 7
+#+BEGIN_SRC bash
+sudo yum install -y mdadm
+#+END_SRC
+
+* RAID1
+
+```bash
+mdadm --create /dev/md2 --level=1 --raid-devices=2 /dev/sda4 /dev/sdb4
+```
