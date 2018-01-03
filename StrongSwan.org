@@ -1,8 +1,13 @@
 #+TITLE: StrongSwan
 #+WIKI: network/ipsec/strongswan
 
-用作实验室内部环境的VPN。我很喜欢IKEv2的 Traffic Selector Narrowing，这样服务器
-和客户机可以分别制定策略，决定到底哪些流量通过IPSec传输。看看它能支持多少路由表吧。
+用作实验室内部环境的VPN。
+
++我很喜欢IKEv2的 Traffic Selector Narrowing，这样服务器和客户机可以分别制定策略，
+决定到底哪些流量通过IPSec传输。+ 我不喜欢了……本来路由和 NAT 规则就已经很乱了，
+半路杀出来 IPSec，光制定能通的策略就已经非常繁琐……万一出了问题完全不会调试。
+
+看看它能支持多少路由表吧。
 
 * 注意
 
@@ -164,8 +169,9 @@ sudo firewall-cmd --list-all
 注意在 children 配置里没有 start_action，默认为 none 。Responsder 是这样配的。
 
 #+BEGIN_SRC bash
+sudo systemctl enable strongswan-swanctl
 sudo systemctl start strongswan-swanctl
-sudo swanctl --load-all
+# sudo swanctl --load-all
 #+END_SRC
 
 ** Initiator
@@ -222,3 +228,13 @@ sudo systemctl restart strongswan-swanctl
 sudo ausearch  -m AVC | grep swan
 sudo grep ipsec_mgmt_t /var/log/audit/audit.log | sudo audit2allow -m swanctl-local > swanctl-local.te
 #+END_SRC
+
+* Masquerade
+
+如果客户通过 IPSec 默认路由到服务器上，本地不可以再做 MASQUERADE 等 SNAT，否则源地址是错的。
+
+#+BEGIN_SRC bash
+iptables -t nat -I POSTROUTING -m policy --pol ipsec --dir out -j ACCEPT
+#+END_SRC
+
+遗憾的是，nftables 暂时还没有这个功能。需要通过标记等方式实现类似的东西。

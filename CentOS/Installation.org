@@ -1,0 +1,33 @@
+#+TITLE: CentOs Installation
+#+WIKI:
+
+* Kickstart
+
+用于自动安装，非常方便。手动安装一次之后，`/root`下面会出现`anacoda-ks.cfg`，按
+需修改就可以作为同一机型后续的安装配置。
+
+[[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-kickstart-syntax][kickstart文件语法]]
+
+[[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/installation_guide/sn-automating-installation][如何使用kickstart自动安装]]
+
+* 内核启动参数
+
+** 强制使用GPT分区
+
+> inst.gpt
+
+** USB上的kickstart文件
+
+> ks=hd:UUID=<UUID>:/ks.cfg
+
+注意！USB一般会占用最低的硬盘号（`sda`），所以kickstart文件里的配置，要么用唯一
+标识符，要么假定Linux发现硬盘的顺序是固定的，往后顺延编号！
+
+关于唯一标识符，见[[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-kickstart-syntax][该文档]]
+中`clearpart`下的`important`小节。
+
+*** 获取UUID
+
+#+BEGIN_SRC bash
+sudo blkid /dev/sda
+#+END_SRC

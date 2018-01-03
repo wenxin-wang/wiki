@@ -17,6 +17,11 @@ sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 #+END_SRC
 
+#+BEGIN_SRC bash
+sudo systemctl restart nftables
+sudo systemctl enable nftables
+#+END_SRC
+
 ** Debian
 
 #+BEGIN_SRC bash

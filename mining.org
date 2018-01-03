@@ -5,19 +5,34 @@
 
 ** xmr-stak-cpu
 
-*** Install
+*** Prepare
+
+**** Debian
 #+BEGIN_SRC bash
 sudo apt-get install -y libssl-dev cmake build-essential git tmux hwloc libhwloc-dev
+#+END_SRC
+
+**** Centos 7
+#+BEGIN_SRC bash
+sudo yum install -y centos-release-scl
+sudo yum install -y devtoolset-7
+sudo yum install -y openssl-devel cmake3 git hwloc hwloc-devel
+scl enable devtoolset-7 bash
+#+END_SRC
+
+*** Install
+#+BEGIN_SRC bash
 # sudo apt-get install -t unstable g++-5
 git clone https://github.com/fireice-uk/xmr-stak-cpu.git
 cd xmr-stak-cpu
 # There's donation!
 # Edit CMakeList.txt add -std=c++11 to CMAKE_CXX_FLAGS
 cmake . -DMICROHTTPD_ENABLE=OFF
+cmake3 . -DMICROHTTPD_ENABLE=OFF
 # CC=gcc-5 CXX=g++-5 cmake . -DMICROHTTPD_REQUIRED=OFF
 # CC=gcc CXX=g++ cmake3 . -DMICROHTTPD_REQUIRED=OFF
 # CC=/root/gcc5/bin/gcc CXX=/root/gcc5/bin/g++ cmake3 . -DMICROHTTPD_REQUIRED=OFF
-make -j3 install
+make -j3
 #+END_SRC
 
 *** Config

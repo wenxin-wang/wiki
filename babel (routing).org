@@ -12,7 +12,7 @@ sudo pacman -S babeld
 * 编译
 
 #+BEGIN_SRC bash
-sudo yum install -y wget
+sudo yum install -y wget make gcc
 #+END_SRC
 
 #+BEGIN_SRC bash

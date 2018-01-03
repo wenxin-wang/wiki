@@ -1,0 +1,13 @@
+#+TITLE: RPM
+#+WIKI:
+
+* 源码RPM
+#+BEGIN_SRC bash
+sudo yum install -y yum-utils rpm-build
+yumdownloader --source kernel
+rpm -ivh ./kernel*.rpm
+sudo yum-builddep kernel
+cd rpmbuild/SPECS
+# Apply patches
+rpmbuild -bp kernel.spec
+#+END_SRC

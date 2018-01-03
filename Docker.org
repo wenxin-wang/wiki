@@ -7,6 +7,16 @@ en_US
 zh_CN: 安装
 :END:
 
+** RHEL 7 官方
+
+#+BEGIN_SRC bash
+sudo yum install -y docker device-mapper-libs device-mapper-event-libs
+#+END_SRC
+
+** Docker 官方
+
+*** CentOS 7
+
 #+BEGIN_SRC bash
 sudo yum remove docker \
                   docker-common \
@@ -22,4 +32,49 @@ sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum install docker-ce
+#+END_SRC
+
+* 网络配置
+
+** 替换默认网桥和 IPTables
+
+我们用 nftables 和 自己的网桥。无奈默认网桥关不掉，只能替换为自己的。
+
+#+BEGIN_SRC bash
+sudo vi /etc/sysconfig/docker-network
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+--iptables=false --bridge=br-nat
+#+END_EXAMPLE
+
+** 添加 macvlan 网络
+
+见[[https://docs.docker.com/engine/userguide/networking/get-started-macvlan/#macvlan-bridge-mode-example-usage][官方文档]]。在创建网络时，即便是以后我们手动分配地址，docker也需要指定网络的子网信息。
+
+#+BEGIN_SRC bash
+docker network create -d macvlan \
+    --subnet=172.16.86.0/24 \
+    --gateway=172.16.86.1  \
+    -o parent=eth0 pub_net
+#+END_SRC
+
+* 存储配置
+
+默认用 loopfile 存储方式，比较慢。切 lvm thinpool 的方式见[[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/managing_containers/managing_storage_with_docker_formatted_containers][官方文档]]。例子
+#+BEGIN_SRC bash
+sudo vgcreate docker-vg /dev/mdx
+sudo bash -c 'echo VG=docker-vg >> /etc/sysconfig/docker-storage-setup'
+sudo systemctl start docker
+#+END_SRC
+
+* SELinux
+** 指定 bind mount 位置
+以 /srv/docker 为例
+
+#+BEGIN_SRC bash
+sudo mkdir -p /srv/docker
+sudo semanage fcontext -a -t var_t '/srv/docker'
+sudo semanage fcontext -d -t svirt_sandbox_file_t '/srv/docker/.*'
+sudo restorecon -vr /srv/docker
 #+END_SRC

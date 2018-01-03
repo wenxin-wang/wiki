@@ -24,3 +24,34 @@ sudo ps -eZ
 #+BEGIN_SRC bash
 id -Z
 #+END_SRC
+
+* TUN
+
+** Docker
+
+#+BEGIN_SRC bash
+mkdir -p /tmp/src/docker-tun-selinux
+cd /tmp/src/docker-tun-selinux
+cat >docker-tun.te <<EOF
+module docker-tun 1.0;
+
+require {
+	type svirt_lxc_net_t;
+	class tun_socket create;
+}
+
+#============= svirt_lxc_net_t ==============
+allow svirt_lxc_net_t self:tun_socket create;
+EOF
+checkmodule -M -m -o docker-tun.mod docker-tun.te
+semodule_package -o docker-tun.pp -m docker-tun.mod
+sudo semodule -i docker-tun.pp
+#+END_SRC
+
+* netlink socket
+
+** Docker
+
+#+BEGIN_SRC bash
+sudo setsebool -P virt_sandbox_use_netlink on
+#+END_SRC

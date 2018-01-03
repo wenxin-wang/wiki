@@ -29,10 +29,19 @@ curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' >/tmp/apnic
 # 只获取路由表项
 awk -F\| '/CN\|ipv4/{ printf "%s/%d\n", $4, 32-log($5)/log(2) }' /tmp/apnic.txt >/tmp/apnic-entries.txt
 
+# babel本地路由表项
+awk -F\| '/CN\|ipv4/{ printf "in ip %s/%d deny\n", $4, 32-log($5)/log(2) }' /tmp/apnic.txt >/tmp/apnic-babel.txt
+
 # 生成ipset
 awk -F\| "
 BEGIN{ print \"create apnic hash:net family inet hashsize 2048 maxelem 65536\" }
 /CN\|ipv4/{ printf \"add apnic %s/%d\n\", \$4, 32-log(\$5)/log(2) }" /tmp/apnic.txt >/tmp/apnic-ipset.txt
+
+# 生成nftables
+awk -F\| "
+BEGIN{ print \"set apnic_routes {\n type ipv4_addr; flags constant, interval;\nelements={\" }
+/CN\|ipv4/{ printf \"%s/%d,\n\", \$4, 32-log(\$5)/log(2) }
+END{ print \"}\n}\n\" }" /tmp/apnic.txt >/tmp/apnic-nft.conf
 #+END_SRC
 
 * 持久化路由策略
@@ -44,6 +53,25 @@ sudo vi /etc/iproute2/rt_tables
 #+END_SRC
 - 然后添加路由规则使得表被使用
 - 然后往表里添加路由
+
+** ArchLinux
+
+没找到，只好自己写脚本。systemd 的服务如下
+
+#+BEGIN_SRC conf
+# /etc/systemd/system/iproute2-rules.service
+[Unit]
+Description=IPRoute2 Rules
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/iproute2-rules-up.sh
+ExecStop=/usr/local/bin/iproute2-rules-down.sh
+
+[Install]
+WantedBy=multi-user.target 
+#+END_SRC
 
 ** CentOS 7
 

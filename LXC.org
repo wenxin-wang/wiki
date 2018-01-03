@@ -3,7 +3,44 @@
 
 * 安装
 ** CentOS 7
+
+在 RHEL 7下用 LXC 会被 SELinux 干很惨。真的很惨。当然可以关、可以 allow2audit 大
+法。但是按照默认的标签它要访问 device_t 和 sys_t，太恐怖了。我自己维护标签又不知
+道哪天又出错。官方支持 Docker，无论我对它有多少意见我也没办法了。如果它还不行我
+就 +干它娘的RHEL+ +netns+ +洗洗睡搞你妹+ 。
+
 #+BEGIN_SRC bash
-sudo yum -y install lxc lxc-templates libcap-devel libcgroup busybox wget bridge-utils
+sudo yum -y install lxc lxc-templates libcap-devel libcgroup wget bridge-utils
 sudo lxc-checkconfig
+sudo systemctl enable lxc
+#+END_SRC
+
+
+* SELinux
+
+#+BEGIN_SRC bash
+mkdir -p /tmp/src
+cd /tmp/src
+cp -r /usr/share/lxc/selinux/ lxc-selinux
+cd lxc-selinux
+make -f /usr/share/selinux/devel/Makefile lxc.pp
+sudo semodule -i lxc.pp
+sudo semanage fcontext -a -t lxc_file_t '/var/lib/lxc/[^/]*/rootfs'
+sudo semanage fcontext -a -t lxc_file_t '/var/lib/lxc/[^/]*/rootfs/.*'
+# 之前出现的玄学错误：/dev/null不可写，是因为rootfs.dev被标记为错误类型
+# 之前只有一条
+# sudo semanage fcontext -a -t lxc_file_t '/var/lib/lxc/[^/]*/rootfs(/.*)?'
+# regex博大精深，我只是过路的，于是干脆拆两条
+#+END_SRC
+
+* CentOS 7 container on CentOS 7
+
+#+BEGIN_SRC bash
+name=
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo lxc-create -n $name -t -t download -- -d centos -r 7 -a amd64
+sudo lxc-start -d -n $name
+sudo lxc-attach -n $name
 #+END_SRC
