@@ -5,6 +5,10 @@
 
 [[https://serverfault.com/questions/22414/how-can-i-run-debian-stable-but-install-some-packages-from-testing][Priorities]]
 
+#+BEGIN_SRC bash
+echo 'Acquire::Languages "none";' | sudo tee /etc/apt/apt.conf.d/99translations
+#+END_SRC
+
 * 锁定包
 
 #+BEGIN_SRC bash

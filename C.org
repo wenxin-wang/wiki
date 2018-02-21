@@ -1,0 +1,23 @@
+#+TITLE: C Programming
+#+WIKI: proglang/c 
+
+* Alignment
+See [[https://www.kernel.org/doc/Documentation/unaligned-memory-access.txt][Kernel Guide]]. Quote:
+
+In summary, the 2 main scenarios where you may run into unaligned access
+problems involve:
+
+- Casting variables to types of different lengths (longer ?)
+- Pointer arithmetic followed by access to at least 2 bytes of data
+
+Check src_c{CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS}.
+
+** DMA
+
+Must see if DMA device can do unaligned access, too.
+
+** NET_IP_ALIGN
+
+- On architecture that require aligned loads: 4-byte bounds -> NET_IP_ALIGN = 4*n + 2 (Ether header 14 byte)
+- PowerPC: 0, because unaligned DMA access is every expensive
+- If ether card cannot do unaligned DMA, need to copy.

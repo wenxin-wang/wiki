@@ -1,0 +1,18 @@
+#+TITLE: DHCP
+#+WIKI: network
+
+* IPv4
+
+#+BEGIN_SRC bash
+sudo yum install -y dhcp
+#+END_SRC
+
+#+BEGIN_SRC conf
+default-lease-time 600;
+max-lease-time 7200;
+subnet 172.16.21.0 netmask 255.255.255.0 {
+  range 172.16.21.2 172.16.21.100;
+  option domain-name-servers 202.38.101.2;
+  option routers 172.16.21.1;
+}
+#+END_SRC

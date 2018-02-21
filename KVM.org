@@ -11,7 +11,7 @@ sudo pacman -S virt-viewer virt-manager virt-install qemu
 
 *** Centos 7
 #+BEGIN_SRC 
-yum install qemu-kvm qemu-img libvirt libvirt-python libvirt-client virt-install 
+sudo yum install -y qemu-kvm qemu-img libvirt libvirt-python libvirt-client virt-install 
 #+END_SRC
 
 * Windows Hyper-V Enlightenments

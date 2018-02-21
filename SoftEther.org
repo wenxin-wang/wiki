@@ -1,0 +1,24 @@
+#+TITLE: SoftEther
+#+WIKI: network/tunnel 
+
+* Server Config
+
+** Admin ip
+*** Debian
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /opt/vpnserver/adminip.txt
+127.0.0.1
+EOF
+#+END_SRC
+** Server Certificate
+
+#+BEGIN_SRC bash
+PORT=443
+PASSWORD=
+SRVCERTPATH=
+SRVKEYPATH=
+#+END_SRC
+
+#+BEGIN_SRC bash
+vpncmd localhost:$PORT /SERVER /PASSWORD:$PASSWORD /CMD ServerCertSet /LOADCERT:$SRVCERTPATH /LOADKEY:$SRVKEYPATH 
+#+END_SRC

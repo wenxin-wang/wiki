@@ -5,8 +5,12 @@
 
 ** CentOS 7
 #+BEGIN_SRC bash
-sudo yum install -y qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install
+sudo yum install -y qemu-kvm virt-manager libvirt libvirt-python libvirt-client virt-install
 sudo usermod -aG libvirt,qemu,kvm $USER 
+
+sudo systemctl start libvirtd
+sudo systemctl status libvirtd
+sudo systemctl enable libvirtd
 #+END_SRC
 
 ** 源
