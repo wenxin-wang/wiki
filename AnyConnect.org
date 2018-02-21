@@ -9,6 +9,10 @@ See [[https://bugs.launchpad.net/ubuntu/+source/ocserv/+bug/1613155%0A][a "fixed
 trouble for ocserv's udp bind & connect. Don't know how to fix it in code, but
 there is a walk-round by seperately listen on IPv4 and IPv6's global address.
 
+Another thought: Maybe SO_REUSEPORT is also an option, but alas, I set
+~ReusePort~ to ~true~ (without seperating IPv4 and IPv6), and the error remained
+the same.
+
 #+BEGIN_SRC bash
 sudo systemctl edit ocserv.socket
 #+END_SRC
