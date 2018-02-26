@@ -30,7 +30,7 @@ sudo yum install -y firewalld && sudo systemctl enable firewalld
 
 #+BEGIN_SRC bash
 INF=出口
-INF=macvlan-ext
+INF=mvlan-ext
 #+END_SRC
 
 正常上网，把网口加到`public` zone。一般来说，保留ssh访问。

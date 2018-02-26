@@ -1,0 +1,54 @@
+#+TITLE: Linux最基本的安全配置
+#+WIKI: linux/admin
+
+#+BEGIN_SRC bash
+SVR=服务器
+UNAME=用户名
+#+END_SRC
+
+无论是物理机还是虚拟机，除了下面的内容，请配置[防火墙](./FirewallD.md)和[Fail2Ban](./Fail2Ban.md)。
+
+* （必须）一定要配啊！
+
+禁止root用密码ssh登录
+
+#+BEGIN_SRC bash
+sudo sed -i 's@^PermitRootLogin .*$@PermitRootLogin without-password@' /etc/ssh/sshd_config && (sudo systemctl restart sshd || sudo service sshd restart)
+#+END_SRC
+
+* （可选）拷贝ssh公钥
+
+#+BEGIN_SRC bash
+# 如果在linux上，不输'${UNAME}@'，会用当前用户名登录， 相当于'${USER}@'
+ssh-copy-id ${UNAME}@${SVR}
+ssh ${UNAME}@${SVR}
+#+END_SRC
+
+* （如果有公钥）（可选）删除本用户的密码，添加root密码
+
+主要用于物理机：
+- 远程登录必须用key
+- 出问题到机房用root登录
+
+步骤：
+- 添加一个不需要输密码的用户组sudonopasswd
+- 为root添加密码
+- 删除本用户的密码：）
+
+#+BEGIN_SRC bash
+# 因为sudo可能会问密码，拆成两步省得复制粘贴时把命令粘到密码栏
+NPWG=sudonopasswd
+sudo groupadd -r $NPWG && sudo usermod -aG $NPWG $USER
+
+echo "%$NPWG ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/sudonopasswd
+echo "set root password"
+sudo passwd root
+
+sudo passwd -l $USER
+#+END_SRC
+
+然后！！千万别退出ssh！新建一个ssh连接，确认你还能登录。要不然就要去机房接显示器了。
+
+#+BEGIN_SRC bash
+ssh ${UNAME}@${SVR} # 再确认下
+#+END_SRC

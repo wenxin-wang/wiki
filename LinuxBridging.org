@@ -1,0 +1,34 @@
+#+TITLE: LinuxBridging
+#+WIKI: linux,network
+
+* 安装基本工具
+
+#+BEGIN_SRC bash
+sudo apt-get install -y bridge-utils
+#+END_SRC
+
+#+BEGIN_WARN
+If not installed, you will be faced with strange "interface not found" errors.
+#+END_WARN
+
+* Debian持久化配置
+
+#+BEGIN_SRC bash
+BR=网桥名字
+PINFS=none
+IP4=IPv4地址
+MA4=255.255.255.0
+IP6=IPv6地址
+#+END_SRC
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/network/interfaces.d/$BR
+auto $BR
+iface $BR inet static
+address $IP4
+netmask $MA4
+bridge_ports $PINFS
+post-up ip a add $IP6 dev $BR
+EOF
+sudo ifup $BR
+#+END_SRC

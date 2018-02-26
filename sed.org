@@ -1,0 +1,4 @@
+#+TITLE: sed
+#+WIKI: tips
+
+* Replace block of text

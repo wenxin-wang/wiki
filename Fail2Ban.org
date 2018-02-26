@@ -17,31 +17,57 @@ Fail2Ban是一个，根据日志中信息（filter），判断某个IP有害，�
 sudo apt-get install -y fail2ban && sudo systemctl enable fail2ban
 #+END_SRC
 
-以后重启FirewallD时，可能会汇报冲突；这时候先
-
-```bash
-sudo sed -i 's@iptables\.service@@g' /lib/systemd/system/fail2ban.service
-sudo systemctl daemon-reload 
-sudo apt-get install -f
-```
-
 ** CentOS 7
 
 #+BEGIN_SRC bash
 sudo yum install -y fail2ban && sudo systemctl enable fail2ban
 #+END_SRC
 
-* 使用FirewallD Action
+** Systemd调整
+
+以后重启FirewallD时，可能会汇报冲突；这时候先
 
 #+BEGIN_SRC bash
-cat <<EOF | sudo tee /etc/fail2ban/jail.d/default-action-firewalld.conf
+sudo mkdir -p /etc/systemd/system/fail2ban.service.d
+cat <<EOF | sudo tee /etc/systemd/system/fail2ban.service.d/override.conf
+[Unit]
+After=
+After=network.target firewalld.service
+EOF
+sudo systemctl daemon-reload 
+#+END_SRC
+
+* 使用FirewallD Action
+
+** CentOS 7
+
+#+BEGIN_SRC bash
+sudo yum install -y fail2ban-firewalld
+#+END_SRC
+
+** Debian
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/fail2ban/jail.d/00-firewalld.conf
 [DEFAULT]
 banaction = firewallcmd-ipset
 banaction_allports = firewallcmd-allports
 EOF
 #+END_SRC
 
-** 开启Jail
+
+* 使用NFTables Action
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/fail2ban/jail.d/default-action-nftables.conf
+[DEFAULT]
+# configure nftables
+banaction = nftables-multiport
+chain     = input
+EOF
+#+END_SRC
+
+* 开启Jail
 
 只开了sshd的jail。
 
@@ -60,3 +86,4 @@ sudo fail2ban-client status
 sudo fail2ban-client status sshd
 sudo ipset list
 #+END_SRC
+

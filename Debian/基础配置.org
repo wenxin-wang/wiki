@@ -1,0 +1,108 @@
+#+TITLE: 基础配置
+#+WIKI: linux/distro,linux/admin
+
+* 常用软件包
+
+#+BEGIN_SRC bash
+sudo apt-get install -y tmux bash-completion
+sudo apt-get install -y git ranger
+#+END_SRC
+
+* 基础准备
+
+#+BEGIN_SRC bash
+# sudo apt-get purge openresolv # 这个不需要还会偷偷改/etc/resolv.conf
+# 将要使用HTTPS的源。其实后来发现有时候不需要。谁知道呢
+sudo apt-get install -y apt-transport-https ca-certificates
+# 不需要翻译包
+echo 'Acquire::Languages "none";' | sudo tee /etc/apt/apt.conf.d/99translations
+#+END_SRC
+
+** 软件源配置
+
+*** Unstable
+
+个人偏好。
+
+#+BEGIN_SRC bash
+cat /etc/apt/sources.list
+# 使用TUNA unstable！
+echo 'deb https://mirrors.tuna.tsinghua.edu.cn/debian/ unstable main non-free contrib' | sudo tee /etc/apt/sources.list
+# 使用USTC unstable！
+#echo 'deb https://mirrors.ustc.edu.cn/debian/ unstable main non-free contrib' | sudo tee /etc/apt/sources.list
+#+END_SRC
+
+*** Stable
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/apt/sources.list
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stable main non-free contrib
+deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ stable main non-free contrib
+
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security stable/updates main contrib non-free
+deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security stable/updates main contrib non-free
+
+# stable-updates, previously known as 'volatile'
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ stable-updates main contrib non-free
+deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ stable-updates main contrib non-free
+EOF
+#+END_SRC
+
+* 安全配置
+
+见[这里](/Linux/最基本的安全配置.md)。
+
+
+* 软件更新配置
+
+#+BEGIN_SRC bash
+sudo apt-get autoremove -y
+sudo apt-get update
+sudo apt-get dist-upgrade -y
+sudo apt-get autoremove
+#+END_SRC
+
+** 自动安装更新
+
+#+BEGIN_SRC bash
+sudo apt-get install -y unattended-upgrades apt-listchanges
+#+END_SRC
+
+
+见 [[https://wiki.debian.org/UnattendedUpgrades][官方教程]]
+
+下面是默认更新所有包，略危险。 *如果不是unstable* ，不做修改，默认只更新安全相关的包。
+
+#+BEGIN_SRC bash
+sudo vi /etc/apt/apt.conf.d/50unattended-upgrades
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+Unattended-Upgrade::Origins-Pattern {
+     "n=${distro_codename}";
+};
+Unattended-Upgrade::Mail "root";
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+sudo cat /etc/apt/apt.conf.d/20auto-upgrades
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+#+END_EXAMPLE
+
+#+BEGIN_SRC bash
+sudo unattended-upgrade -d
+#+END_SRC
+
+* 时间设置
+
+#+BEGIN_SRC bash
+sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+sudo dpkg-reconfigure -f noninteractive tzdata
+
+## systemd似乎自带NTP
+# sudo apt-get install -y ntp && sudo systemctl enable ntp && sudo systemctl start ntp
+#+END_SRC

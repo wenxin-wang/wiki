@@ -1,0 +1,123 @@
+#+TITLE: macvlan
+#+WIKI: network
+
+* 简介
+
+[[http://backreference.org/2014/03/20/some-notes-on-macvlanmacvtap/][教程1]]
+
+macvtap主要是虚拟环境下，利用macvlan连接虚拟机的方式。
+
+macvlan类似网桥，在有些局限的同时，性能上有所提升，在一些场景下安全性略高：
+
+- 有几种工作模式，在一般情况下我选`bridge`模式，基本就是个*预先配置好接口mac地址*的网桥
+- 某个macvlan口只能收到
+  - 广播包
+  - 目标/源地址是自己mac地址的包，只有这一种！
+  - 也就是说：混杂模式不可用
+  - 也就是说：不要再把这个端口接到网桥上，收不到其它包的
+  - 从另一个角度讲，如果一个端口被人利用来听包，他只能看到广播包和到本机的包
+- 另一个局限：在这种情况下，物理端口无法和macvlan的虚拟口通信
+  - 在虚拟化的环境下，这意味着，如果宿主机想收到使用macvlan的容器/macvtap的虚拟
+    机的包，自己的内网口也必须是macvlan口
+    
+* ARP配置修改
+
+如果不加下面的配置，物理和虚拟端口会同时回ARP
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/sysctl.d/100-arp.conf
+net.ipv4.conf.all.arp_ignore=1
+net.ipv4.conf.all.arp_announce=2
+EOF
+sudo sysctl -p /etc/sysctl.d/100-arp.conf
+#+END_SRC
+
+* 临时用
+
+#+BEGIN_SRC bash
+PINF=内网物理口
+IINF=macvlan-int
+MODE=bridge
+#+END_SRC
+
+** 添加
+
+#+BEGIN_SRC bash
+sudo ip l set $PINF up
+sudo ip l add $IINF link $PINF type macvlan mode $MODE
+#+END_SRC
+
+** 删除
+
+#+BEGIN_SRC bash
+sudo ip l del $IINF
+#+END_SRC
+
+* Debian持久化配置
+
+** 内网口macvlan
+
+如果需要网关，自行添加。一般用作内网，不需要网关
+
+#+BEGIN_SRC bash
+IP4=IPv4地址
+MA4=255.255.255.0
+IP6=IPv6地址
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo vi /etc/network/interfaces
+#+END_SRC
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/network/interfaces.d/$IINF
+iface $PINF inet manual
+
+auto $IINF
+iface $IINF inet static
+address $IP4
+netmask $MA4
+pre-up ip l set $PINF up && ip l add $IINF link $PINF type macvlan mode $MODE
+post-up sysctl net.ipv6.conf.$PINF.accept_ra=0 && sysctl net.ipv6.conf.$IINF.accept_ra=0 && ip a add $IP6 dev $IINF
+post-down ip l del $IINF && ip l set $PINF down
+EOF
+sudo ifup $IINF
+#+END_SRC
+
+** 外网口macvlan
+
+#+BEGIN_SRC bash
+PINF=外网物理口
+IINF=macvlan-ext
+MODE=bridge
+#+END_SRC
+
+#+BEGIN_SRC bash
+IP4=IPv4地址
+MA4=255.255.255.0
+GW4=
+IP6=IPv6地址
+GW6=
+#+END_SRC
+
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/network/interfaces.d/$EINF
+iface $PINF inet manual
+
+auto $EINF
+iface $EINF inet static
+address $IP4
+netmask $MA4
+gateway $GW4
+pre-up ip l set $PINF up && ip link add $EINF link $PINF type macvlan mode $MODE
+post-up sysctl net.ipv6.conf.$PINF.accept_ra=0 && sysctl net.ipv6.conf.$EINF.accept_ra=0 && ip a add $IP6 dev $EINF && ip -6 r add default via $GW6
+post-down ip l del $EINF && ip l set $PINF down
+EOF
+#+END_SRC
+
+怕是只能重启了
+
+#+BEGIN_SRC bash
+sudo reboot # :)
+#+END_SRC

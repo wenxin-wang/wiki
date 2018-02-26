@@ -13,3 +13,24 @@ sudo sysctl -p /etc/sysctl.d/99-no-ipv6.conf
 #+BEGIN_SRC bash
 sudo yum install -y radvd
 #+END_SRC
+
+* 关闭RA
+
+#+BEGIN_SRC bash
+INF=
+#+END_SRC
+
+** 临时
+
+#+BEGIN_SRC bash
+sysctl -w net.ipv6.conf.$PINF.accept_ra=0
+#+END_SRC
+** 永久
+
+#+BEGIN_SRC bash
+F=/etc/sysctl.d/100-$INF-no-ra.conf
+cat <<EOF | sudo tee $F
+net.ipv6.conf.$PINF.accept_ra=0
+EOF
+sudo sysctl -p $F
+#+END_SRC

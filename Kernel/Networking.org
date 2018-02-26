@@ -30,3 +30,7 @@ There's [[https://lwn.net/Articles/89597/][an article]] on LWN.net that discuss 
 on CPU and DMA. If we align IP packets, then DMA access is unaligned; if not,
 then CPU access is unaligned. The cost of the two kinds of penalties varies
 between architecture, and thus different choices are made.
+
+** Allocation Details
+
+[[https://www.spinics.net/lists/newbies/msg10540.html][A good starting point]]
