@@ -25,10 +25,10 @@ IP6=IPv6地址
 cat <<EOF | sudo tee /etc/network/interfaces.d/$BR
 auto $BR
 iface $BR inet static
-address $IP4
-netmask $MA4
-bridge_ports $PINFS
-post-up ip a add $IP6 dev $BR
+  address $IP4
+  netmask $MA4
+  bridge_ports $PINFS
+  post-up ip a add $IP6 dev $BR
 EOF
 sudo ifup $BR
 #+END_SRC

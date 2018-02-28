@@ -15,8 +15,7 @@ sudo lxc-checkconfig
 sudo systemctl enable lxc
 #+END_SRC
 
-
-* SELinux
+*** SELinux
 
 #+BEGIN_SRC bash
 mkdir -p /tmp/src
@@ -33,6 +32,23 @@ sudo semanage fcontext -a -t lxc_file_t '/var/lib/lxc/[^/]*/rootfs/.*'
 # regex博大精深，我只是过路的，于是干脆拆两条
 #+END_SRC
 
+** Debian
+#+BEGIN_SRC bash
+sudo apt-get install -y lxc
+#+END_SRC
+
+*** （Debian相关）AppArmor配置
+
+并不想装AppArmor和SELinux。他们是好东西，但是我还不会，而且每个人学起来都费力。
+而且Debian上的默认AppArmor配置似乎有点问题。
+
+总之对于Debian上的LXC而言，无论用不用AppArmor，都需要
+
+#+BEGIN_SRC bash
+grep -q 'lxc.aa_allow_incomplete' /etc/lxc/default.conf || \
+  (echo "lxc.aa_allow_incomplete = 1" | sudo tee /etc/lxc/default.conf)
+#+END_SRC
+
 * CentOS 7 container on CentOS 7
 
 #+BEGIN_SRC bash
@@ -43,4 +59,45 @@ name=
 sudo lxc-create -n $name -t -t download -- -d centos -r 7 -a amd64
 sudo lxc-start -d -n $name
 sudo lxc-attach -n $name
+#+END_SRC
+
+* Debian on Debian
+
+#+BEGIN_SRC bash
+NAME=容器名
+PINF=enp4s0
+STORAGE_OPTS="-B lvm --lvname $NAME --vgname base-vg --fssize 1G --fstype ext4"
+OTHER_OPTS=""
+TMPL=debian
+TMPL_OPTS="--enable-non-free --mirror=https://mirrors.tuna.tsinghua.edu.cn/debian/ --security-mirror=https://mirrors.tuna.tsinghua.edu.cn/debian-security/ --packages=iputils-ping,vim-tiny,bash-completion,sudo"
+
+IP4=IPv4地址/前缀
+GW4=IPv4网关
+IP6=IPv6地址/前缀
+GW6=IPv6网关
+#+END_SRC
+
+#+BEGIN_SRC bash
+cat <<EOF >/tmp/lxc-$NAME.conf
+lxc.network.0.type=macvlan
+lxc.network.0.macvlan.mode=bridge
+lxc.network.0.flags=up
+lxc.network.0.link=$PINF
+lxc.network.0.ipv4=$IP4
+lxc.network.0.ipv4.gateway=$GW4
+lxc.network.0.ipv6=$IP6
+lxc.network.0.ipv6.gateway=$GW6
+lxc.start.auto=1
+EOF
+sudo lxc-create -n $NAME -f /tmp/lxc-$NAME.conf\
+  $STORAGE_OPTS $OTHER_OPTS\
+  -t $TMPL -- $TMPL_OPTS
+sudo lxc-start -n $NAME # 如果出问题，加-F前台启动看一下。不过没有密码所以没法登录
+sudo lxc-attach -n $NAME -- sed -i 's/dhcp/manual/g' /etc/network/interfaces
+cat <<EOF | sudo sudo lxc-attach -n $NAME -- tee /etc/sysctl.d/100-no-ra.conf
+net.ipv6.conf.all.accept_ra=0
+EOF
+
+sudo lxc-stop -n $NAME
+sudo lxc-start -n $NAME
 #+END_SRC

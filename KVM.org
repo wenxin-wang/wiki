@@ -5,6 +5,15 @@
 
 ** Host
 
+*** Debian
+#+BEGIN_SRC bash
+sudo apt install -y qemu-kvm libvirt-clients libvirt-daemon-system
+sudo adduser $USER libvirt
+sudo adduser $USER libvirt-qemu
+sudo adduser $USER kvm
+sudo su -l $USER
+#+END_SRC
+*** Arch
 #+BEGIN_SRC bash
 sudo pacman -S virt-viewer virt-manager virt-install qemu
 #+END_SRC
