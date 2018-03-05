@@ -97,3 +97,23 @@ sudo pacman -S gvfs-smb
 **** Nautilus
 
 ctrl + l 然后输入 smb://$ip
+
+* 虚拟机线下迁移
+
+** 原宿主机
+
+#+BEGIN_SRC bash
+DOMAIN=
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo dd if=x | gzip | ssh oldhost bash -c 'gunzip -c | sudo dd of=y'
+sudo virsh dumpxml $DOMAIN >$DOMAIN.xml
+# 做必要的修改
+#+END_SRC
+
+** 新宿主机
+
+#+BEGIN_SRC bash
+sudo virsh define $DOMAIN.xml
+#+END_SRC
