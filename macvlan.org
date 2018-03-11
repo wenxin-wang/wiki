@@ -45,6 +45,7 @@ MODE=bridge
 #+BEGIN_SRC bash
 sudo ip l set $PINF up
 sudo ip l add $IINF link $PINF type macvlan mode $MODE
+sudo ip l set $IINF up
 #+END_SRC
 
 ** 删除

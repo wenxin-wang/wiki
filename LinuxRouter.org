@@ -21,6 +21,15 @@ EOF
 sudo sysctl -p /etc/sysctl.d/100-ipv6-all-forward.conf
 #+END_SRC
 
+* 自动地址分配
+
+#+BEGIN_SRC bash
+sudo apt-get install -y isc-dhcp-server radvd
+sudo vi /etc/default/isc-dhcp-server
+sudo systemctl restart isc-dhcp-server radvd
+sudo systemctl status isc-dhcp-server radvd
+#+END_SRC
+
 * 获取APNIC路由表
 
 #+BEGIN_SRC bash

@@ -94,6 +94,9 @@ sudo lxc-create -n $NAME -f /tmp/lxc-$NAME.conf\
   -t $TMPL -- $TMPL_OPTS
 sudo lxc-start -n $NAME # 如果出问题，加-F前台启动看一下。不过没有密码所以没法登录
 sudo lxc-attach -n $NAME -- sed -i 's/dhcp/manual/g' /etc/network/interfaces
+sudo lxc-attach -n $NAME -- mkdir -p /root/.ssh
+cat ~/.ssh/authorized_keys | sudo lxc-attach -n $NAME -- bash -c 'cat >/root/.ssh/authorized_keys'
+sudo lxc-attach -n $NAME -- chmod -R go-rwx /root/.ssh
 cat <<EOF | sudo sudo lxc-attach -n $NAME -- tee /etc/sysctl.d/100-no-ra.conf
 net.ipv6.conf.all.accept_ra=0
 EOF

@@ -3,6 +3,12 @@
 
 * Installation
 
+** Debian
+#+BEGIN_SRC bash
+sudo apt-get install -y openvpn
+#+END_SRC
+
+** ArchLinux
 #+BEGIN_SRC bash
 sudo pacman -S --needed openvpn
 sudo groupadd -r nogroup

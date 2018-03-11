@@ -4,7 +4,7 @@
 * 常用软件包
 
 #+BEGIN_SRC bash
-sudo apt-get install -y tmux bash-completion
+sudo apt-get install -y tmux bash-completion arping
 sudo apt-get install -y git ranger
 #+END_SRC
 

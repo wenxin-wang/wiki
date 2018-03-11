@@ -69,8 +69,8 @@ vi config.txt
 #+END_EXAMPLE
 
 #+BEGIN_SRC bash
-tmux new-s -s miner
 cd ~/xmr-stak-cpu/bin
+tmux new-s -s miner
 ./xmr-stak-cpu
 #+END_SRC
 
