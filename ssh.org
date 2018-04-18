@@ -15,3 +15,10 @@ X11UseLocalhost no
 X11DisplayOffset 10
 X11Forwarding yes
 #+END_EXAMPLE
+
+* X2go
+
+#+BEGIN_SRC bash
+sudo pacman -S x2goserver
+sudo pacman -S x2goclient
+#+END_SRC

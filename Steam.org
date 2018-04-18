@@ -1,0 +1,14 @@
+#+TITLE: Steam
+#+WIKI: gaming
+
+* 安装
+
+** Debian
+
+non-free
+#+BEGIN_SRC bash
+dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install -y steam
+sudo usermod -a -G video,audio $USER
+#+END_SRC

@@ -98,9 +98,10 @@ sudo lxc-attach -n $NAME -- mkdir -p /root/.ssh
 cat ~/.ssh/authorized_keys | sudo lxc-attach -n $NAME -- bash -c 'cat >/root/.ssh/authorized_keys'
 sudo lxc-attach -n $NAME -- chmod -R go-rwx /root/.ssh
 cat <<EOF | sudo sudo lxc-attach -n $NAME -- tee /etc/sysctl.d/100-no-ra.conf
-net.ipv6.conf.all.accept_ra=0
+net.ipv6.conf.eth0.accept_ra=0
 EOF
 
 sudo lxc-stop -n $NAME
 sudo lxc-start -n $NAME
+sudo lxc-attach -n $NAME
 #+END_SRC

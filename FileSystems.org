@@ -1,0 +1,12 @@
+#+TITLE: FileSystems
+#+WIKI: linux/admin
+
+* Ext4
+
+** Resize
+
+#+BEGIN_SRC bash
+sudo e2fsck -f /dev/sdx
+sudo resize2fs /dev/sdx
+sudo e2fsck -f /dev/sdx
+#+END_SRC

@@ -13,6 +13,7 @@ sudo adduser $USER libvirt-qemu
 sudo adduser $USER kvm
 sudo su -l $USER
 #+END_SRC
+
 *** Arch
 #+BEGIN_SRC bash
 sudo pacman -S virt-viewer virt-manager virt-install qemu
@@ -21,6 +22,22 @@ sudo pacman -S virt-viewer virt-manager virt-install qemu
 *** Centos 7
 #+BEGIN_SRC 
 sudo yum install -y qemu-kvm qemu-img libvirt libvirt-python libvirt-client virt-install 
+sudo usermod -aG libvirt,kvm,qemu $USER
+
+systemctl start libvirtd
+systemctl status libvirtd
+systemctl enable libvirtd
+rmmod kvm_intel
+rmmod kvm
+modprobe kvm
+modprobe kvm_intel
+#+END_SRC
+
+*** 启动
+#+BEGIN_SRC 
+sudo systemctl start libvirt
+sudo systemctl status libvirt
+sudo systemctl enable libvirt
 #+END_SRC
 
 * Windows Hyper-V Enlightenments

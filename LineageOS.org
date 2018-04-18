@@ -1,0 +1,61 @@
+#+TITLE: LineageOS
+#+WIKI: android
+
+LineageOS 14.1 on Debian stretch
+
+* 设备
+
+- 小米4c：https://wiki.lineageos.org/devices/libra/build
+
+* 准备
+
+#+BEGIN_SRC bash
+sudo apt-get install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev libesd0-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python
+sudo apt-get install -y openjdk-8-jdk
+
+mkdir -p ~/bin
+mkdir -p ~/android/lineage
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+#+END_SRC
+
+#+BEGIN_SRC bash
+export PATH=~/bin:$PATH
+#+END_SRC
+
+* 同步代码
+
+#+BEGIN_SRC bash
+cd ~/android/lineage
+repo init -u https://github.com/LineageOS/android.git -b cm-14.1
+repo sync
+
+#+END_SRC
+
+* 准备硬件相关代码
+
+#+BEGIN_SRC bash
+source build/envsetup.sh
+breakfast libra
+#+END_SRC
+
+* Other Setup
+** CCACHE
+
+#+BEGIN_SRC bash
+export USE_CCACHE=1
+ccache -M 50G
+#+END_SRC
+
+** JACK
+
+#+BEGIN_SRC bash
+export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
+#+END_SRC
+
+* BUILD!
+
+#+BEGIN_SRC bash
+croot
+brunch libra
+#+END_SRC
