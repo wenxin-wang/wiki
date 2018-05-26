@@ -12,3 +12,130 @@ It  redirects  the  packet  to the machine itself by changing the destination IP
 *The primary address of the incoming interface*!! 不是 127.0.0.1 ！
 
 同一个坑踩两次是要哪样！每次3小时！
+
+* 持久化
+
+#+BEGIN_SRC bash
+sudo apt-get install -y iptables-persistent
+sudo systemctl status netfilter-persistent
+sudo systemctl enable netfilter-persistent
+#+END_SRC
+
+* EMPTY
+
+#+BEGIN_SRC bash
+sudo touch /etc/iptables/rules.v{4,6}
+cat <<EOF | sudo tee /etc/iptables/rules.v4
+# Empty iptables rule file
+*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+COMMIT
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+COMMIT
+EOF
+sudo iptables-restore </etc/iptables/rules.v4
+sudo ip6tables-restore </etc/iptables/rules.v6
+#+END_SRC
+
+* NO FORWARD, all OUTPUT, only ssh INPUT, lo free
+
+** IPv4
+
+#+BEGIN_SRC bash
+sudo iptables -N TCP
+sudo iptables -N UDP
+
+sudo iptables -P FORWARD DROP
+sudo iptables -P OUTPUT ACCEPT
+
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A INPUT -p icmp -j ACCEPT
+sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+sudo iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+sudo iptables -A INPUT -p tcp --syn -m conntrack --ctstate NEW -j TCP
+
+sudo iptables -A TCP -p tcp --dport 22 -j ACCEPT
+
+sudo iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+sudo iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+
+sudo iptables -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+sudo iptables -P INPUT DROP
+#+END_SRC
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/iptables/rules.v4
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [36:5787]
+:TCP - [0:0]
+:UDP - [0:0]
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+-A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
+-A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+-A INPUT -p tcp -j REJECT --reject-with tcp-reset
+-A INPUT -j REJECT --reject-with icmp-proto-unreachable
+-A TCP -p tcp -m tcp --dport 22 -j ACCEPT
+COMMIT
+EOF
+sudo iptables-restore </etc/iptables/rules.v4
+#+END_SRC
+
+** IPv6
+#+BEGIN_SRC bash
+sudo ip6tables -N TCP
+sudo ip6tables -N UDP
+
+sudo ip6tables -P FORWARD DROP
+sudo ip6tables -P OUTPUT ACCEPT
+
+sudo ip6tables -A INPUT -i lo -j ACCEPT
+sudo ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
+sudo ip6tables -A INPUT -m conntrack --ctstate INVALID -j DROP
+sudo ip6tables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+sudo ip6tables -A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+sudo ip6tables -A INPUT -p tcp --syn -m conntrack --ctstate NEW -j TCP
+
+sudo ip6tables -A TCP -p tcp --dport 22 -j ACCEPT
+
+sudo ip6tables -A INPUT -p udp -j REJECT --reject-with icmp6-port-unreachable
+sudo ip6tables -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+
+sudo ip6tables -A INPUT -j REJECT --reject-with icmp6-port-unreachable
+sudo ip6tables -P INPUT DROP
+#+END_SRC
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/iptables/rules.v6
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [197:48063]
+:TCP - [0:0]
+:UDP - [0:0]
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p ipv6-icmp -j ACCEPT
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p udp -m conntrack --ctstate NEW -j UDP
+-A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
+-A INPUT -p udp -j REJECT --reject-with icmp6-port-unreachable
+-A INPUT -p tcp -j REJECT --reject-with tcp-reset
+-A INPUT -j REJECT --reject-with icmp6-port-unreachable
+-A TCP -p tcp -m tcp --dport 22 -j ACCEPT
+COMMIT
+EOF
+sudo ip6tables-restore </etc/iptables/rules.v6
+#+END_SRC

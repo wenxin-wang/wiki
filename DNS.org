@@ -1,0 +1,10 @@
+#+TITLE: DNS
+#+WIKI: network
+
+* PowerDNS
+** Authoritative Server
+*** Installation
+**** Debian
+#+BEGIN_SRC bash 
+apt-get install pdns-server pdns-backend-bind
+#+END_SRC

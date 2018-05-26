@@ -49,6 +49,7 @@ sudo firewall-cmd --reload
 以下使得 *非本机* 的访问得以转发
 
 #+BEGIN_SRC bash
+ZONE=external
 EPORT=外部端口
 IPORT=内部端口
 IIP4=内部IPv4
@@ -57,8 +58,8 @@ PROTO=协议
 #+END_SRC
 
 #+BEGIN_SRC bash
-sudo firewall-cmd --permanent --zone=external --add-forward-port=port=$EPORT:proto=$PROTO:toport=$IPORT:toaddr=$IIP4
-sudo firewall-cmd --zone=external --add-rich-rule="rule family=ipv6 forward-port port=$EPORT protocol=$PROTO to-port=$IPORT to-addr=$IIP6" --permanent
+sudo firewall-cmd --permanent --zone=$ZONE --add-forward-port=port=$EPORT:proto=$PROTO:toport=$IPORT:toaddr=$IIP4
+sudo firewall-cmd --zone=$ZONE --add-rich-rule="rule family=ipv6 forward-port port=$EPORT protocol=$PROTO to-port=$IPORT to-addr=$IIP6" --permanent
 
 sudo firewall-cmd --reload
 sudo firewall-cmd --zone=external --list-all

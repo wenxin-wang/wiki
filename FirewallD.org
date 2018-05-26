@@ -46,3 +46,9 @@ sudo iptables-save | less
 #+END_SRC
 
 如果是NAT配置见[这里](./NAT.md)。
+
+* Forward
+
+#+BEGIN_SRC bash
+sudo firewall-cmd --direct  --permanent --add-rule ipv4 filter FORWARD 0 -i eth0 -o eth1 -j ACCEPT
+#+END_SRC

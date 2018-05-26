@@ -34,13 +34,47 @@ sudo yum-config-manager \
 sudo yum install docker-ce
 #+END_SRC
 
+*** Debian
+#+BEGIN_SRC bash
+sudo apt-get remove -y docker docker-engine docker.io
+sudo apt-get -y install apt-transport-https ca-certificates \
+     curl gnupg2 software-properties-common
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+sudo APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 \
+     apt-key fingerprint 0EBFCD88 |\
+     grep '9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88'
+sudo add-apt-repository \
+   "deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce
+#+END_SRC
+
 * 网络配置
 
-** 替换默认网桥和 IPTables
+** Debian 替换默认网桥和 IPTables
+
+我们用 firewalld 和 自己的网桥。无奈默认网桥关不掉，只能替换为自己的。
+
+#+BEGIN_SRC bash
+sudo ip l del docker0
+sudo vi /etc/docker/daemon.json
+#+END_SRC
+
+#+BEGIN_SRC json
+{
+  "iptables": false,
+  "bridge": "br-nat"
+}
+#+END_SRC
+
+** CentOS 7 替换默认网桥和 IPTables
 
 我们用 nftables 和 自己的网桥。无奈默认网桥关不掉，只能替换为自己的。
 
 #+BEGIN_SRC bash
+sudo ip l del docker0
 sudo vi /etc/sysconfig/docker-network
 #+END_SRC
 
@@ -59,9 +93,16 @@ docker network create -d macvlan \
     -o parent=eth0 pub_net
 #+END_SRC
 
+* 启动
+#+BEGIN_SRC bash
+sudo systemctl start docker
+sudo systemctl status docker
+sudo systemctl enable docker
+#+END_SRC
+
 * 存储配置
 
-默认用 loopfile 存储方式，比较慢。切 lvm thinpool 的方式见[[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/managing_containers/managing_storage_with_docker_formatted_containers][官方文档]]。例子
+Centos 7 默认用 loopfile 存储方式，比较慢。切 lvm thinpool 的方式见[[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/managing_containers/managing_storage_with_docker_formatted_containers][官方文档]]。例子
 #+BEGIN_SRC bash
 sudo vgcreate docker-vg /dev/mdx
 sudo bash -c 'echo VG=docker-vg >> /etc/sysconfig/docker-storage-setup'

@@ -27,3 +27,13 @@ sudo apt-mark unhold $pkgname
 sudo apt-get install locales
 sudo dpkg-reconfigure locales
 #+END_SRC
+
+* backports
+
+#+BEGIN_SRC bash
+cat <<EOF | sudo tee /etc/apt/sources.list.d/stretch-backports.list
+deb https://mirrors.tuna.tsinghua.edu.cn/debian stretch-backports main contrib non-free
+EOF
+sudo apt-get update
+sudo apt-get install -y -t strech-backports $pkg
+#+END_SRC

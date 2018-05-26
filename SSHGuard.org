@@ -1,0 +1,32 @@
+#+TITLE: SSHGuard
+#+WIKI: network security
+
+* Installation
+
+#+BEGIN_SRC bash
+sudo apt-get install -y sshguard
+sudo systemctl start sshguard
+sudo systemctl status sshguard
+sudo systemctl enable sshguard
+#+END_SRC
+
+* Config
+
+#+BEGIN_SRC bash
+sudo iptables -N sshguard      # for IPv4
+sudo ip6tables -N sshguard     # for IPv6
+
+sudo iptables -I INPUT -j sshguard
+sudo ip6tables -I INPUT -j sshguard
+sudo vi /etc/iptables/rules.v4
+sudo vi /etc/iptables/rules.v6
+sudo iptables-restore </etc/iptables/rules.v4
+sudo ip6tables-restore </etc/iptables/rules.v6
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+*filter
+
+:sshguard - [0:0]
+-A INPUT -j sshguard
+#+END_EXAMPLE

@@ -35,9 +35,9 @@ modprobe kvm_intel
 
 *** 启动
 #+BEGIN_SRC 
-sudo systemctl start libvirt
-sudo systemctl status libvirt
-sudo systemctl enable libvirt
+sudo systemctl start libvirtd
+sudo systemctl status libvirtd
+sudo systemctl enable libvirtd
 #+END_SRC
 
 * Windows Hyper-V Enlightenments
@@ -133,4 +133,27 @@ sudo virsh dumpxml $DOMAIN >$DOMAIN.xml
 
 #+BEGIN_SRC bash
 sudo virsh define $DOMAIN.xml
+#+END_SRC
+
+* 虚拟机Console
+
+grub
+#+BEGIN_EXAMPLE
+console=ttyS0
+#+END_EXAMPLE
+
+* IPv6 Macvtap
+
+#+BEGIN_SRC bash
+virsh edit $domain
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+<interface type='direct' trustGuestRxFilters='yes'>
+#+END_EXAMPLE
+
+* IOMMU
+
+#+BEGIN_SRC bash
+sudo dmesg | grep -e DMAR -e IOMMU
 #+END_SRC
