@@ -1,0 +1,53 @@
+#+TITLE: LetsEncrypt
+#+WIKI: security network
+
+* Installation
+
+#+BEGIN_SRC bash
+sudo apt-get install -y certbot -t stretch-backports
+sudo mkdir -p /etc/letsencrypt/renewal-hooks/{pre,post,deploy}/
+sudo touch /etc/letsencrypt/renewal-hooks/{pre,post,deploy}/000-default.sh
+sudo chmod +x /etc/letsencrypt/renewal-hooks/{pre,post,deploy}/000-default.sh
+#+END_SRC
+
+* HTTP
+** Test
+
+首先配好域名
+
+#+BEGIN_SRC bash
+sudo certbot certonly --test-cert --standalone --renew-by-default -d $domain
+sudo certbot revoke --test-cert --cert-path /etc/letsencrypt/live/$domain/fullchain.pem
+#+END_SRC
+
+** GET
+
+#+BEGIN_SRC bash
+for d in $domains; do
+  sudo certbot certonly --standalone --renew-by-default -d $d
+done
+#+END_SRC
+
+* DNS-01
+
+** Test
+#+BEGIN_SRC bash
+sudo certbot certonly --test-cert --manual --preferred-challenges=dns \
+  --manual-public-ip-logging-ok --renew-by-default \
+  --manual-auth-hook /etc/letsencrypt/acme-dns-01-docker-pdns/acme-dns-01-docker-pdns-auth.sh \
+  --manual-cleanup-hook /etc/letsencrypt/acme-dns-01-docker-pdns/acme-dns-01-docker-pdns-cleanup.sh \
+   -d $domain
+sudo certbot revoke --test-cert --cert-path /etc/letsencrypt/live/$domain/fullchain.pem
+#+END_SRC
+
+
+** Get
+#+BEGIN_SRC bash
+for domain in $domains; do
+sudo certbot certonly --manual --preferred-challenges=dns \
+  --manual-public-ip-logging-ok --renew-by-default \
+  --manual-auth-hook /etc/letsencrypt/acme-dns-01-docker-pdns/acme-dns-01-docker-pdns-auth.sh \
+  --manual-cleanup-hook /etc/letsencrypt/acme-dns-01-docker-pdns/acme-dns-01-docker-pdns-cleanup.sh \
+   -d $domain
+done
+#+END_SRC

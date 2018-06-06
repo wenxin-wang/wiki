@@ -1,0 +1,14 @@
+#+TITLE: SMTP
+#+WIKI:
+
+* Test
+
+#+BEGIN_EXAMPLE
+EHLO mail.lab.ivi2.org
+MAIL FROM: <test@mail.lab.ivi2.org>
+rcpt to: <i@wenxinwang.me>
+DATA
+Subject: I have some questions!
+Hi
+.
+#+END_EXAMPLE

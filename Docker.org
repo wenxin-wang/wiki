@@ -1,6 +1,13 @@
 #+TITLE: Docker
 #+WIKI: virtualization/container
 
+* 文件夹配置
+
+#+BEGIN_SRC bash
+# /var/lib/docker/
+sudo mkdir -p /docker/{data,log}
+#+END_SRC
+
 * Installation
 :HEADLINE:
 en_US
@@ -43,8 +50,9 @@ curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 sudo APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 \
      apt-key fingerprint 0EBFCD88 |\
      grep '9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88'
+#   "deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \
 sudo add-apt-repository \
-   "deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \
+   "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/debian \
    $(lsb_release -cs) \
    stable"
 sudo apt-get update
@@ -118,4 +126,10 @@ sudo mkdir -p /srv/docker
 sudo semanage fcontext -a -t var_t '/srv/docker'
 sudo semanage fcontext -d -t svirt_sandbox_file_t '/srv/docker/.*'
 sudo restorecon -vr /srv/docker
+#+END_SRC
+
+* Build
+
+#+BEGIN_SRC bash
+sudo docker build --pull -t $tag .
 #+END_SRC

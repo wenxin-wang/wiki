@@ -1,6 +1,11 @@
 #+TITLE: FileSystems
 #+WIKI: linux/admin
 
+* Reload partitions
+#+BEGIN_SRC bash
+sudo apt-get install -y parted
+sudo partprobe
+#+END_SRC
 * Ext4
 
 ** Resize

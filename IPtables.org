@@ -1,4 +1,4 @@
-#+TITLE: IPtables
++TITLE: IPtables
 #+WIKI: linux,network
 
 * REDIRECT
@@ -21,6 +21,28 @@ sudo systemctl status netfilter-persistent
 sudo systemctl enable netfilter-persistent
 #+END_SRC
 
+不好使，启动时莫名失败
+#+BEGIN_SRC bash
+sudo apt remove -y netfilter-persistent
+cat <<'EOF' | sudo tee /etc/network/if-pre-up.d/iptables
+#!/bin/bash
+
+set -e
+
+v4=/etc/iptables/rules.v4
+v6=/etc/iptables/rules.v6
+
+if [ "$IFACE" = lo ]; then
+  if [ -r $v4 ]; then
+    iptables-restore <$v4 || echo "iptables restore failed!"
+  fi
+  if [ -r $v6 ]; then
+    ip6tables-restore <$v6 || echo "ip6tables restore failed!"
+  fi
+fi
+EOF
+sudo chmod +x /etc/network/if-pre-up.d/iptables
+#+END_SRC
 * EMPTY
 
 #+BEGIN_SRC bash
@@ -138,4 +160,28 @@ cat <<EOF | sudo tee /etc/iptables/rules.v6
 COMMIT
 EOF
 sudo ip6tables-restore </etc/iptables/rules.v6
+#+END_SRC
+
+* FORWARD
+
+#+BEGIN_SRC bash
+IN=eth0
+NET=1.1.1.0/24
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo iptables -I FORWARD -i $IN -s $NET ! -d $NET -j ACCEPT
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
+#+END_SRC
+
+* SNAT
+
+#+BEGIN_SRC bash
+OUT=eth0
+SRC=1.1.1.4-1.1.1.254
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo iptables -t nat -A POSTROUTING -o $OUT -j SNAT --to-source $SRC
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
 #+END_SRC
