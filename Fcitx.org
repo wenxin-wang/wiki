@@ -1,0 +1,18 @@
+#+TITLE: Fcitx
+#+WIKI:
+
+* 漏字母问题
+
+#+BEGIN_SRC bash
+sudo pacman -S fcitx-gtk2 fcitx-gtk3 # 用啥装啥
+sudo bash -c '/usr/bin/gtk-query-immodules-2.0 >/usr/lib32/gtk-2.0/2.10.0/immodules.cache'
+sudo bash -c '/usr/bin/gtk-query-immodules-3.0 >/usr/lib32/gtk-3.0/3.0.0/immodules.cache'
+vi ~/.xprofile
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+export LC_CTYPE="zh_CN.utf8"
+#+END_EXAMPLE
