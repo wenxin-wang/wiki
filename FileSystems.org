@@ -15,3 +15,10 @@ sudo e2fsck -f /dev/sdx
 sudo resize2fs /dev/sdx
 sudo e2fsck -f /dev/sdx
 #+END_SRC
+
+* Permission
+
+#+BEGIN_SRC bash
+sudo getfacl -pR /bin /usr /home /var /etc /lib* /tmp /mnt /media /dev /boot /sbin /srv >bin.perm
+sudo setfacl --restore=bin.perm
+#+END_SRC
