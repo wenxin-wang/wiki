@@ -133,3 +133,11 @@ sudo restorecon -vr /srv/docker
 #+BEGIN_SRC bash
 sudo docker build --pull -t $tag .
 #+END_SRC
+
+* Systemd Cgroup Manager
+
+#+BEGIN_SRC json
+{
+  "exec-opts": [ "native.cgroupdriver=systemd" ]
+}
+#+END_SRC

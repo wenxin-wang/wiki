@@ -1,0 +1,89 @@
+#+TITLE: Docker/Systemd
+#+WIKI: docker
+
+* 需求
+
+使用 Systemd 管理 Docker 容器的生存周期和启动依赖。原因：
+
+- 我知道 Docker 有自己的做法，但是它的重启策略没有 Systemd 那么丰富
+- 我不想学习 Docker Compose。Systemd 的启动顺序控制应该可靠，并且我不需要 Docker
+  Compose/Swarm 的横向扩展功能
+
+具体需求：
+- 可以通过 Systemd 管理 Docker 容器*内*进程的生命周期
+- Docker client 应该可以 detach
+- 当我使用 `docker run/start/stop` 时，Systemd 应该能够同时知晓容器状态
+  - `docker start`后，`systemctl start`应该不出问题
+  - `docker stop`后，systemd 应该知道该服务已经退出
+- 每个容器都可以被 rm，必需的状态持久化在 host 中
+  - 数据：bind-mount
+  - 日志：journald
+
+* 调研
+已经有前人非常详细地 [[https://groups.google.com/forum/m/#!msg/coreos-dev/wf7G6rA7Bf4/Olmxmo13WKQJ][总结]] 了各种办法的优缺点。
+
+核心问题：`docker run` 得到的进程不是容器内的 PID 1，信号量的传递等容易出问题，
+并且它本身存在的必要不大，不应该用 systemd 监视该进程
+- `docker run/start`后，子进程是 Docker client 而不是 容器内的 PID 1
+- 容器的 `PID 1` 是 containerd 的子进程
+- Systemd 的一个服务，理论上无法监测其它服务的子进程的存活状态
+
+前人 [[https://github.com/moby/moby/issues/6791][指出]]，把 PID 1 （及容器内其它）进程放入该 systemd 服务对应的 cgroup 中，
+systemd 就可以监测该进程的存活状态（虽然仍然会提示，监测非子孙进程很可能出问题）。
+链接中的脚本所需的 cgroup 目录的规则已经改变，需要微调才能运行。在`docker-18.05`
+及 `systemd 238`（需要修改systemd内核启动参数，见下文） 上确认工作。这种办法的不
+足是，被移动到 service cgroup 的只有进程本身，而 Docker 配置的进程组限制没有移过
+去。同一个写了 [[https://github.com/ibuildthecloud/systemd-docker][一个Wrapper]] 来解决这个问题，但是它也不尽完美，并且很久没有更新。
+
+Docker 1.6.0 [[https://github.com/ibuildthecloud/systemd-docker/issues/25][引入了]] `--cgroup-parent`这个参数，使得用户可以指定容器内进程所属的
+cgroup 的父目录。这使得 docker 可以直接将容器 cgroup 创建在 systemd service
+cgroup 下面。这样得到的容器的 cgroup 目录结构与上面脚本的一样，并且保留了 Docker
+的资源限制（我尝试了限制内存和进程数）。Systemd service cgroup 的位置目前可以确
+定，但是不知道以后会不会有变化。这个方法以后甚至可能就完全不工作了。
+
+Docker 后来还引入了选项，使得它可以采用 systemd 的方式指定 parent
+cgroup（"--exec-opt native.cgroupdriver=systemd"）。可惜目前这种方法只能指定到
+[[https://www.freedesktop.org/software/systemd/man/systemd.slice.html][systemd.slice]] 级别，无法指定到 service cgroup，试了一下，果然 PID 1 无法被监测。
+
+另外，Docker 已经在自己的 systemd service 文件中 [[https://github.com/moby/moby/pull/20633][处理了]] 与 systemd 在指定子进程 cgroup
+时的冲突。
+
+* Systemd 内核参数（禁用 cgroup v2）
+
+目前 Docker [[https://github.com/opencontainers/runc/issues/654][不支持]] cgroup v2，用 v2 会发现`--cgroup-parent`无论如何也不能把容器
+的 cgroup 创建在指定层级下。
+
+通过添加内核启动参数
+
+#+BEGIN_EXAMPLE
+systemd.unified_cgroup_hierarchy=0 systemd.legacy_systemd_cgroup_controller=1
+#+END_EXAMPLE
+
+禁用 cgroup v2 （需要重启）可以绕过这个问题。
+
+* 实例 service 文件
+
+见 https://gitlab.com/wenxin-wang1/systemd-docker-container
+
+由于容器的状态在 host　上持久化，因此可以在启动前后移除容器。
+
+* 日志
+
+
+#+BEGIN_SRC bash
+# 容器日志
+sudo journalctl CONTAINER_NAME=hello-test
+# 服务日志：会缺少 systemd 本身 Start/Stop 等输出，但是没找到什么好办法
+sudo journalctl -t hello.service
+#+END_SRC
+
+非常可惜，由于 [[https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html#Trusted%2520Journal%2520Fields][journald]] 和 Docker 的（非常合理的）限制，Docker　的 journald log
+driver　打印出的所有日志都在 docker.service unit　下，而无法放到上面创建的
+hello.service unit 下。也就是说
+
+#+BEGIN_SRC bash
+# 看不到 container 输出，但是有 systemd　Start/Stop　的输出
+sudo journalctl -u hello.service
+# 看到所有 container 输出
+sudo journalctl -u docker.service
+#+END_SRC
