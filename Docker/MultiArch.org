@@ -1,0 +1,14 @@
+#+TITLE: Docker MultiArch
+#+WIKI: docker
+
+* References
+
+https://www.ecliptik.com/Cross-Building-and-Running-Multi-Arch-Docker-Images/
+http://www.hotblackrobotics.com/en/blog/2018/01/22/docker-images-arm/
+https://developer.ibm.com/linuxonpower/2017/07/27/create-multi-architecture-docker-image/
+
+* binfmt_misc
+
+https://en.wikipedia.org/wiki/Binfmt_misc
+
+内核调用qemu直接运行其它架构的二进制文件

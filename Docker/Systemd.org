@@ -87,3 +87,9 @@ sudo journalctl -u hello.service
 # 看到所有 container 输出
 sudo journalctl -u docker.service
 #+END_SRC
+
+* Debug
+
+#+BEGIN_EXAMPLE
+-it --rm --entrypoint /bin/sh
+#+END_EXAMPLE
