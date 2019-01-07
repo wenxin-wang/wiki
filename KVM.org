@@ -24,13 +24,13 @@ sudo pacman -S virt-viewer virt-manager virt-install qemu
 sudo yum install -y qemu-kvm qemu-img libvirt libvirt-python libvirt-client virt-install 
 sudo usermod -aG libvirt,kvm,qemu $USER
 
-systemctl start libvirtd
-systemctl status libvirtd
-systemctl enable libvirtd
-rmmod kvm_intel
-rmmod kvm
-modprobe kvm
-modprobe kvm_intel
+sudo systemctl start libvirtd
+sudo systemctl status libvirtd
+sudo systemctl enable libvirtd
+sudo rmmod kvm_intel
+sudo rmmod kvm
+sudo modprobe kvm
+sudo modprobe kvm_intel
 #+END_SRC
 
 *** 启动
