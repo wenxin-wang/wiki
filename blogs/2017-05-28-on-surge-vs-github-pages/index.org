@@ -2,6 +2,10 @@
 #+WIKI: blog,roast
 #+STARTUP: inlineimages
 
+*EDIT 2019-01-07*: 写的什么玩意！完全体现不出“Surge通过'向不会用git的用户表现
+git有多难用'来推销自己，并且自身的步骤也没比github简单到哪去”的中心思想。另外我
+现在也不会觉得这样的产品没有意义了（真香）。永久保留，引以为戒。
+
 我本来是随手搜一下Github Pages对页面路由的友好程度（我估计肯定得用'#'分隔），然
 后搜到[[https://github.com/kriasoft/react-static-boilerplate/issues/58#issuecomment-169252404][一个issue的回答]] 推荐Surge，其中一句There are [[http://gh-pages-vs.surge.sh/][articles dedicated]] to how
 hard it is to deal with GHPages. （我甚至原样保留了链接）
