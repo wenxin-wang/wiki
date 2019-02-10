@@ -1,0 +1,131 @@
+#+TITLE: Elisp 中宏内 eval 的变量绑定问题
+#+WIKI: proglang/elisp
+#+DATE: 2019-02-10
+
+* 最初的问题
+
+假如 ~try.el~ 内容如下：
+
+#+BEGIN_SRC elisp
+(let ((a 1))
+  (eval-when-compile
+    (message "HI %d" a)))
+#+END_SRC
+
+如果运行 ~emacs -Q --batch -l try.el~ ，则输出
+
+#+BEGIN_EXAMPLE
+Eager macro-expansion failure: (void-variable a)
+HI 1
+#+END_EXAMPLE
+
+如果运行 ~emacs -Q --batch -f batch-byte-compile try.el~ ，则输出
+
+#+BEGIN_EXAMPLE
+In toplevel form:
+try.el:3:25:Warning: reference to free variable ‘a’
+try.el:3:25:Error: Symbol’s value as variable is void: a
+#+END_EXAMPLE
+
+但是！如果把 ~let~ 变成 ~defvar~ ，提前将 ~a~ 声明为全局变量，就没有这
+个问题。
+
+* ~eval-when-compile~ 定义
+
+#+BEGIN_SRC elisp
+(defmacro eval-when-compile (&rest body)
+  "Like `progn', but evaluates the body at compile time if you're compiling.
+Thus, the result of the body appears to the compiler as a quoted
+constant.  In interpreted code, this is entirely equivalent to
+`progn', except that the value of the expression may be (but is
+not necessarily) computed at load time if eager macro expansion
+is enabled."
+  (declare (debug (&rest def-form)) (indent 0))
+  (list 'quote (eval (cons 'progn body) lexical-binding)))
+#+END_SRC
+
+~eval-when-compile~ 是一个宏，宏内定义包含一个展开时而非展开后运行的
+~eval~ 。看上去是这个 ~eval~ 找不到宏外围 ~let~ 内定义的变量
+
+* 简化问题
+
+** 展开时运行 message
+
+#+BEGIN_SRC elisp
+(defmacro show1 (var)
+  (message "show1 %s" var))
+
+(show1 b)
+#+END_SRC
+
+输出 "show1 b"，说明宏内 ~var~ 变量的值是 ~symbol b~ ，并不会继续求 ~b~
+的值，符合预期。
+
+** 展开后运行 message
+
+#+BEGIN_SRC elisp
+(defmacro show2 (var)
+  `(message "show2 %s" ,var))
+
+;; (show2 b) 会输出 void variable b
+
+(macroexpand-all '(show2 b))
+;; (message "show2 %s" b)
+
+(let ((b 1))
+  (show2 b))
+#+END_SRC
+
+输出 "show2 1"，说明宏展开结果 ~(message "show2 %s" b)~ ，然后求值时带入
+~b~ 的本地绑定1，符合预期。
+
+** 展开时运行 eval
+
+#+BEGIN_SRC elisp
+(defmacro show3 (var)
+  (eval `(message "show3 %s" ,var)))
+;;  (eval `(message "show4 %s" ,var) t) lexical-binding 也一样
+
+(let ((b 1))
+  (macroexpand-all '(show3 b)))
+;; 输出 "show3 1"
+
+(let ((b 1))
+  (show3 b))
+;; 报错 (void-variable b)
+#+END_SRC
+
+神奇！ ~macroexpand-all~ 能够成功运行，但是直接 ~eval-last-sexp~ 求值，
+根据 ~backtrace~ ，内部也是先调用 ~macroexpand-all~ ，却会出错。
+
+* 确定问题
+
+在看 ~backtrace~ 时发现， ~eval-last-sexp~ 是从最顶层的表达式开始递归
+调用 ~macroexpand-all~ 的。（见 emacs 26.1 elisp-mode.el.gz，1167行）
+
+根据注释，这就是 原来这就是 [[http://dgutov.github.io/blog/2013/04/07/emacs-24-dot-3-s-killer-feature-eager-macro-expansion/][这篇博客介绍的]] [[https://gnu.huihoo.org/emacs/24.5/emacs-lisp/How-Programs-Do-Loading.html][elisp文档提到的]] [[https://emacs.stackexchange.com/questions/17321/how-to-disable-eager-load-time-macro-expansion-in-emacs-24-3][也给大家添
+了麻烦的]] eager macro-expansion 。
+
+我的理解是，elisp求值时，不再是遇到宏才展开，而是先试图把整个表达式做
+宏替换。但是从顶层替换宏时，表达式内的局部绑定就不在顶层替换调用的环境
+中，导致展开时使用局部绑定的宏展开失败。
+
+一个很好的证明是，把 ~let~ 挪到 ~macroexpand-all~ 里面，也会出错了：
+
+#+BEGIN_SRC elisp
+(macroexpand-all '(let ((b 1))
+  (show3 b)))
+;; eval: Symbol’s value as variable is void: b
+#+END_SRC
+
+这也解释了为什么用 ~defvar~ 预先声明，就不会出错，因为 ~defvar~ 是单独
+一个语句，使得下一个语句的 eager macro-expansion 时的绑定环境中存在这
+个变量。
+
+
+* 解决方案？
+
+首先， [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Eval-During-Expansion.html#Eval-During-Expansion][elisp 文档]] 不推荐在宏展开时求参数值。
+
+但是 ~eval-when-compile~ 就是利用宏展开时求值实现仅编译时运行的。不知
+道怎么办……
