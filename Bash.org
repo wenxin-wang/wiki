@@ -8,6 +8,21 @@ https://stackoverflow.com/questions/9393038/ssh-breaks-out-of-while-loop-in-bash
 * 关联数组
 https://www.artificialworlds.net/blog/2012/10/17/bash-associative-array-examples/
 
+* 检查 symlink
+
+
+#+begin_src bash
+for d in *; do
+    for f in $d/*.el; do
+	if [ ! -e $f ]; then
+	    echo $d
+	    echo $f
+	    break
+	fi
+    done
+done
+#+end_src
+
 * TMUX
 
 #+BEGIN_SRC bash
