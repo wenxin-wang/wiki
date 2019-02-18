@@ -1,0 +1,52 @@
+#+TITLE: Emacs
+#+WIKI: texteditor,proglang/elisp,guile
+
+* Concurrency
+
+https://nullprogram.com/blog/2018/05/31/
+
+* JIT
+
+JIT Compilation for Emacs (Yet another one)
+https://tromey.com/blog/?p=982
+
+Emacs Lisp JIT Compiler (gnu.org)
+https://news.ycombinator.com/item?id=17760649
+
+* Guile
+
+GuileEmacs repo
+http://git.hcoop.net/?p=bpt/emacs.git;a=summary
+
+what happened to the Guile-Emacs project
+https://news.ycombinator.com/item?id=17761261
+
+The future of Emacs, Guile, and Emacs Lisp
+https://lwn.net/Articles/615220/
+
+Guile needs a community, Elisp/Emacs needs a technology
+https://www.reddit.com/r/emacs/comments/701v90/guile_needs_a_community_elispemacs_needs_a/
+
+Speed, threading, and memory improvements in Guile
+https://lwn.net/Articles/664766/
+
+GNU Guile 2.2.0
+https://news.ycombinator.com/item?id=13884322
+
+** LLVM conference on Guile
+http://llvm.org/devmtg/2016-09/
+
+[[file:Emacs/andy-wingo-guile-notes.pdf]] https://www.gnu.org/ghm/2011/paris/slides/andy-wingo-guile-notes.pdf
+
+[[file:Emacs/andy-wingo-guile.pdf]] https://www.gnu.org/ghm/2011/paris/slides/andy-wingo-guile.pdf
+
+** Build GuileEmacs
+https://www.emacswiki.org/emacs/GuileEmacsBuild
+
+https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=guile-emacs-git
+https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=guile4emacs-git
+
+* remacs: Rust Emacs
+
+On Guile
+https://github.com/remacs/remacs/issues/66

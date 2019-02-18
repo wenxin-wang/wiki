@@ -21,3 +21,11 @@ Must see if DMA device can do unaligned access, too.
 - On architecture that require aligned loads: 4-byte bounds -> NET_IP_ALIGN = 4*n + 2 (Ether header 14 byte)
 - PowerPC: 0, because unaligned DMA access is every expensive
 - If ether card cannot do unaligned DMA, need to copy.
+
+* Coroutine
+
+Coroutine Theory
+https://lewissbaker.github.io/2017/09/25/coroutine-theory
+
+libaco
+https://github.com/hnes/libaco/blob/master/README.md
