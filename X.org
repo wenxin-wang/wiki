@@ -1,0 +1,11 @@
+#+TITLE: X
+
+# DPI
+
+https://utcc.utoronto.ca/~cks/space/blog/linux/HiDPILinuxHassles
+https://wiki.archlinux.org/index.php/Xorg#Display_size_and_DPI
+https://wiki.archlinux.org/index.php/HiDPI
+
+# MultiHead
+
+https://www.reddit.com/r/archlinux/comments/740xoq/multihead_hidpi/

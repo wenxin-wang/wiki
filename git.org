@@ -1,0 +1,9 @@
+#+TITLE: Git
+#+WIKI: vcs
+
+* LFS
+
+#+begin_src bash
+git lfs install
+git lfs track "*.pdf*"
+#+end_src
