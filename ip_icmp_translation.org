@@ -1,0 +1,5 @@
+#+TITLE: IP/ICMP Translation
+
+* Hairpin
+[[wiki:Effect_of_IPv6_Prefix_with_Referrals_behave-11.pdf]]
+https://www.ietf.org/proceedings/75/slides/behave-11.pdf

@@ -1,0 +1,11 @@
+#+TITLE: Yubikey
+#+WIKI: encrypt,security
+
+* GNUPG
+
+#+begin_src bash
+sudo pacman -S libusb-compat pcsclite ccid
+sudo systemctl start pcscd.socket
+gpg --card-status
+sudo systemctl enable pcscd.socket
+#+end_src
