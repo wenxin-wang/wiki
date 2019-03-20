@@ -1,5 +1,5 @@
 #+TITLE: C Programming
-#+WIKI: proglang/c 
+#+WIKI: proglang/c
 
 * Alignment
 See [[https://www.kernel.org/doc/Documentation/unaligned-memory-access.txt][Kernel Guide]]. Quote:

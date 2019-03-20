@@ -20,8 +20,8 @@ sudo pacman -S virt-viewer virt-manager virt-install qemu
 #+END_SRC
 
 *** Centos 7
-#+BEGIN_SRC 
-sudo yum install -y qemu-kvm qemu-img libvirt libvirt-python libvirt-client virt-install 
+#+BEGIN_SRC bash
+sudo yum install -y qemu-kvm qemu-img libvirt libvirt-python libvirt-client virt-install
 sudo usermod -aG libvirt,kvm,qemu $USER
 
 sudo systemctl start libvirtd
@@ -34,7 +34,7 @@ sudo modprobe kvm_intel
 #+END_SRC
 
 *** 启动
-#+BEGIN_SRC 
+#+BEGIN_SRC bash
 sudo systemctl start libvirtd
 sudo systemctl status libvirtd
 sudo systemctl enable libvirtd
@@ -46,7 +46,7 @@ sudo systemctl enable libvirtd
 
 #+BEGIN_SRC bash
 sudo virt-xml $VMNAME --edit --features hyperv_relaxed=on,hyperv_vapic=on,hyperv_spinlocks=on,hyperv_spinlocks_retries=8191
-sudo virt-xml $VMNAME --edit --clock hypervclock_present=yes  
+sudo virt-xml $VMNAME --edit --clock hypervclock_present=yes
 #+END_SRC
 
 * Clock
@@ -157,3 +157,7 @@ virsh edit $domain
 #+BEGIN_SRC bash
 sudo dmesg | grep -e DMAR -e IOMMU
 #+END_SRC
+
+* SPICE for windows
+
+https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe

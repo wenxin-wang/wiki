@@ -40,3 +40,7 @@ debuild -b -uc -us
 #+BEGIN_SRC bash
 dpkg-source --commit
 #+END_SRC
+
+* Kernel
+
+https://kernel-team.pages.debian.net/kernel-handbook/ch-common-tasks.html#s-common-official
