@@ -1,0 +1,8 @@
+#+TITLE: golang
+#+WIKI: proglang
+
+* Termux
+
+https://github.com/rafalgolarz/termux-go
+http://rafalgolarz.com/blog/2017/01/15/running_golang_on_android/
+[[https://github.com/termux/termux-packages/issues/2410][Problem cross-compiling go program #2410]]

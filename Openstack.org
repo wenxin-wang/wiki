@@ -1,0 +1,14 @@
+#+TITLE: Openstack
+#+WIKI: cloud
+
+openstack network create --provider-physical-network provider_ipv4  --provider-network-type flat --external 192_168_64_0_24
+openstack subnet create --subnet-range 192.168.64.0/24 --gateway 192.168.64.1 --network 192_168_64_0_24 --no-dhcp 192_168_64_0_24-v4
+
+openstack network create --provider-physical-network provider_ipv6  --provider-network-type flat --external 2001_da8_abff_fff_64
+openstack subnet create --ip-version 6 --subnet-range 2001:da8:abff:fff::/64 --gateway 2001:da8:abff:fff::1 --network 2001_da8_abff_fff_64 --no-dhcp 2001_da8_abff_fff_64-v6
+
+openstack network create 172_16_1_0_24
+openstack subnet create --subnet-range 172.16.1.0/24 --gateway 172.16.1.1 --network 172_16_1_0_24 --no-dhcp 172_16_1_0_24-v4
+
+openstack network create 172_16_0_0_24
+openstack subnet create --subnet-range 172.16.0.0/24 --gateway 172.16.0.1 --network 172_16_0_0_24 --no-dhcp 172_16_0_0_24-v4

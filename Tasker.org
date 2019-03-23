@@ -1,0 +1,9 @@
+#+TITLE: Tasker
+#+WIKI: android
+
+https://www.androidauthority.com/how-to-use-tasker-199872/
+https://www.androidcentral.com/tasker-101-basics
+https://www.reddit.com/r/tasker/comments/7le33d/how_to_use_tasker_to_perform_a_command_in_termux/
+https://joaoapps.com/autoinput/
+
+* Idea: use tasker autoinput to connect wechat & enterprise wechat

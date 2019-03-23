@@ -1,0 +1,11 @@
+#+TITLE: mu4e
+#+WIKI: email
+
+* Writing email
+
+https://www.djcbsoftware.nl/code/mu/mu4e/Writing-messages.html
+
+* Examples
+
+with msmtp
+https://zmalltalker.com/linux/mu.html

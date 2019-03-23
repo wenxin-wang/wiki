@@ -1,0 +1,6 @@
+#+TITLE: Termux
+#+WIKI: android
+
+* Build
+
+https://wiki.termux.com/wiki/Package_Management#Cross-compiling

@@ -1,0 +1,7 @@
+#+TITLE: Email
+
+* Android cmdline
+
+#+begin_src bash
+adb shell am start -n com.google.android.gm/com.google.android.gm.ComposeActivityGmail -d email:i@wenxinwang.me --es subject 'Test' --es body 'Hi there'
+#+end_src

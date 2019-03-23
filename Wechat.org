@@ -1,0 +1,43 @@
+#+TITLE: Wechat
+
+FCKYOU WECHAT
+AND YOU, WEIXIN WORK
+FEELING GOOD HUH, TENCENT
+GETTING SOOOO MANY USERS
+INTO THE KITCHEN SINK YOU BUILT
+
+And here I go, down into that freaking stinky sink
+
+* Thank you, Deepin, for filling up the gap
+
+** Wechat
+
+Many thanks to @countstarlight !
+
+https://github.com/countstarlight/deepin-wine-wechat-arch
+
+#+begin_src bash
+yay -S aur/deepin-wine-wechat
+#+end_src
+
+** WXWORK
+
+Many thanks to @huiyiqun !
+
+https://aur.archlinux.org/packages/deepin-wxwork/
+
+Unfortunately, ~deepin-wine~ binary doesn't work on my arch. But
+~wine~ on the system already works for Deepin-Wechat. So here's a
+quick workaround.
+
+#+begin_src bash
+uname -a
+yay -S aur/deepin-wxwork aur/deepin-wine
+# Linux archie 5.0.3-arch1-1-ARCH #1 SMP PREEMPT Tue Mar 19 13:09:13 UTC 2019 x86_64 GNU/Linux
+sed -e 's@^\(WINE_CMD=\).*$@\1"wine"@' /opt/deepinwine/tools/run.sh | sudo tee /opt/deepinwine/tools/run-syswine.sh
+sed -e 's@run\.sh@run-syswine.sh@' /opt/deepinwine/apps/Deepin-WXWork/run.sh | sudo tee /opt/deepinwine/apps/Deepin-WXWork/run-syswine.sh
+sudo chmod go+x /opt/deepinwine/tools/run-syswine.sh /opt/deepinwine/apps/Deepin-WXWork/run-syswine.sh
+sudo sed -i 's@run\.sh@run-syswine.sh@' /usr/share/applications/deepin.com.weixin.work.desktop
+sudo sed -i 's@run\.sh@run-syswine.sh@' /opt/deepinwine/apps/Deepin-WXWork/deepin.com.weixin.work.desktop
+#+end_src
+
