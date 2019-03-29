@@ -1,0 +1,6 @@
+#+TITLE: Factorio
+#+WIKI: games
+
+* Linear Programming
+
+http://kirkmcdonald.github.io/posts/calculation.html

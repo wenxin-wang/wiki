@@ -5,3 +5,37 @@
 #+begin_src bash
 adb shell am start -n com.google.android.gm/com.google.android.gm.ComposeActivityGmail -d email:i@wenxinwang.me --es subject 'Test' --es body 'Hi there'
 #+end_src
+
+* mbsync for IETF mailist
+
+#+BEGIN_EXAMPLE
+############
+#   IETF   #
+############
+
+IMAPAccount ietf-anonymous
+Host imap.ietf.org
+Port 993
+User anonymous@imap.ietf.org
+Pass ""
+SSLType IMAPS
+SSLVersions TLSv1.2
+
+IMAPStore ietf-anonymous-remote
+Account ietf-anonymous
+
+MaildirStore ietf-anonymous-local
+Path ~/Maildir/ietf-anonymous/
+Inbox ~/Maildir/ietf-anonymous/INBOX
+SubFolders Verbatim
+
+Channel ietf-anonymous-interests
+Master :ietf-anonymous-remote:
+Slave :ietf-anonymous-local:
+Patterns "Shared\ Folders/v6ops"
+Create Slave
+Sync Pull
+SyncState *
+CopyArrivalDate yes
+#+END_EXAMPLE
+
