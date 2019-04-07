@@ -1,6 +1,273 @@
 #+TITLE: Factorio
 #+WIKI: games
 
+* Tips
+
+Factorio: Observations, Tips, Tricks, & Efficiency
+https://steamcommunity.com/sharedfiles/filedetails/?id=661582295
+
+https://www.reddit.com/r/factorio/comments/2gwx70/best_design_patterns/
+
+radar range = 7 gap between large pole
+
 * Linear Programming
 
 http://kirkmcdonald.github.io/posts/calculation.html
+
+* Rail
+
+https://wiki.factorio.com/Railway
+
+https://wiki.factorio.com/Train_stop
+
+https://wiki.factorio.com/Tutorial:Train_signals
+
+https://wiki.factorio.com/Rail_signal
+
+https://wiki.factorio.com/Rail_chain_signal
+
+https://wiki.factorio.com/Railway/Train_path_finding
+
+Factorio Train Tutorial - Planning A Rail Network : Junction Spacing, Train Size & Mainline
+https://www.youtube.com/watch?v=NXIPZNFSrvg
+
+
+* Creative Mod
+
+https://www.reddit.com/r/factorio/comments/7qc8sy/creative_mode_without_mod/
+
+* Main Bus
+
+Factorio: How to Build a Main Bus
+https://steamcommunity.com/sharedfiles/filedetails/?id=754378586
+
+https://wiki.factorio.com/tutorial:main_bus
+
+* Logistics Network
+
+https://wiki.factorio.com/Logistic_network
+
+
+
+* Open
+
+** electricity
+
+- iron: 40
+- copper: 4
+- wood: 1
+- stone: 5
+
+- pole: 1
+- boiler: 1
+- steamer: 1
+- offshore pump: 1
+
+** asm tech
+
+- iron: 56
+- copper: 25
+
+- red tech: 10
+- lab: 1
+
+** asm
+
+- iron: 22
+- copper: 5
+
+** more coal/iron/copper
+
+- iron：81
+- stone：70
+
+- gear：27
+
+- cdrill：9
+- sfurn：9
+
+- coal: 2
+- iron: 6
+- copper: 2
+
+** more asm
+
+- iron: 88
+- copper: 18
+
+- gear: 20
+- cwire: 36
+- gcirc: 12
+
+- asm: 4
+
+** MOVE boilder to coal
+
+*** pipes
+
+- iron：250
+
+- upipe：30
+- pipe：10
+
+*** belt 10 cin 4
+- iron: 27
+
+- gear: 9
+*** pole 50
+- copper: 50
+- wood: 50
+
+- cwire: 100
+*** radar 1
+- iron: 25
+- copper: 8
+
+- gear: 5
+- cwire: 16
+- gcirc: 5
+
+** summary
+
+- stone furnance: 8
+- asm: 5
+
+* red tech line
+
+- copper
+  - edrill: 2 + 2 = 4
+  - sfurn: 4 + 4 = 8
+  - yins: 8 + 8 = 16
+- iron
+  - edrill: 4 + 2 = 6
+  - sfurn: 7 + 3 = 10
+  - yins: 14 + 6 = 20
+
+** smelt line up
+*** sfurn 18
+- stone: 90
+*** wood box 10
+- wood: 20
+*** belt 100
+- iron: 150
+
+- gear: 50
+*** edrill 10
+- iron: 230
+- copper: 45
+
+- gear: 50
+- cwire: 90
+- gcirc: 30
+*** yins 36
+
+- iron: 144
+- copper: 54
+
+- gear: 36
+- cwire: 108
+- gcirc: 36
+
+** prod line up
+
+- belt: 100
+- yins: 32
+- asm: 11
+- lab: 10
+
+- gear asm 1
+  - yins: 2
+- rbottle asm 10
+  - yins: 20
+- lab: 10
+  - yins: 10
+
+*** belt 100
+- iron: 150
+
+- gear: 50
+*** yins 32
+- iron: 128
+- copper: 48
+
+- gear: 32
+- cwire: 96
+- gcirc: 32
+*** asm 11
+- iron: 242
+- copper: 50
+
+- gear: 55
+- cwire: 99
+- gcirc: 33
+*** lab 10
+- iron: 360
+- copper: 150
+
+- gear: 120
+- cwire: 300
+- gcirc: 100
+
+** tech
+
+- automation 1: 10
+- logistics 1: 20
+- electronics: 30
+  - fast inserter: 30
+
+- steel processing: 50
+
+- turrent: 10
+- stone walls: 10
+
+* red + green tech line
+
+** smelt line up
+
+- copper
+  - edrill: 4 + 2 = 6
+  - sfurn: 6 + 2 = 8
+  - yins: 16
+- iron
+  - edrill: 12 + 4 = 16
+  - sfurn: 19 + 2 = 21
+  - yins: 42
+
+** prod line up
+
+- belt: 100
+- yins: 36
+- asm: 18
+
+* r+green+gray tech line
+
+** smelt line up
+
+- copper
+  - edrill: 10
+  - stfurn: 8
+  - yins: 16
+  - lins: 8
+- iron red
+  - edrill: 29
+  - stfurn: 24
+  - yins: 48
+  - lins: 24
+- brick red
+  - edrill: 20
+  - stfurn: 8
+  - yins: 16
+  - lins: 8
+
+** prod line up
+
+- belt: 100
+- yins: 36
+- asm: 23
+
+- gray bottle: 10
+  - brick: 1
+  - rmag: 3
+    - mag: 1
+  - genade: 8
+
