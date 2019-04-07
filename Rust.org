@@ -26,3 +26,10 @@ Rust book.
 
 References don't have to be explicitly dereferenced; there are
 [[http://stackoverflow.com/questions/28519997/what-are-rusts-exact-auto-dereferencing-rules][auto-dereferencing rules]]. (some say [[http://stackoverflow.com/questions/29216530/does-rust-automatically-dereference-primitive-type-references][impl for both types and reference types]]?)
+
+* Zero-cost Abstractions
+
+https://ruudvanasseldonk.com/2016/11/30/zero-cost-abstractions
+
+Zero-cost futures in Rust
+https://aturon.github.io/blog/2016/08/11/futures/

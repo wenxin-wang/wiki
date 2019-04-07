@@ -1,0 +1,37 @@
+#+TITLE: micro-kernel
+#+WIKI: os
+
+* Critique
+
+Microkernels are slow and Elvis didn't do no drugs (darknedgy.net)
+https://news.ycombinator.com/item?id=10824382
+
+Critique Of Microkernel Architectures
+https://news.ycombinator.com/item?id=10301375
+https://www.cse.unsw.edu.au/~cs9242/04/lectures/lect05b.pdf
+[[wiki:Critique_Of_Microkernel_Architectures.pdf]]
+
+* Performance
+
+Extreme High Performance Computing or Why Microkernels Suck
+https://landley.net/kdocs/ols/2007/ols2007v1-pages-251-262.pdf
+[[wiki:Extreme_High_Performance_Computing_or_Why_Microkernels_Suck.pdf]]
+
+* Virtualization
+
+Lightweight Virtualization on Microkernel-based Systems
+https://os.inf.tu-dresden.de/papers_ps/liebergeld-diplom.pdf
+[[wiki:Lightweight_Virtualization_on_Microkernel-based_Systems.pdf]]
+
+Analysis of Monolithic and Microkernel Architectures Towards Secure Hypervisor Design
+https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6759218
+[[wiki:Analysis_of_Monolithic_and_Microkernel_Architectures_Towards_Secure_Hypervisor_Design.pdf]]
+
+Are Virtual Machine Monitors Microkernels Done Right?
+https://www.usenix.org/legacy/events/hotos05/final_papers/full_papers/hand/hand.pdf
+kk
+[[wiki:Are_Virtual_Machine_Monitors_Microkernels_Done_Right.pdf]]
+
+https://www.kernkonzept.com/l4re.html
+
+https://microkerneldude.wordpress.com/2008/04/03/microkernels-vs-hypervisors/
