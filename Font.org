@@ -1,0 +1,34 @@
+#+TITLE: Font
+
+I HAVE WASTED SO MUCH TIME ON FONTS.
+
+* evince Chinese font empty
+
+Sometimes, your favorate pdf reader may tell you that this freshly
+xelatex-generated pdf with ctex has problem with its Chinese
+fonts. All Chinese characters are gone, leaving blankness behind.
+
+And instantly, you panic. OH MY GOD THERE IS SOMETHING WRONG WITH MY
+CHINESE FONT SETUP AGAIN. AAAGGGGAAAAAAINNNNNNN.
+
+But no, don't panic. Just install xpdf. Those you trusted most would
+betray you at unexpected moments.
+
+You found out that xpdf displays these Chinese characters just fine.
+
+And [[https://bugs.launchpad.net/ubuntu/+source/poppler/+bug/197537][it turns out]] what you should do is: (which at least solves some of
+the problems)
+
+#+begin_src bash
+sudo pacman -S poppler-data
+#+end_src
+
+And that sounds so familiar that you suddenly recalls another night of
+desperate Internet searching, three or four years ago, for exactly the
+same reason, wasted almost the same hours, followed exactly the same
+steps, found exactly the same bug report, and took exactly the same
+measures. Only this time your back and neck and butts aches much more,
+because during these years I did not grow up, I grow old, physically.
+
+I should have written it down somewhere back then. Now, I have
+this wiki. I should be proud of myself.
