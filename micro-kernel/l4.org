@@ -1,0 +1,6 @@
+#+TITLE: l4
+
+https://www.slideshare.net/jserv/l4-microkernel-design-overview
+
+Interprocess Communication & the L4 Microkernel
+http://www.drdobbs.com/interprocess-communication-the-l4-micro/184402030

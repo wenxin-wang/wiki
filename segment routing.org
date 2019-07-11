@@ -1,0 +1,10 @@
+#+TITLE: segment routing
+#+WIKI: network
+
+* RFC
+
+IPv6 Segment Routing Header (SRH)
+https://tools.ietf.org/html/draft-ietf-6man-segment-routing-header-07
+
+http://www3.lacnic.net/eventos/lacnic23/jueves/gianpietro-cisco-segmentrouting-ipv6-flip6.pdf
+[[wiki:gianpietro-cisco-segmentrouting-ipv6-flip6.pdf]]

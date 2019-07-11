@@ -1,6 +1,14 @@
 #+TITLE: nftables
 #+WIKI: network
 
+* API
+
+Nftables: a new packet filtering engine
+https://lwn.net/Articles/324989/
+
+Adding new expressions to nftables
+https://zasdfgbnm.github.io/2017/09/07/Extending-nftables/
+
 * 安装
 
 ** CentOS 7

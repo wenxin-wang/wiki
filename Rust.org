@@ -29,7 +29,19 @@ References don't have to be explicitly dereferenced; there are
 
 * Zero-cost Abstractions
 
+Abstraction without overhead: traits in Rust
+https://blog.rust-lang.org/2015/05/11/traits.html
+
 https://ruudvanasseldonk.com/2016/11/30/zero-cost-abstractions
 
 Zero-cost futures in Rust
 https://aturon.github.io/blog/2016/08/11/futures/
+
+* Bare metal
+
+Writing an OS in Rust (Second Edition)
+https://os.phil-opp.com/freestanding-rust-binary/
+
+* Unsafe rust
+
+https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#using-extern-functions-to-call-external-code

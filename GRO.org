@@ -1,0 +1,28 @@
+#+TITLE: GRO
+#+WIKI: network
+
+http://netoptimizer.blogspot.com/2014/04/full-scalability-for-netfilter.html
+
+https://www.redhat.com/en/blog/mitigate-tcp-syn-flood-attacks-red-hat-enterprise-linux-7-beta
+
+[nf-next] netfilter: xt_CHECKSUM: avoid bad offload warnings on GSO packets
+https://lore.kernel.org/patchwork/patch/824819/
+
+[4/4] examples/nf-queue: receive large gso packets
+https://patchwork.ozlabs.org/patch/239484/
+
+[5/5] netfilter: nfqueue: avoid expensive gso segmentation and checksum fixup
+https://patchwork.ozlabs.org/patch/237011/
+
+** UDP GRO/GSO
+
+https://github.com/torvalds/linux/blob/master/tools/testing/selftests/net/udpgro_bench.sh
+https://github.com/torvalds/linux/blob/master/tools/testing/selftests/net/udpgso_bench_tx.c
+https://github.com/torvalds/linux/blob/master/tools/testing/selftests/net/udpgso_bench_rx.c
+
+https://stackoverflow.com/questions/55516579/udp-gro-do-not-restore-every-udp-packet
+
+[[https://lwn.net/Articles/770978/][udp: implement GRO support]]
+[[https://lwn.net/Articles/752956/][udp gso]]
+
+http://vger.kernel.org/lpc_net2018_talks/willemdebruijn-lpc2018-udpgso-presentation-20181113.pdf

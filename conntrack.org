@@ -1,0 +1,9 @@
+#+TITLE: conntrack
+
+* Ulogd2
+
+#+begin_src bash
+modprobe nf_conntrack_netlink
+echo "1" | sudo tee /proc/sys/net/netfilter/nf_conntrack_timestamp
+echo "1" | sudo tee /proc/sys/net/netfilter/nf_conntrack_acct
+#+end_src

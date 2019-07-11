@@ -1,0 +1,17 @@
+#+TITLE: flowlabel
+#+WIKI: network, ipv6
+
+* Flowlabel management: Current standard
+
+http://linux-ip.net/gl/api-ip6-flowlabels/api-ip6-flowlabels-node9.html
+
+Flow Label support for IPv6 sockets
+https://www.linux.com/forums/software-development/flow-label-support-ipv6-sockets
+
+Linux C IPv6 raw socket - tell socket NOT to assign a flow label
+https://stackoverflow.com/questions/48310068/linux-c-ipv6-raw-socket-tell-socket-not-to-assign-a-flow-label
+
+* Proposed usage
+
+Survey of Proposed Use Cases for the IPv6 Flow Label
+https://tools.ietf.org/html/rfc6294

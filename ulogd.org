@@ -1,0 +1,26 @@
+#+TITLE: ulogd
+
+* json output
+
+#+begin_src bash
+sudo apt install autoconf libtool libnfnetlink-dev libnetfilter-log-dev libnetfilter-conntrack-dev libnetfilter-acct-dev libjansson-dev
+
+git clone git://git.netfilter.org/ulogd2
+cd ulogd2
+./autogen.sh
+./configure
+make
+sudo make install
+#+end_src
+
+#+begin_src bash
+sudo apt install ulogd2-json
+#+end_src
+
+* conntrack history
+
+#+begin_src bash
+modprobe nf_conntrack_netlink
+echo "1" | sudo tee /proc/sys/net/netfilter/nf_conntrack_timestamp
+echo "1" | sudo tee /proc/sys/net/netfilter/nf_conntrack_acct
+#+end_src

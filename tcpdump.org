@@ -1,0 +1,8 @@
+#+TITLE: tcpdump
+#+WIKI: network
+
+* ssh wireshark
+
+#+begin_src bash
+ssh xlat@100.64.0.3 'sudo ip netns exec ns-r2 stdbuf -o0 tcpdump -nne -i r2r0 -w -' | wireshark  -i -
+#+end_src

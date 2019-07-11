@@ -1,0 +1,9 @@
+#+TITLE: netfilter
+#+WIKI: netfilter, network, kernel
+
+* packet flow graph
+
+https://commons.wikimedia.org/wiki/File:Netfilter-packet-flow.svg
+[[wiki:Netfilter-packet-flow.svg]]
+
+http://linux-ip.net/pages/diagrams.html

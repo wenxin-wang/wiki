@@ -1,0 +1,18 @@
+#+TITLE: quic
+
+https://www.chromium.org/quic
+https://www.chromium.org/quic/quic-faq
+
+quic wire layout spec
+https://docs.google.com/document/d/1WJvyZflAO2pq77yOLbp9NsGjC1CHetAXV8I0fQe-B_U/edit#heading=h.n8ctotxlkz36
+
+https://github.com/curl/curl/wiki/QUIC
+https://github.com/curl/curl/wiki/QUIC-implementation
+
+* build chrome quic
+
+https://chromium.googlesource.com/chromium/src/+/master/docs/linux_build_instructions.md#Get-the-code
+
+https://github.com/chromium/chromium/tree/master/components/cronet
+
+https://www.chromium.org/quic/playing-with-quic

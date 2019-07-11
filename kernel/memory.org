@@ -1,0 +1,11 @@
+#+TITLE: memory
+
+* User / kernel memory copy
+User space memory access from the Linux kernel
+https://www.ibm.com/developerworks/library/l-kernel-memory-access/
+
+How to share linux kernel memory with userspace (read only)
+https://stackoverflow.com/questions/20242620/how-to-share-linux-kernel-memory-with-userspace-read-only
+
+Avoid memory copying between user space and kernel space
+http://www.linuxforums.org/forum/kernel/158548-avoid-memory-copying-between-user-space-kernel-space.html

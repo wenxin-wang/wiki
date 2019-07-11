@@ -1,0 +1,6 @@
+#+TITLE: flow control
+#+WIKI: network
+
+* Pacing
+
+https://blogs.akamai.com/2018/11/enhancing-network-performance-with-packet-pacing.html

@@ -1,0 +1,12 @@
+#+TITLE: booting
+
+Inside the Linux boot process
+https://www.ibm.com/developerworks/library/l-linuxboot/
+
+The Kernel Boot Process
+https://manybutfinite.com/post/kernel-boot-process/
+
+Kernel booting process. Part 1.
+https://0xax.gitbooks.io/linux-insides/content/Booting/linux-bootstrap-1.html
+
+http://www.tldp.org/LDP/lki/lki-1.html

@@ -14,6 +14,18 @@ radar range = 7 gap between large pole
 
 http://kirkmcdonald.github.io/posts/calculation.html
 
+* 900/min
+
+https://kirkmcdonald.github.io/calc.html#zip=bZBLbsMwDAVv41UIxOkigAEfhpZom6h+IKlFb19ZSVME8VJvxMEjPRrOVxjvMA6R03wb1ioJHc1qRAGer4GNos4rqoEJJi1ZDBYKNq3TeOGkJEYyyfR1CTltsGPy5OEN9Om3JJLnGoECORN2UHKgDhbeTlKtixoa59SfhQuBZdgk1+R79Jppu3Cr4YVD6ARVKS7hCCO6nRPBrQOXk5pUd2hB8pLtv2zTkjz0j2VfREtg+1tjIWyWfgmslmOvCOqYkiMo6L6Pb9d2mY3VWrtPFLn5UH5OkNspssNwgopk/2z+CasdzhPjLw==
+
+https://kirkmcdonald.github.io/calc.html#zip=fVTbjuMwCP2bPo2ljrTS7mTVjyEOSVF9E8atOl+/NJNmto4zkh8swAc4BzyAwOlo3n+b94OncPp1IEGfT1AkehCKwWRLGCyaBPbScfdxPL65OFEWsi2fJ0cCfG/57Bk9WXAtX+I4FLuXscgDtgma9Y4Nx8EroEPtxdriiwOJ3P3N2P15g+EKGjwYS2wLSZdwPVVEJGe0NIs5U5jqqB2WNnA9iCDfK2ubjs1jG1NCNhZ6h7vepP292NGhFVaNMEwU0JTQ6nONGgsH5bH73xyDOnYp+hF3JEZgbzxM8KlhC+7o7sqi4dhHMSODbzQ0MQYYni/OCNf7rIJlZWerAYWMrOQu8aRVm0lzm9sZ0W3h54ANW7P1MdIN/h1NZ/mphPY6bHHizQwY8jzHwjrshRv9u9KrIBCksrcXa/M8EbL9IrmEIdcKJErr1cFcdQ9cY6wDvyPv3rLuBl4fTX8t5JKdYQBe7+Se12gvKMbGoPPndtIvQWNpCbw4E3DjZVbdnfL4rCJHp6OSIKD7ttAwQ+uARm9W9WukhPo9vLSURSduO1tZou7JQ9TL1nwDt2YuTrewTjMbVSWwNFQ+YQg5RRbTo5MFpflTNn4NqBtaPpLIdey8G1vzXP+r7R8=
+
+https://kirkmcdonald.github.io/calc.html#data=0-17-1&min=2&items=steel-plate:f:60&modules=iron-plate:;null:8,iron-ore:;null:8
+
+https://wiki.factorio.com/Items
+
+https://davemcw.com/factorio/tech-tree/
+
 * Rail
 
 https://wiki.factorio.com/Railway

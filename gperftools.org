@@ -1,0 +1,6 @@
+#+TITLE: gperftools
+
+https://gperftools.github.io/gperftools/heap_checker.html
+https://gperftools.github.io/gperftools/heapprofile.html
+
+https://gperftools.github.io/gperftools/tcmalloc.html
