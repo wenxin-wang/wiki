@@ -1,0 +1,37 @@
+#+TITLE: Accounting
+
+* Plain text accounting
+
+https://plaintextaccounting.org/
+
+#+BEGIN_QUOTE
+accounting is tracking the flow of valuable commodities, such as money
+or time. It clarifies activity, priorities, obligations,
+opportunities. It can reduce stress and even be enjoyable.
+
+double-entry bookkeeping is a process for doing this reliably. For
+every movement of value (a transaction), both the source and
+destination are recorded. Simple arithmetic invariants help prevent
+errors.
+
+In traditional double-entry bookkeeping, value at any point in time is
+tracked in various accounts, classified as asset (owned), liability
+(owed) or equity (invested). Two more classifications track changes
+during some period: revenues (inflows) and expenses (outflows).
+
+Transactions consist of debits (increases to asset or expense
+accounts, or decreases to liability or equity accounts) or credits
+(decreases to asset or expense accounts, or increases to liability or
+equity accounts).
+#+END_QUOTE
+
+And that is too much information flowing through my mind.
+
+Assets = Equity + Liabilities
+
+Assests：资产
+Equity：所有权
+Liabilities：负债
+
+[[https://docs.google.com/document/d/100tGcA4blh6KSXPRGCZpUlyxaRUwFHEvnz_k9DyZFn4][Beancount: The Double-Entry Counting Method]]'s description for clearing
+and opening balances is very clarifying.

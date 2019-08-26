@@ -159,3 +159,9 @@ sudo docker build --pull -t $tag .
   "exec-opts": [ "native.cgroupdriver=systemd" ]
 }
 #+END_SRC
+
+* nsenter
+
+#+begin_src bash
+sudo nsenter -t $(sudo docker inspect -f '{{.State.Pid}}' recur64.lab.ivi2.org) -n bash
+#+end_src

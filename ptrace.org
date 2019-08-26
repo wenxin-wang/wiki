@@ -1,0 +1,13 @@
+#+TITLE: ptrace
+
+https://blog.packagecloud.io/eng/2016/02/29/how-does-strace-work/
+
+https://github.com/gaffe23/linux-inject
+
+https://github.com/kubo/injector
+
+https://www.datawire.io/code-injection-on-linux-and-macos/
+
+https://blog.xpnsec.com/linux-process-injection-aka-injecting-into-sshd-for-fun/
+
+https://blog.cloudflare.com/know-your-scm_rights/

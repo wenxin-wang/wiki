@@ -1,0 +1,5 @@
+#+TITLE: hole_punching
+
+http://bford.info/pub/net/p2pnat/
+
+https://en.wikipedia.org/wiki/TCP_hole_punching#Details_of_a_typical_TCP_connection_instantiation_with_TCP_Hole_Punching
