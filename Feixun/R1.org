@@ -1,0 +1,7 @@
+#+TITLE: Feixun/R1
+
+[R1音箱] 智障音箱R1：TTL连接方式及波特率及MASKROM已找到
+https://www.right.com.cn/forum/thread-814207-1-1.html
+
+[R1音箱] R1 3448 版本root
+https://www.right.com.cn/forum/thread-946128-1-1.html

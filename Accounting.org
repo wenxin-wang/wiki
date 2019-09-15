@@ -35,3 +35,17 @@ Liabilities：负债
 
 [[https://docs.google.com/document/d/100tGcA4blh6KSXPRGCZpUlyxaRUwFHEvnz_k9DyZFn4][Beancount: The Double-Entry Counting Method]]'s description for clearing
 and opening balances is very clarifying.
+
+[[https://www.mscs.dal.ca/~selinger/accounting/tutorial.html][Tutorial on multiple currency accounting]]
+
+https://github.com/adept/full-fledged-hledger/wiki
+
+https://felixcrux.com/blog/ledger-practices-accrual-vs-cash-basis-accounting
+
+* How to include
+
+https://www.starlg.cn/2019/07/13/Beancount-01/
+
+* Taxes
+
+https://mumble.net/~campbell/2017/08/06/ledger/HOWTO-track-tax
