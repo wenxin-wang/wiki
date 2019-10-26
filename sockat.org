@@ -1,8 +1,0 @@
-#+TITLE: sockat
-
-#+begin_src bash
-
-socat - TCP:[::1]:8000,sourceport=8001,reuseaddr
-socat - TCP6-LISTEN:8000,reuseaddr,reuseport
-
-#+end_src

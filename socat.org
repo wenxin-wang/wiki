@@ -1,0 +1,33 @@
+#+TITLE: socat
+
+#+begin_src bash
+
+socat - TCP:[::1]:8000,sourceport=8001,reuseaddr
+socat - TCP6-LISTEN:8000,reuseaddr,reuseport
+
+socat - TCP6-LISTEN:8001,reuseaddr,reuseport
+
+tc qdisc add dev lo root handle 1:0 netem delay 5sec
+socat - TCP:[fdee::2]:8001,bind=[fdee::1]:8000,reuseaddr
+socat - TCP:[fdee::1]:8000,bind=[fdee::2]:8001,reuseaddr
+
+https://stackoverflow.com/questions/2231283/tcp-two-sides-trying-to-connect-simultaneously
+#+end_src
+
+#+begin_src python
+import socket
+s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s1.bind(('localhost', 1111))
+s1.connect(('localhost', 2222))
+s1.send('hello')
+s1.recv(5)
+#+end_src
+
+#+begin_src python
+import socket
+s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s1.bind(('localhost', 2222))
+s1.connect(('localhost', 1111))
+s1.send('hello')
+s1.recv(5)
+#+end_src
