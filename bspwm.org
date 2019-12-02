@@ -1,0 +1,9 @@
+#+TITLE: bspwm
+
+Oh my god it's beautifle
+
+http://thedarnedestthing.com/bspwm
+
+And after using AutoKey to remapping some common key combinations
+to follow osx style, I can now accept the usage of a keyboard daemon
+for every wm operation.

@@ -1,0 +1,8 @@
+#+TITLE: raspberrypi
+
+#+begin_src bash
+unzip -p 2019-09-26-raspbian-buster-lite.zip | sudo bash -c 'pv >/dev/sdX'
+sudo mount /dev/sdX1 /mnt/usbstick
+sudo touch /mnt/usbstick/ssh
+sudo umount /mnt/usbstick
+#+end_src

@@ -1,0 +1,11 @@
+#+TITLE: Clojure/ClojureScript
+
+* Compile
+
+Seems that it cannot be compiled to wasm, why? They used to say a lot
+of things were impossible. But in the end there usually is a way.
+
+https://www.reddit.com/r/Clojure/comments/6hhg1h/why_isnt_there_a_compiled_or_interpreted_clojure/
+
+ferret
+lumo

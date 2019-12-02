@@ -1,0 +1,5 @@
+#+TITLE: wasm
+
+https://rsms.me/wasm-intro
+
+https://mnt.io/2018/08/22/from-rust-to-beyond-the-webassembly-galaxy/

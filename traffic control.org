@@ -1,0 +1,8 @@
+#+TITLE: traffic control
+
+http://wiki.linuxwall.info/doku.php/en:ressources:dossiers:networking:traffic_control
+
+F(s, l) = sum C(i, s) * T(i, l)
+T(s, 0) = 0
+T(s, 1) = 1
+T(s, 2) = T(s-1, 2) + T(s-1, 1) = T(s - 1, 2) + 1 ... = T(2, 2) + s - 2 = T(1, 2) + T(1, 1) + s - 2 = s
