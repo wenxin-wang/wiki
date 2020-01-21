@@ -13,3 +13,18 @@ git lfs track "*.pdf*"
 #+begin_src bash
 bfg --delete-files YOUR-FILE-WITH-SENSITIVE-DATA
 #+end_src
+
+* cherry-pick a range of commits
+
+https://stackoverflow.com/questions/509859/what-is-the-best-way-to-git-patch-a-subrange-of-a-branch
+
+#+begin_src bash
+# Checkout a new temporary branch at the current location
+git checkout -b tmp
+
+# Move the br branch to the head of the new patchset
+git branch -f br B
+
+# Rebase the patchset onto tmp, the old location of br
+git rebase --onto tmp A br
+#+end_src
