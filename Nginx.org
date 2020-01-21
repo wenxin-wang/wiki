@@ -1,0 +1,11 @@
+#+TITLE: Nginx
+
+* IP_TRANSPARENT
+
+https://gist.github.com/shankerwangmiao/cfecc03174e8e67f20537dc4650ef3e8
+
+* UDP proxy
+
+https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/
+
+https://www.nginx.com/blog/tcp-load-balancing-udp-load-balancing-nginx-tips-tricks/

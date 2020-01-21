@@ -1,0 +1,5 @@
+#+TITLE: algorithms
+
+* Generating All Balanced Parentheses: A Deep Dive Into An Interview Question
+
+https://sahandsaba.com/interview-question-generating-all-balanced-parentheses.html

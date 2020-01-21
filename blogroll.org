@@ -1,0 +1,5 @@
+#+TITLE: blogroll
+
+http://technomancy.us/list forgot how I found him when searching about elisp, javascript and lua
+
+https://quasilyte.dev/status/ he seems to have built a golang runtime on top of emacs https://github.com/quasilyte/goism (and vice versa)

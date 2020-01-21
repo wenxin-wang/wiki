@@ -54,3 +54,7 @@ https://gist.github.com/jFransham/369a86eff00e5f280ed25121454acec1#use-link-time
 * LTO
 
 https://doc.rust-lang.org/rustc/linker-plugin-lto.html
+
+* Book on Kernel
+
+https://os.phil-opp.com/minimal-rust-kernel/

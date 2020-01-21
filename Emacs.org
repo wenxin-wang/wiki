@@ -1,6 +1,10 @@
 #+TITLE: Emacs
 #+WIKI: texteditor,proglang/elisp,guile
 
+* The craft of text editing
+
+https://www.finseth.com/craft/
+
 * Concurrency
 
 https://nullprogram.com/blog/2018/05/31/
@@ -50,3 +54,13 @@ https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=guile4emacs-git
 
 On Guile
 https://github.com/remacs/remacs/issues/66
+
+* Javascript
+
+https://github.com/samsonjs/elisp.js
+
+http://lisperator.net/s/slip/js/machine.js
+
+http://steve-yegge.blogspot.com/2008/11/ejacs-javascript-interpreter-for-emacs.html?m=1
+
+https://blog.oleganza.com/post/106246432/recursive-descent-parser-in-javascript

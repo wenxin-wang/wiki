@@ -6,3 +6,14 @@ https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.XLV4a3UzYXf
 * socket opts
 
 set opts before bind!!
+
+* epoll
+
+https://gist.github.com/dtoma/417ce9c8f827c9945a9192900aff805b epoll.cpp
+
+https://medium.com/@copyconstruct/the-method-to-epolls-madness-d9d2d6378642
+
+
+https://github.com/tokio-rs/tokio/issues/570 Rust epoll udp
+
+https://tokio-rs.github.io/mio/doc/mio/struct.Poll.html
