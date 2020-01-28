@@ -58,3 +58,7 @@ https://doc.rust-lang.org/rustc/linker-plugin-lto.html
 * Book on Kernel
 
 https://os.phil-opp.com/minimal-rust-kernel/
+
+* Embedded Rust
+
+https://docs.rust-embedded.org/embedonomicon/preface.html

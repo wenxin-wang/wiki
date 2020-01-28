@@ -51,3 +51,9 @@ sudo certbot certonly --manual --preferred-challenges=dns \
    -d $domain
 done
 #+END_SRC
+
+* CPanel
+
+E.g. Godaddy
+
+https://github.com/Neilpang/acme.sh/wiki/Simple-guide-to-add-TLS-cert-to-cpanel
