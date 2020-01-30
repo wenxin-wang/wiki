@@ -1,0 +1,3 @@
+#+TITLE: Flame Graph
+
+http://www.brendangregg.com/flamegraphs.html
