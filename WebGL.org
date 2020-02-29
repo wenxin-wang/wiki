@@ -1,0 +1,11 @@
+#+TITLE: WebGL
+
+https://github.com/toji/gl-matrix
+
+https://maierfelix.github.io/glmw/
+
+https://news.ycombinator.com/item?id=16789716
+
+https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Matrix_math_for_the_web
+
+https://blog.scottlogic.com/2019/07/15/multithreaded-webassembly.html

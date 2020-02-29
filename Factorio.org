@@ -14,6 +14,18 @@ radar range = 7 gap between large pole
 
 http://kirkmcdonald.github.io/posts/calculation.html
 
+* API
+
+https://github.com/Klonan/Mining_Drones/blob/master/script/mining_drone.lua
+
+https://lua-api.factorio.com/latest/events.html#on_script_path_request_finished
+
+https://lua-api.factorio.com/latest/LuaSurface.html#LuaSurface.request_path
+
+https://github.com/factoriommo/factoriommo-agent/blob/master/factoriomcd/main.py
+
+https://www.reddit.com/r/factorio/comments/5g3qiz/modding_how_to_make_internet_connected_mods_like/?utm_source=amp&utm_medium=&utm_content=post_body
+
 * 900/min
 
 https://kirkmcdonald.github.io/calc.html#zip=bZBLbsMwDAVv41UIxOkigAEfhpZom6h+IKlFb19ZSVME8VJvxMEjPRrOVxjvMA6R03wb1ioJHc1qRAGer4GNos4rqoEJJi1ZDBYKNq3TeOGkJEYyyfR1CTltsGPy5OEN9Om3JJLnGoECORN2UHKgDhbeTlKtixoa59SfhQuBZdgk1+R79Jppu3Cr4YVD6ARVKS7hCCO6nRPBrQOXk5pUd2hB8pLtv2zTkjz0j2VfREtg+1tjIWyWfgmslmOvCOqYkiMo6L6Pb9d2mY3VWrtPFLn5UH5OkNspssNwgopk/2z+CasdzhPjLw==

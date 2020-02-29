@@ -1,0 +1,7 @@
+#+TITLE: googletest
+
+https://github.com/google/googletest/blob/master/googletest/docs/primer.md
+
+https://github.com/google/googletest/blob/master/googlemock/docs/cook_book.md
+
+http://cheezyworld.com/wp-content/uploads/2010/12/PlainGoogleQuickTestReferenceGuide1.pdf

@@ -1,0 +1,13 @@
+#+TITLE: GatsbyJs
+
+* Tutorial
+
+I overestimated myself. After staring at the "more complex" recipes for 2 days, I finally admitted the fact that I'm noob and went back to the tutorials.
+
+https://www.gatsbyjs.org/tutorial/part-one/
+
+https://medium.com/hackers-at-cambridge/build-a-note-taking-tool-using-gatsby-25037dca3faf
+
+* Directory listing
+
+https://joshuatz.com/posts/2019/gatsby-automatic-directory-listing-pages-beginners-attempt/

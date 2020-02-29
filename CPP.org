@@ -1,0 +1,11 @@
+#+TITLE: CPP
+
+* TALLY
+
+** enable_shared_from_this should be PUBLICLY inherited
+
+https://en.cppreference.com/w/cpp/memory/enable_shared_from_this
+
+https://stackoverflow.com/questions/40020154/shared-from-this-and-private-inheritance
+
+20 min

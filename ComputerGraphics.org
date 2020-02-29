@@ -1,0 +1,7 @@
+#+TITLE: Computer Graphics
+
+http://math.hws.edu/graphicsbook/index.html
+
+https://www.cs.uic.edu/~jbell/CourseNotes/ComputerGraphics/IntroToCG.html
+
+https://www.scratchapixel.com/lessons/3d-basic-rendering/get-started
