@@ -16,6 +16,10 @@ http://kirkmcdonald.github.io/posts/calculation.html
 
 * API
 
+https://wiki.factorio.com/Tutorial:Modding_tutorial/Gangsir#The_major_components_to_any_Factorio_mod
+
+https://lua-api.factorio.com/latest/Data-Lifecycle.html
+
 https://github.com/Klonan/Mining_Drones/blob/master/script/mining_drone.lua
 
 https://lua-api.factorio.com/latest/events.html#on_script_path_request_finished
@@ -25,6 +29,24 @@ https://lua-api.factorio.com/latest/LuaSurface.html#LuaSurface.request_path
 https://github.com/factoriommo/factoriommo-agent/blob/master/factoriomcd/main.py
 
 https://www.reddit.com/r/factorio/comments/5g3qiz/modding_how_to_make_internet_connected_mods_like/?utm_source=amp&utm_medium=&utm_content=post_body
+
+https://github.com/gotyoke/Factorio-AnyPct-TAS/blob/master/AnyPctTAS_0.0.1/scenarios/AnyPctTAS/control.lua
+
+https://github.com/canidae/factorio/blob/master/brave-new-world/scenarios/bnw/control.lua
+
+https://github.com/Klonan/Construction_Drones/blob/master/script/construction_drone.lua
+
+https://wiki.factorio.com/Console#Cheat_mode
+
+https://mods.factorio.com/mod/Teleportation
+
+https://forums.factorio.com/viewtopic.php?f=6&t=4682
+
+https://forums.factorio.com/viewtopic.php?t=18153
+
+https://github.com/narc0tiq/YARM
+
+https://github.com/BlackCapCoder/factorio-keyboard-mod
 
 * 900/min
 

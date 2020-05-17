@@ -1,0 +1,3 @@
+#+TITLE: SCVMod
+
+https://wiki.factorio.com/Prototype/SelectionTool

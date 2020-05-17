@@ -1,0 +1,25 @@
+#+TITLE: lua
+
+* doc
+
+https://www.lua.org/pil/8.html
+
+* vm
+
+https://the-ravi-programming-language.readthedocs.io/en/latest/lua_bytecode_reference.html
+
+https://github.com/efrederickson/LuaAssemblyTools
+
+http://files.catwell.info/misc/mirror/lua-5.2-bytecode-vm-dirk-laurie/lua52vm.html
+
+http://wiki.luajit.org/New-Garbage-Collector
+
+* sandbox
+
+https://www.reddit.com/r/netsec/comments/52cm3h/escaping_the_lua_52_sandbox_with_untrusted/
+
+https://github.com/erezto/lua-sandbox-escape/
+
+http://benmmurphy.github.io/blog/2015/06/04/redis-eval-lua-sandbox-escape/
+
+https://gist.github.com/corsix/6575486
