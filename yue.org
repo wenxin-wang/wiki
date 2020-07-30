@@ -1,0 +1,84 @@
+#+TITLE: 约吗
+#+TODO: TODO(t) DONE(d) AGAIN(a) NEVERMORE(n)
+
+要不要看看更不可能实现的 [[file:flags.org][flags]]
+
+* 饭店
+
+** AGAIN [[https://j.map.baidu.com/e7/FUF][COCO 壱番屋]]
+
+连锁咖喱店的廉价咖喱！
+
+** AGAIN [[http://www.dianping.com/shop/514779][海碗居]]
+
+炸酱面，乾隆白菜，芥末墩，京酱肉丝。还有牛肚和羊肉。 一碗居也很好，就是远
+
+** AGAIN [[http://www.dianping.com/shop/97989858][Home 泰]]
+
+泰式咖喱配羊腿肉、鸡肉、猪里脊和米饭！
+
+** TODO 宜家
+
+去了宜家发现人好多，没吃成。人那么多，更想试试
+
+** AGAIN [[http:/www.dianping.com/shop/5724122][门框胡同卤煮]]
+
+最多吃半碗，但是偶尔就会想去。新街口那家没去过
+
+** AGAIN [[http://www.dianping.com/shop/507663][兰特伯爵]]
+
+面包配德国大肘子、大香肠和啤酒。没喝过它的啤酒其实。肘子要做一个小时，需要提前预约。奥运村也有一家
+
+** TODO [[http://www.dianping.com/shop/k7kugq5madkKXZyF][油梨树]]
+
+路过，吃了别的，没吃成这个。好像是冰淇淋
+
+** AGAIN [[https://j.map.baidu.com/c0/FWt][五棵松的豆捞坊]]
+
+如果他们不再卖牛腱我就不去吃了
+
+* 未定店吃的
+
+** TODO 广东的汤
+
+据说很棒
+
+** AGAIN 四川凉面
+
+李先生里好像就有
+
+** AGAIN 国贸 SOHO 那边曾经有个宜宾面馆
+
+后来再去没了，找了另一家，没有之前那家好吃
+
+** AGAIN 潮汕牛肉锅
+
+好像哪家店都行
+
+** TODO 三鲜两面黄
+
+也许 [[http://www.dianping.com/shop/27399309][东吴面馆]] 有？等等，这桌子看着就像东吴面馆。可能面馆都长一个样吧。
+
+[[file:food/三鲜两面黄.jpg]]
+
+感谢群友贴图诱惑
+
+* 景点
+
+** 黄山
+
+从来没去过，据说挺危险？
+
+* 展览
+
+** [[https://www.douban.com/event/33456369/][国家地理经典影像大展--北京站]]
+
+还在感叹 2021 年为啥现在要放出来，一看是推迟了
+
+** [[https://www.douban.com/event/33422438/][今日美术馆 | 光/谱 鲍勃·迪伦艺术大展]]
+
+只闻其名，未闻其声
+
+** [[https://www.douban.com/event/33523550/][1420：从南京到北京]]
+
+首都博物馆
