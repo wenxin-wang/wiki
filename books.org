@@ -1,0 +1,8 @@
+#+TITLE: books
+
+https://b-ok.org/
+
+http://libgen.li/
+
+Evidence-basedSoftware Engineering based on the publicly available data
+http://knosof.co.uk/ESEUR/ESEUR-draft.pdf

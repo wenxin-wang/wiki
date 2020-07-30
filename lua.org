@@ -23,3 +23,13 @@ https://github.com/erezto/lua-sandbox-escape/
 http://benmmurphy.github.io/blog/2015/06/04/redis-eval-lua-sandbox-escape/
 
 https://gist.github.com/corsix/6575486
+
+* luajit
+
+https://staff.fnwi.uva.nl/h.vandermeer/docs/lua/luajit/luajit_intro.html
+
+http://lua-users.org/lists/lua-l/2009-11/msg00089.html
+
+https://eliasdaler.github.io/luavela/
+
+https://github.com/raptorjit/raptorjit

@@ -64,3 +64,5 @@ http://lisperator.net/s/slip/js/machine.js
 http://steve-yegge.blogspot.com/2008/11/ejacs-javascript-interpreter-for-emacs.html?m=1
 
 https://blog.oleganza.com/post/106246432/recursive-descent-parser-in-javascript
+
+https://github.com/nicferrier/emacs-ejit
