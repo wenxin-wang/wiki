@@ -1,9 +1,31 @@
 #+TITLE: 约吗
-#+TODO: TODO(t) DONE(d) AGAIN(a) NEVERMORE(n)
+#+TODO: TODO(t) DONE(d) AGAIN(a) NEVERMORE(n) MISSED(m)
 
 要不要看看更不可能实现的 [[file:flags.org][flags]]
 
 * 饭店
+
+** [[http://www.dianping.com/shop/H7xwszcIySPeDUG7][PHO88 越风尚]]
+
+花园路
+
+** [[http://www.dianping.com/shop/972819836][鸟月居酒屋]]
+
+[[file:food/鸟月.jpg]]
+
+** [[http://www.dianping.com/shop/jV9YrvIWVlYi4a57][麦家小馆]]
+
+学清路
+
+[[file:food/麦家小馆.jpg]]
+
+** [[http://www.dianping.com/shop/G3pvJZDiaSWXxLoq][龙人居·水煮三峡鱼]]
+
+五道口
+
+** [[http://www.dianping.com/shop/H8ZJFQsFJXhxrKuC][六丁火木炭烤肉]]
+
+五道口
 
 ** AGAIN [[https://j.map.baidu.com/e7/FUF][COCO 壱番屋]]
 
@@ -36,6 +58,10 @@
 ** AGAIN [[https://j.map.baidu.com/c0/FWt][五棵松的豆捞坊]]
 
 如果他们不再卖牛腱我就不去吃了
+
+** AGAIN [[http://www.dianping.com/shop/G7FhUtDWOX1tYGlS][么哈(五道口店)]]
+
+[[file:food/mojar.jpg]]
 
 * 未定店吃的
 
@@ -75,10 +101,42 @@
 
 还在感叹 2021 年为啥现在要放出来，一看是推迟了
 
-** [[https://www.douban.com/event/33422438/][今日美术馆 | 光/谱 鲍勃·迪伦艺术大展]]
+** DONE [[https://www.douban.com/event/33422438/][今日美术馆 | 光/谱 鲍勃·迪伦艺术大展]]
 
 只闻其名，未闻其声
 
-** [[https://www.douban.com/event/33523550/][1420：从南京到北京]]
+有幅画好看其它看不懂
+
+** MISSED [[https://www.douban.com/event/33523550/][1420：从南京到北京]]
 
 首都博物馆
+
+** [[https://www.douban.com/event/33600979/][叶浅予自选速写作品研究展]]
+
+2020年07月30日 ~ 2020年08月31日 每天 09:00 - 16:30  北京市海淀区紫竹桥西三环北路54号
+
+** [[https://www.douban.com/event/33626520/][乔治·莫兰迪版画展_豆瓣]]
+
+2020年08月15日 ~ 2020年08月30日 每天 09:00 - 17:00 北京市大兴区北兴路西红门星光公园1号
+
+** [[https://www.douban.com/event/33591719/][学院派：清华大学动画艺术展]]
+
+2020年07月31日-2020年08月30日 北京市朝阳区工人体育场北路·首北兆龙饭店·一层中庭
+
+** [[https://www.douban.com/event/33506011/][写真黄金一代——日本摄影大师五人展]]
+
+2020年07月18日-2020年09月20日 北京市朝阳区草场地155A 三影堂摄影艺术中心
+
+** [[https://www.douban.com/event/33601109/][美育人生：吴冠中百年诞辰艺术展]]
+
+2020年08月05日-2020年10月30日 北京市海淀区清华园1号清华大学校内
+
+9:00 - 17:00 提前30分钟停止入馆 周一闭馆
+
+** [[https://www.douban.com/event/33602327/][异域同绘：中国美术馆藏日本浮世绘和清代木版年画展]]
+
+2020年08月05日-2020年10月15日 北京东城区五四大街1号中国美术馆
+
+** [[https://www.douban.com/event/33554459/][UCCA新展预见丨伊丽莎白·佩顿中国首次个展：练习]]
+
+2020年08月15日 ~ 2020年11月29日 北京市朝阳区酒仙桥路4号798艺术区UCCA尤伦斯当代艺术中心
