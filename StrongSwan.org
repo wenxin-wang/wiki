@@ -117,7 +117,7 @@ connections {
 }
 pools {
    v4pool {
-      addrs = 172.16.254.0/24  
+      addrs = 172.16.254.0/24
    }
    v6pool {
       addrs = fddc:ffff::0/64

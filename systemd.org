@@ -1,0 +1,22 @@
+#+TITLE: Systemd
+
+如果用来记录所有遇到的问题的话，这个条目其实可以非常长。
+
+* User session environment variables
+
+#+begin_src bash
+sudo mkdir -p /etc/systemd/user-environment-generators/
+cat<<EOF | sudo tee /etc/systemd/user-environment-generators/99-user-profile.sh
+#!/bin/bash
+
+if [ -r $HOME/.profile ]; then
+  TMP=$(mktemp)
+  (
+    . $HOME/.profile
+    env >$TMP
+  ) 2>&1
+  cat $TMP
+  rm $TMP
+fi
+EOF
+#+end_src

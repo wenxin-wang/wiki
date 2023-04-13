@@ -6,3 +6,23 @@ http://libgen.li/
 
 Evidence-basedSoftware Engineering based on the publicly available data
 http://knosof.co.uk/ESEUR/ESEUR-draft.pdf
+
+* cs
+
+https://computationstructures.org/index.html
+
+[[https://docs.google.com/spreadsheets/d/1zfw8nPvJeewxcFUBpKUKmAVE8PjnJI7H0CKimdQXxr0/htmlview][stanford cs curriculum]]
+
+* story
+
+柳林风声
+
+蛤蟆先生去看心理医生
+
+被讨厌的勇气
+
+了不起的我
+
+* magazines
+
+https://downmagaz.net/

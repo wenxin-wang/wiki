@@ -18,3 +18,12 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export LC_CTYPE="zh_CN.utf8"
 #+END_EXAMPLE
+
+* 没有用户造词
+
+应该是因为 userdb 和之前版本不兼容？不知道怎么解，清了再来。
+
+#+begin_src bash
+rm -rf ~/.local/share/fcitx5/rime/build
+rm -rf ~/.local/share/fcitx5/rime/*.userdb
+#+end_src

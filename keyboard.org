@@ -1,0 +1,19 @@
+#+TITLE: Keyboard
+
+* shift - ctrl - capslock
+
+#+begin_src bash
+cat<<EOF >/etc/udev/hwdb.d/61-keyboard-local.hwdb
+evdev:atkbd:dmi:*
+  KEYBOARD_KEY_3a=leftshift
+  KEYBOARD_KEY_2a=leftctrl
+  KEYBOARD_KEY_1d=capslock
+
+evdev:input:b0003v17EFp6047*
+  KEYBOARD_KEY_70039=leftshift
+  KEYBOARD_KEY_700e1=leftctrl
+  KEYBOARD_KEY_700e0=capslock
+EOF
+sudo systemd-hwdb update
+sudo udevadm trigger
+#+end_src
